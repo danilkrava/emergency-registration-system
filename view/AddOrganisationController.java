@@ -48,7 +48,9 @@ public class AddOrganisationController {
     @FXML
     private void handleOk() {
         if (isInputValid()) {
-            Organisation organisation = new Organisation(nameField.getText(), adressField.getText(), new Region(regionField.getText()));
+            Region region = new Region(regionField.getText());
+            region.setId(1);
+            Organisation organisation = new Organisation(nameField.getText(), adressField.getText(), region);
             OrganisationDao dao;
             try (Connection con = DaoFactory.getConnection()) {
                 dao = DaoFactory.getOrganisationDao(con);
