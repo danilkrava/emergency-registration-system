@@ -40,14 +40,6 @@ public class DaoFactory {
 
         try (Connection con = DaoFactory.getConnection()) {
             OrganisationDao dao = DaoFactory.getOrganisationDao(con);
-            Organisation org = new Organisation();
-            org.setName("Орг");
-            org.setAddress("Аддр");
-            Region reg = new Region("Регион");
-            reg.setId(1);
-            org.setRegion(reg);
-            dao.add(org);
-
         }
     }
 
