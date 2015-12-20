@@ -1,17 +1,25 @@
 package model;
 
 public class Report {
-    private int emergencyId;
+    private int id, emergencyId;
     private Date date;
-    private float radiation;
+    private double radiation;
     private String info;
 
-    public Report(int emergencyId, Date date, float radiation, String info) {
+    public Report(int id, int emergencyId, Date date, double radiation, String info) {
+        this.id = id;
         this.emergencyId = emergencyId;
         this.date = date;
         this.radiation = radiation;
         this.info = info;
-        //lsdlmkmkmk
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getEmergencyId() {
@@ -30,11 +38,14 @@ public class Report {
         this.date = date;
     }
 
-    public float getRadiation() {
+    public double getRadiation() {
         return radiation;
     }
 
-    public void setRadiation(float radiation) {
+    public Report() {
+    }
+
+    public void setRadiation(double radiation) {
         this.radiation = radiation;
     }
 

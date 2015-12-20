@@ -4,12 +4,24 @@ package model;
  * Created by Oleksandr on 28.11.2015.
  */
 public class Measure {
-    private int timeTypeId, severityTypeId, areaTypeId;
+    private int id, timeTypeId, severityTypeId, areaTypeId;
 
-    public Measure(int timeTypeId, int severityTypeId, int areaTypeId) {
+    public Measure(int id, int timeTypeId, int severityTypeId, int areaTypeId) {
+        this.id = id;
         this.timeTypeId = timeTypeId;
         this.severityTypeId = severityTypeId;
         this.areaTypeId = areaTypeId;
+    }
+
+    public Measure() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getTimeTypeId() {

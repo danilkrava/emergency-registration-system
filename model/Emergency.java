@@ -5,13 +5,25 @@ package model;
  */
 public class Emergency {
     private Date date;
-    private int areaTypeId, severityTypeId, organisationId;
+    private int id, areaTypeId, severityTypeId, organisationId;
 
-    public Emergency(Date date, int areaTypeId, int severityTypeId, int organisationId) {
+    public Emergency(int id, Date date, int areaTypeId, int severityTypeId, int organisationId) {
+        this.id = id;
         this.date = date;
         this.areaTypeId = areaTypeId;
         this.severityTypeId = severityTypeId;
         this.organisationId = organisationId;
+    }
+
+    public Emergency() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Date getDate() {

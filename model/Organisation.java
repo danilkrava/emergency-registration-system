@@ -5,12 +5,24 @@ package model;
  */
 public class Organisation {
     private String name, address;
-    private int districtId;
+    private int id, districtId;
 
-    public Organisation(String name, String address, int districtId) {
+    public Organisation(int id, String name, String address, int districtId) {
+        this.id = id;
         this.name = name;
         this.address = address;
         this.districtId = districtId;
+    }
+
+    public Organisation() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

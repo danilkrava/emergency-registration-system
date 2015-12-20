@@ -4,14 +4,27 @@ package model;
  * Created by Oleksandr on 28.11.2015.
  */
 public class Person {
+    private int id;
     private String name, surname, middleName;
     private Date birthDate;
 
-    public Person(String name, String surname, String middleName, Date birthDate){
+    public Person(int id, String name, String surname, String middleName, Date birthDate){
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.middleName = middleName;
         this.birthDate = birthDate;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Person() {
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

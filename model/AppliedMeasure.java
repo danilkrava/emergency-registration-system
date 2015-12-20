@@ -5,15 +5,27 @@ package model;
  */
 public class AppliedMeasure {
     private Date date;
-    private float money;
-    private int measureId;
+    private double money;
+    private int id, measureId;
     private String info;
 
-    public AppliedMeasure(Date date, float money, int measureId, String info) {
+    public AppliedMeasure() {
+    }
+
+    public AppliedMeasure(int id, Date date, double money, int measureId, String info) {
+        this.id = id;
         this.date = date;
         this.money = money;
         this.measureId = measureId;
         this.info = info;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Date getDate() {
@@ -24,11 +36,9 @@ public class AppliedMeasure {
         this.date = date;
     }
 
-    public float getMoney() {
-        return money;
-    }
+    public double getMoney() { return money; }
 
-    public void setMoney(float money) {
+    public void setMoney(double money) {
         this.money = money;
     }
 
