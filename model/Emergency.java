@@ -1,13 +1,15 @@
 package model;
 
+import java.sql.*;
+
 /**
  * Created by Oleksandr on 28.11.2015.
  */
 public class Emergency {
-    private Date date;
+    private java.sql.Date date;
     private int id, areaTypeId, severityTypeId, organisationId;
 
-    public Emergency(int id, Date date, int areaTypeId, int severityTypeId, int organisationId) {
+    public Emergency(int id, java.sql.Date date, int areaTypeId, int severityTypeId, int organisationId) {
         this.id = id;
         this.date = date;
         this.areaTypeId = areaTypeId;
@@ -26,11 +28,11 @@ public class Emergency {
         this.id = id;
     }
 
-    public Date getDate() {
+    public java.sql.Date getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(java.sql.Date date) {
         this.date = date;
     }
 
