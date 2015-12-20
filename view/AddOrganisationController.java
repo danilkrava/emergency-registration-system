@@ -46,6 +46,7 @@ public class AddOrganisationController {
             alert.setTitle("Error");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
+            dialogStage.close();
         }
     }
 
