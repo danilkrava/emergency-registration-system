@@ -58,6 +58,7 @@ public class AddOrganisationController {
                 alert.initOwner(dialogStage);
                 alert.setTitle("Error");
                 alert.setContentText(e.getMessage());
+                alert.showAndWait();
             }
 
             okClicked = true;
