@@ -5,21 +5,18 @@ package model;
  */
 public class TimeType {
     private int id;
-    private String info;
+    private String name;
 
     public TimeType() {
     }
 
-    public TimeType(String info) {
-        this.info = info;
+    public TimeType(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
-        return "TimeType{" +
-                "id=" + id +
-                ", info='" + info + '\'' +
-                '}';
+        return name;
     }
 
     public int getId() {
@@ -30,11 +27,11 @@ public class TimeType {
         this.id = id;
     }
 
-    public String getInfo() {
-        return info;
+    public String getName() {
+        return name;
     }
 
-    public void setInfo(String info) {
-        this.info = info;
+    public void setName(String name) {
+        this.name = name;
     }
 }

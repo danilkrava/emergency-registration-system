@@ -32,9 +32,6 @@ public class SeverityType {
 
     @Override
     public String toString() {
-        return "Severity{" +
-                "id=" + id +
-                ", info='" + name + '\'' +
-                '}';
+        return name;
     }
 }
