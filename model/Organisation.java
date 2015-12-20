@@ -5,13 +5,13 @@ package model;
  */
 public class Organisation {
     private String name, address;
-    private int id, districtId;
+    private int id, regionId;
 
-    public Organisation(int id, String name, String address, int districtId) {
+    public Organisation(int id, String name, String address, int regionId) {
         this.id = id;
         this.name = name;
         this.address = address;
-        this.districtId = districtId;
+        this.regionId = regionId;
     }
 
     public Organisation() {
@@ -41,11 +41,11 @@ public class Organisation {
         this.address = address;
     }
 
-    public int getDistrictId() {
-        return districtId;
+    public int getRegionId() {
+        return regionId;
     }
 
-    public void setDistrictId(int districtId) {
-        this.districtId = districtId;
+    public void setRegionId(int regionId) {
+        this.regionId = regionId;
     }
 }
