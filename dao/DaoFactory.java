@@ -36,14 +36,10 @@ public class DaoFactory {
     public static void main(String[] args) throws SQLException, PersistException{
         System.out.println("DAO main");
         List<Emergency> list;
-        DaoFactory daoFactory = new DaoFactory();
 
-        try (Connection con = daoFactory.getConnection()) {
+        try (Connection con = DaoFactory.getConnection()) {
             EmergencyDao dao = DaoFactory.getEmergencyDao(con);
-            //System.out.println(dao.get(1).getDate().getTime());
-            Emergency em = dao.get(2);
-            Organisation org = new Organisation();
-            dao.delete(em);
+            Emergency em = dao.get(1);
         }
     }
 
