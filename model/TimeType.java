@@ -5,13 +5,15 @@ package model;
  */
 public class TimeType {
     private int id;
+    private int timeElapsed;
     private String name;
 
     public TimeType() {
     }
 
-    public TimeType(String name) {
+    public TimeType(String name, int timeElapsed) {
         this.name = name;
+        this.timeElapsed = timeElapsed;
     }
 
     @Override
@@ -33,5 +35,13 @@ public class TimeType {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getTimeElapsed() {
+        return timeElapsed;
+    }
+
+    public void setTimeElapsed(int timeElapsed) {
+        this.timeElapsed = timeElapsed;
     }
 }
