@@ -12,8 +12,7 @@ public class Measure {
     public Measure() {
     }
 
-    public Measure(int id, TimeType timeType, SeverityType severity, AreaType areaType) {
-        this.id = id;
+    public Measure(TimeType timeType, SeverityType severity, AreaType areaType) {
         this.timeType = timeType;
         this.severity = severity;
         this.areaType = areaType;

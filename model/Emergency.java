@@ -16,9 +16,8 @@ public class Emergency {
     public Emergency() {
     }
 
-    public Emergency(Date date, int id, AreaType areaType, SeverityType severityType, Organisation organisation) {
+    public Emergency(Date date, AreaType areaType, SeverityType severityType, Organisation organisation) {
         this.date = date;
-        this.id = id;
         this.areaType = areaType;
         this.severityType = severityType;
         this.organisation = organisation;

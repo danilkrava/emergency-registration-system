@@ -8,8 +8,7 @@ public class AreaType {
     private String name;
     private double area;
 
-    public AreaType(int id, String name, double area) {
-        this.id = id;
+    public AreaType(String name, double area) {
         this.name = name;
         this.area = area;
     }

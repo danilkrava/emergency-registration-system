@@ -9,8 +9,7 @@ public class Report {
     private double radiation;
     private String info;
 
-    public Report(int id, Emergency emergency, Date date, double radiation, String info) {
-        this.id = id;
+    public Report(Emergency emergency, Date date, double radiation, String info) {
         this.emergency = emergency;
         this.date = date;
         this.radiation = radiation;

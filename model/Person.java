@@ -9,8 +9,7 @@ public class Person {
     private String name, surname, middleName;
     private Date birthDate;
 
-    public Person(int id, String name, String surname, String middleName, Date birthDate){
-        this.id = id;
+    public Person(String name, String surname, String middleName, Date birthDate){
         this.name = name;
         this.surname = surname;
         this.middleName = middleName;

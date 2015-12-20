@@ -7,8 +7,7 @@ public class SeverityType {
     private int id;
     private String name;
 
-    public SeverityType(int id, String name) {
-        this.id = id;
+    public SeverityType(String name) {
         this.name = name;
     }
 

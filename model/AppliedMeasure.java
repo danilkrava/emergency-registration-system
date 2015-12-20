@@ -15,10 +15,9 @@ public class AppliedMeasure {
     public AppliedMeasure() {
     }
 
-    public AppliedMeasure(Date date, double money, int id, Measure measure, String info) {
+    public AppliedMeasure(Date date, double money, Measure measure, String info) {
         this.date = date;
         this.money = money;
-        this.id = id;
         this.measure = measure;
         this.info = info;
     }

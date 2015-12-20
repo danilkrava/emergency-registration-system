@@ -10,8 +10,7 @@ public class TimeType {
     public TimeType() {
     }
 
-    public TimeType(int id, String info) {
-        this.id = id;
+    public TimeType(String info) {
         this.info = info;
     }
 
