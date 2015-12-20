@@ -74,12 +74,13 @@ public class AddTimeTypeController {
         }
         try {
             Integer.parseInt(timeField.getText());
+            if (timeField.getText() == null || nameField.getText().length() == 0 || Integer.parseInt(timeField.getText()) < 0) {
+                errorMessage += "No valid time!\n";
+            }
         } catch (Exception ex) {
             errorMessage += "No valid time!\n";
         }
-        if (timeField.getText() == null || nameField.getText().length() == 0) {
-            errorMessage += "No valid time!\n";
-        }
+
         if (errorMessage.length() == 0) {
             return true;
         } else {
