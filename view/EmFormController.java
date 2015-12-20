@@ -114,7 +114,7 @@ public class EmFormController {
             // Set the person into the controller.
             AddOrganisationController controller = loader.getController();
             controller.setDialogStage(dialogStage);
-            controller.initialize();
+            //controller.initialize();
 
             // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();
