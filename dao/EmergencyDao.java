@@ -74,7 +74,6 @@ public class EmergencyDao {
             int count = stm.executeUpdate();
             if (count != 1)
                 throw new SQLException(count + " records were modified instead of 1!");
-            //em.setId();
         }
 
         sql = "SELECT MAX(emergency_id) FROM emergency;";

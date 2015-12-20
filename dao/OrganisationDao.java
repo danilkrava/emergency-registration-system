@@ -72,6 +72,7 @@ public class OrganisationDao {
             ResultSet rs = stm.executeQuery();
             rs.next();
             obj.setId(rs.getInt(1));
+
         }
     }
 }
