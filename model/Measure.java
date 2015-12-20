@@ -20,6 +20,16 @@ public class Measure {
         return id;
     }
 
+    @Override
+    public String toString() {
+        return "Measure{" +
+                "id=" + id +
+                ", timeTypeId=" + timeTypeId +
+                ", severityTypeId=" + severityTypeId +
+                ", areaTypeId=" + areaTypeId +
+                '}';
+    }
+
     public void setId(int id) {
         this.id = id;
     }
