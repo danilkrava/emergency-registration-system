@@ -2,15 +2,15 @@ package view;
 
 import dao.AreaTypeDao;
 import dao.DaoFactory;
-import dao.OrganisationDao;
+import dao.RegionDao;
+import dao.SeverityTypeDao;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.AreaType;
-import model.Organisation;
 import model.Region;
-import model.TimeType;
+import model.SeverityType;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -18,11 +18,9 @@ import java.sql.SQLException;
 /**
  * Created by Крава on 20.12.2015.
  */
-public class AddAreaTypeController {
+public class AddSeverityTypeController {
     @FXML
     private TextField nameField;
-    @FXML
-    private TextField areaField;
 
     private Stage dialogStage;
     private boolean okClicked = false;
@@ -45,11 +43,11 @@ public class AddAreaTypeController {
     @FXML
     private void handleOk() {
         if (isInputValid()) {
-            AreaType areaType = new AreaType(nameField.getText(), Integer.parseInt(areaField.getText()));
-            AreaTypeDao dao;
+            SeverityType severityType = new SeverityType(nameField.getText());
+            SeverityTypeDao dao;
             try (Connection con = DaoFactory.getConnection()) {
-                dao = DaoFactory.getAreaTypeDao(con);
-                dao.add(areaType);
+                dao = DaoFactory.getSeverityTypeDao(con);
+                dao.add(severityType);
             } catch (SQLException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.initOwner(dialogStage);
@@ -57,7 +55,6 @@ public class AddAreaTypeController {
                 alert.setContentText(e.getMessage());
                 alert.showAndWait();
             }
-
             okClicked = true;
             dialogStage.close();
         }
@@ -74,10 +71,7 @@ public class AddAreaTypeController {
         String errorMessage = "";
 
         if (nameField.getText() == null || nameField.getText().length() == 0) {
-            errorMessage += "No valid first name!\n";
-        }
-        if (areaField.getText() == null || areaField.getText().length() == 0) {
-            errorMessage += "No valid last name!\n";
+            errorMessage += "No valid name!\n";
         }
         if (errorMessage.length() == 0) {
             return true;

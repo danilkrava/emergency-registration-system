@@ -44,7 +44,6 @@ public class LogFormController {
 
                 EmFormController controller = loader.getController();
             controller.setPrimaryStage(primaryStage);
-                controller.initialize();
 
         } catch (IOException e) {
             e.printStackTrace();
