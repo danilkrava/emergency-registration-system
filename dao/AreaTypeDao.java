@@ -48,4 +48,24 @@ public class AreaTypeDao {
         }
         return list;
     }
+
+    public void add(AreaType obj) throws SQLException{
+        String sql = "INSERT INTO area_type (name, area) VALUES (?,?);";
+        try (PreparedStatement stm = connection.prepareStatement(sql)) {
+            stm.setString(1, obj.getName());
+            stm.setDouble(2, obj.getArea());
+            int count = stm.executeUpdate();
+            if (count != 1)
+                throw new SQLException(count + " records were modified instead of 1!");
+
+        }
+
+        sql = "SELECT MAX(area_type_id) FROM area_type;";
+        try (PreparedStatement stm = connection.prepareStatement(sql)) {
+            ResultSet rs = stm.executeQuery();
+            rs.next();
+            obj.setId(rs.getInt(1));
+
+        }
+    }
 }

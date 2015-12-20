@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -35,7 +36,7 @@ public class RegionDao {
     public List<Region> getAll() throws SQLException{
         List<Region> list = new ArrayList<>();
 
-        String sql = "SELECT * FROM emergency;";
+        String sql = "SELECT * FROM region;";
 
         try (PreparedStatement stm = connection.prepareStatement(sql)) {
             ResultSet rs = stm.executeQuery();
@@ -48,4 +49,28 @@ public class RegionDao {
         }
         return list;
     }
+
+    /*public void update(Region obj) throws SQLException {
+        String sql = "UPDATE region SET name=?, address=?, region_id=? WHERE orgranisation_id=?";
+        try (PreparedStatement stm = connection.prepareStatement(sql)) {
+            stm.setString(1, obj.getName());
+            stm.setString(2, obj.getAddress());
+            stm.setInt(3, obj.getRegion().getId());
+            int count = stm.executeUpdate();
+            if (count != 1) {
+                throw new SQLException(count + " records were modified instead of 1!");
+            }
+        }
+    }
+
+    public void delete(Organisation obj) throws SQLException {
+        String sql = "DELETE FROM organisation WHERE orgranisation_id = ?;";
+        try (PreparedStatement stm = connection.prepareStatement(sql)) {
+            stm.setInt(1, obj.getId());
+            int count = stm.executeUpdate();
+            if (count != 1) {
+                throw new SQLException(count + " records were modified instead of 1!");
+            }
+        }
+    }*/
 }
