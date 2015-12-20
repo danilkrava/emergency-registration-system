@@ -1,33 +1,26 @@
 package view;
 
-import dao.DaoFactory;
-import dao.EmergencyDao;
+import dao.AreaTypeDao;
 import dao.OrganisationDao;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import model.Emergency;
+import model.AreaType;
 import model.Organisation;
 import model.Region;
-
-import java.sql.Connection;
-import java.sql.SQLException;
+import model.TimeType;
 
 /**
  * Created by Крава on 20.12.2015.
  */
-public class AddOrganisationController {
+public class AddAreaTypeController {
     @FXML
     private TextField nameField;
     @FXML
-    private TextField adressField;
-    @FXML
-    private TextField regionField;
+    private TextField areaField;
 
     private Stage dialogStage;
-    //  private Person person;
     private boolean okClicked = false;
 
 
@@ -48,18 +41,12 @@ public class AddOrganisationController {
     @FXML
     private void handleOk() {
         if (isInputValid()) {
-            Organisation organisation = new Organisation(nameField.getText(), adressField.getText(), new Region(regionField.getText()));
-            OrganisationDao dao;
-            try (Connection con = DaoFactory.getConnection()) {
-                dao = DaoFactory.getOrganisationDao(con);
-                dao.add(organisation);
-            } catch (SQLException e) {
-                Alert alert = new Alert(AlertType.ERROR);
-                alert.initOwner(dialogStage);
-                alert.setTitle("Error");
-                alert.setContentText(e.getMessage());
-            }
-
+            AreaType areaType = new AreaType(nameField.getText(), Integer.parseInt(areaField.getText()));
+            AreaTypeDao dao;
+           /* try (Connection con = DaoFactory.getConnection()) {
+                EmergencyDao dao = DaoFactory.getEmergencyDao(con);
+                Emergency em = dao.get(1);
+            }*/
             okClicked = true;
             dialogStage.close();
         }
@@ -78,18 +65,14 @@ public class AddOrganisationController {
         if (nameField.getText() == null || nameField.getText().length() == 0) {
             errorMessage += "No valid first name!\n";
         }
-        if (adressField.getText() == null || adressField.getText().length() == 0) {
+        if (areaField.getText() == null || areaField.getText().length() == 0) {
             errorMessage += "No valid last name!\n";
         }
-        if (regionField.getText() == null || regionField.getText().length() == 0) {
-            errorMessage += "No valid street!\n";
-        }
-
         if (errorMessage.length() == 0) {
             return true;
         } else {
             // Show the error message.
-            Alert alert = new Alert(AlertType.ERROR);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initOwner(dialogStage);
             alert.setTitle("Invalid Fields");
             alert.setHeaderText("Please correct invalid fields");
