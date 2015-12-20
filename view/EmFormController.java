@@ -45,25 +45,25 @@ public class EmFormController {
     private TableColumn<Emergency, String> col2;
 
     @FXML
-    private Label emergencyId;
+    private TextField emergencyId;
 
     @FXML
-    private Label severityName;
+    private TextField severityName;
 
     @FXML
-    private Label areaName;
+    private TextField areaName;
 
     @FXML
-    private Label areaSize;
+    private TextField areaSize;
 
     @FXML
-    private Label organisationName;
+    private TextField organisationName;
 
     @FXML
-    private Label organisationAdress;
+    private TextField organisationAdress;
 
     @FXML
-    private Label organisationRegion;
+    private TextField organisationRegion;
 
 
     private ObservableList<Emergency> list = FXCollections.observableArrayList();
