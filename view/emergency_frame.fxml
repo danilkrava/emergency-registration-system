@@ -44,7 +44,7 @@
                            </rowConstraints>
                            <children>
                                <Label text="Info"/>
-                               <Label fx:id="info" text="Label" GridPane.columnIndex="1"/>
+                               <Label fx:id="name" text="Label" GridPane.columnIndex="1"/>
                                <Label text="id" GridPane.rowIndex="1"/>
                                <Label fx:id="id" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
                                <Label text="Label" GridPane.rowIndex="2"/>
