@@ -83,4 +83,44 @@ public class EmFormController {
         }
     }
 
+    @FXML
+    private void addEm() {
+
+    }
+
+    @FXML
+    private void addOrganisation() {
+
+    }
+
+    @FXML
+    private void addSeverityType() {
+
+    }
+
+    @FXML
+    private void addTimeType() {
+
+    }
+
+    @FXML
+    private void addAreaType() {
+
+    }
+
+    @FXML
+    private void addMeasure() {
+
+    }
+
+    @FXML
+    private void addReport() {
+
+    }
+
+    @FXML
+    private void addDamagedPerson() {
+
+    }
+
 }
