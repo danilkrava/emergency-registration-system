@@ -27,9 +27,7 @@ public class Region {
 
     }
 
-    public Region(int id, String name) {
-
-        this.id = id;
+    public Region(String name) {
         this.name = name;
     }
 
