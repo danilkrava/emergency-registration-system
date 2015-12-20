@@ -75,4 +75,31 @@ public class OrganisationDao {
 
         }
     }
+
+   /* public void update(Organisation obj) throws SQLException {
+        String sql = "UPDATE organisation SET name=?, address=?, region_id=? WHERE orgranisation_id=?";
+        try (PreparedStatement stm = connection.prepareStatement(sql)) {
+            stm.setDate(1, obj.getName());
+            stm.setInt(2, obj.getOrganisation().getId());
+            stm.setInt(3, obj.getAreaType().getId());
+            stm.setInt(4, obj.getSeverityType().getId());
+            stm.setInt(5, obj.getId());
+            int count = stm.executeUpdate();
+            if (count != 1) {
+                throw new SQLException(count + " records were modified instead of 1!");
+            }
+        }
+    }
+
+    public void delete(Emergency obj) throws SQLException {
+        String sql = "DELETE FROM emergency WHERE emergency_id = ?;";
+        try (PreparedStatement stm = connection.prepareStatement(sql)) {
+            stm.setInt(1, obj.getId());
+            int count = stm.executeUpdate();
+            if (count != 1) {
+                throw new SQLException(count + " records were modified instead of 1!");
+            }
+        }
+    }
+*/
 }
