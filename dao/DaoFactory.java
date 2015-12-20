@@ -66,4 +66,6 @@ public class DaoFactory {
     public static RegionDao getRegionDao (Connection connection) {
         return new RegionDao(connection);
     }
+
+    public static TimeTypeDao getTimeTypeDao (Connection connection) {return  new TimeTypeDao(connection); }
 }
