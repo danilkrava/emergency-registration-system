@@ -81,7 +81,6 @@ public class EmFormController {
             alert.setTitle("Error");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
-            dialogStage.close();
         }
         emergencies.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showPersonDetails(newValue));
@@ -96,7 +95,6 @@ public class EmFormController {
             this.organisationAdress.setText(info.getOrganisation().getAddress());
             this.organisationRegion.setText(info.getOrganisation().getRegion().getName());
             this.severityName.setText(info.getSeverityType().getName());
-
         } else {
             //label.setText("");
         }
