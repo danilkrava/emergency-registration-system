@@ -1,6 +1,9 @@
 package view;
 
 import controller.MainController;
+import dao.DaoFactory;
+import dao.EmergencyDao;
+import dao.RegionDao;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -21,6 +24,8 @@ import model.Emergency;
 import model.SeverityType;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 /**
  * Created by Крава on 06.12.2015.
@@ -28,6 +33,7 @@ import java.io.IOException;
 public class EmFormController {
 
     private Stage primaryStage;
+    private Stage dialogStage;
     MainController controller = new MainController();
     @FXML
     private TableView<Emergency> emergencies;
@@ -65,12 +71,18 @@ public class EmFormController {
     public void initialize(){
         col1.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDate().toString()));
         col2.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getOrganisation().getName()));
-        for (Emergency em :
-                controller.getEmergencies()) {
-            list.add(em);
+        try (Connection con = DaoFactory.getConnection()) {
+            EmergencyDao emergencyDao = DaoFactory.getEmergencyDao(con);
+            list.addAll(emergencyDao.getAll());
+            emergencies.setItems(list);
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initOwner(dialogStage);
+            alert.setTitle("Error");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+            dialogStage.close();
         }
-        emergencies.setItems(list);
-
         emergencies.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showPersonDetails(newValue));
     }
