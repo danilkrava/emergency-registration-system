@@ -41,9 +41,6 @@ public class EmFormController {
     private Label areaName;
 
     @FXML
-    private Label areaId;
-
-    @FXML
     private Label areaSize;
 
     @FXML
@@ -60,7 +57,7 @@ public class EmFormController {
 
     public void initialize(){
         col1.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDate().toString()));
-        col1.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getOrganisation().getName()));
+        col2.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getOrganisation().getName()));
         for (Emergency em :
                 controller.getEmergencies()) {
             list.add(em);
@@ -74,7 +71,6 @@ public class EmFormController {
     private void showPersonDetails(Emergency info) {
         if (info != null) {
             this.emergencyId.setText(String.valueOf(info.getId()));
-            this.areaId.setText(String.valueOf(info.getAreaType().getId()));
             this.areaSize.setText(String.valueOf(info.getAreaType().getArea()));
             this.areaName.setText(String.valueOf(info.getAreaType().getName()));
             this.organisationName.setText(info.getOrganisation().getName());

@@ -75,11 +75,11 @@
                                    </rowConstraints>
                                    <children>
                                        <Label text="Имя"/>
-                                       <Label fx:id="organisationAdress" text="Label" GridPane.columnIndex="1"
+                                       <Label fx:id="organisationAdress" GridPane.columnIndex="1"
                                               GridPane.rowIndex="1"/>
-                                       <Label fx:id="organisationRegion" text="Label" GridPane.columnIndex="1"
+                                       <Label fx:id="organisationRegion" GridPane.columnIndex="1"
                                               GridPane.rowIndex="2"/>
-                                       <Label fx:id="organisationName" text="Label" GridPane.columnIndex="1"/>
+                                       <Label fx:id="organisationName" GridPane.columnIndex="1"/>
                                        <Label text="Регион" GridPane.rowIndex="2"/>
                                        <Label text="Адрес" GridPane.rowIndex="1"/>
                                    </children>
