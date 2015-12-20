@@ -61,4 +61,50 @@ public class EmergencyDao {
 
         return list;
     }
+
+    public void add(Emergency em) throws PersistException{
+        String sql = "INSERT INTO emergency (date, organisation_id, area_type_id, severity_type_id) VALUES (?,?,?,?);";
+        try (PreparedStatement stm = connection.prepareStatement(sql)) {
+            stm.setDate(1, em.getDate());
+            stm.setInt(2, em.getOrganisation().getId());
+            stm.setInt(3, em.getAreaType().getId());
+            stm.setInt(4, em.getSeverityType().getId());
+            int count = stm.executeUpdate();
+            if (count != 1)
+                throw new PersistException(count + " records were modified instead of 1!");
+            //em.setId();
+        } catch (Exception e) {
+            throw new PersistException(e);
+        }
+    }
+
+    public void update(Emergency obj) throws PersistException {
+        String sql = "UPDATE emergency SET date=?, organisation_id=?, area_type_id=?, severity_type_id=? WHERE emergency_id=?";
+        try (PreparedStatement stm = connection.prepareStatement(sql)) {
+            stm.setDate(1, obj.getDate());
+            stm.setInt(2, obj.getOrganisation().getId());
+            stm.setInt(3, obj.getAreaType().getId());
+            stm.setInt(4, obj.getSeverityType().getId());
+            stm.setInt(5, obj.getId());
+            int count = stm.executeUpdate();
+            if (count != 1) {
+                throw new PersistException(count + " records were modified instead of 1!");
+            }
+        } catch (Exception e) {
+            throw new PersistException(e);
+        }
+    }
+
+    public void delete(Emergency obj) throws PersistException {
+        String sql = "DELETE FROM emergency WHERE emergency_id = ?;";
+        try (PreparedStatement stm = connection.prepareStatement(sql)) {
+            stm.setInt(1, obj.getId());
+            int count = stm.executeUpdate();
+            if (count != 1) {
+                throw new PersistException(count + " records were modified instead of 1!");
+            }
+        } catch (Exception e) {
+            throw new PersistException(e);
+        }
+    }
 }

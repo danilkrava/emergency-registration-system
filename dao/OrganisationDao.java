@@ -20,7 +20,7 @@ public class OrganisationDao {
     }
 
     public Organisation get(int id) throws SQLException{
-        RegionDao regionDao = new RegionDao(connection);
+        RegionDao regionDao = DaoFactory.getRegionDao(connection);
 
         String sql = "SELECT * FROM organisation WHERE orgranisation_id = ?;";
         PreparedStatement stm = connection.prepareStatement(sql);
@@ -38,7 +38,7 @@ public class OrganisationDao {
 
     public List<Organisation> getAll() throws SQLException{
         List<Organisation> list = new ArrayList<>();
-        RegionDao regionDao = new RegionDao(connection);
+        RegionDao regionDao = DaoFactory.getRegionDao(connection);
 
         String sql = "SELECT * FROM organisation;";
         PreparedStatement stm = connection.prepareStatement(sql);

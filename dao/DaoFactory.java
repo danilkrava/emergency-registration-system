@@ -1,9 +1,11 @@
 package dao;
 
+import model.AreaType;
 import model.Emergency;
 import model.Organisation;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
@@ -13,12 +15,12 @@ import java.util.List;
  */
 
 public class DaoFactory {
-    private String user = "root";
-    private String password = "";
-    private String url = "jdbc:mysql://localhost:3306/emergencies";
-    private String driver = "com.mysql.jdbc.Driver";
+    private static String user = "root";
+    private static String password = "";
+    private static String url = "jdbc:mysql://localhost:3306/emergencies";
+    private static String driver = "com.mysql.jdbc.Driver";
 
-    public DaoFactory() {
+    static {
         try {
             Class.forName(driver);
         } catch (ClassNotFoundException e) {
@@ -27,18 +29,25 @@ public class DaoFactory {
         }
     }
 
-    public static void main(String[] args) throws SQLException{
+    public DaoFactory() {
+
+    }
+
+    public static void main(String[] args) throws SQLException, PersistException{
         System.out.println("DAO main");
         List<Emergency> list;
         DaoFactory daoFactory = new DaoFactory();
 
         try (Connection con = daoFactory.getConnection()) {
-            OrganisationDao dao = DaoFactory.getOrganisationDao(con);
-            System.out.println(dao.getAll().get(0));
+            EmergencyDao dao = DaoFactory.getEmergencyDao(con);
+            //System.out.println(dao.get(1).getDate().getTime());
+            Emergency em = dao.get(2);
+            Organisation org = new Organisation();
+            dao.delete(em);
         }
     }
 
-    public Connection getConnection() throws SQLException {
+    public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(url, user, password);
     }
 
