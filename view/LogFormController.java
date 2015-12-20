@@ -51,6 +51,7 @@ public class LogFormController {
         }
     }
 
+
     @FXML
     private void cancelLogInButtonPressed() {
         System.exit(0);
