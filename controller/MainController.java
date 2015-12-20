@@ -18,11 +18,11 @@ public class MainController {
 
     public MainController() {
         for (int i = 0; i < 5; i++) {
-            areaTypes.add(new AreaType(i, "type #" + i, i * 12.75));
-            severities.add(new SeverityType(i, "Blya Fuck" + i));
-            regions.add(new Region(i, "Region #"+i));
+            areaTypes.add(new AreaType("type #" + i, i * 12.75));
+            severities.add(new SeverityType("Blya Fuck" + i));
+            regions.add(new Region("Region #"+i));
             organisations.add(new Organisation("Organisation #"+i, "Address #"+i, regions.get(i)));
-            emergencies.add(new Emergency(new Date(2000+i, i, i), i, areaTypes.get(i), severities.get(i), organisations.get(i)));
+            emergencies.add(new Emergency(new Date(2000+i, i, i), areaTypes.get(i), severities.get(i), organisations.get(i)));
         }
 
     }
