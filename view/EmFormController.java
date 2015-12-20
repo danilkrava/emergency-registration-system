@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 
+import model.Emergency;
 import model.SeverityType;
 
 /**
@@ -22,27 +23,44 @@ public class EmFormController {
 
     MainController controller = new MainController();
     @FXML
-    private TableView<SeverityType> emergencies;
+    private TableView<Emergency> emergencies;
 
     @FXML
-    private TableColumn<SeverityType, String> col1;
+    private TableColumn<Emergency, String> col1;
 
     @FXML
-    private Label info;
+    private TableColumn<Emergency, String> col2;
 
     @FXML
-    private Label id;
+    private Label emergencyId;
 
     @FXML
-    private Label label;
+    private Label severityName;
 
-    private ObservableList<SeverityType> list = FXCollections.observableArrayList();
+    @FXML
+    private Label areaName;
+
+    @FXML
+    private Label areaSize;
+
+    @FXML
+    private Label organisationName;
+
+    @FXML
+    private Label organisationAdress;
+
+    @FXML
+    private Label organisationRegion;
+
+
+    private ObservableList<Emergency> list = FXCollections.observableArrayList();
 
     public void initialize(){
-        col1.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
-        for (SeverityType sev :
-                controller.getSeverities()) {
-            list.add(sev);
+        col1.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDate().toString()));
+        col2.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getOrganisation().getName()));
+        for (Emergency em :
+                controller.getEmergencies()) {
+            list.add(em);
         }
         emergencies.setItems(list);
 
@@ -50,15 +68,59 @@ public class EmFormController {
                 (observable, oldValue, newValue) -> showPersonDetails(newValue));
     }
 
-    private void showPersonDetails(SeverityType info) {
+    private void showPersonDetails(Emergency info) {
         if (info != null) {
-
-            this.info.setText(info.getName());
-            this.id.setText(String.valueOf(info.getId()));
+            this.emergencyId.setText(String.valueOf(info.getId()));
+            this.areaSize.setText(String.valueOf(info.getAreaType().getArea()));
+            this.areaName.setText(String.valueOf(info.getAreaType().getName()));
+            this.organisationName.setText(info.getOrganisation().getName());
+            this.organisationAdress.setText(info.getOrganisation().getAddress());
+            this.organisationRegion.setText(info.getOrganisation().getRegion().getName());
+            this.severityName.setText(info.getSeverityType().getName());
 
         } else {
-            label.setText("");
+            //label.setText("");
         }
+    }
+
+    @FXML
+    private void addEm() {
+
+    }
+
+    @FXML
+    private void addOrganisation() {
+
+    }
+
+    @FXML
+    private void addSeverityType() {
+
+    }
+
+    @FXML
+    private void addTimeType() {
+
+    }
+
+    @FXML
+    private void addAreaType() {
+
+    }
+
+    @FXML
+    private void addMeasure() {
+
+    }
+
+    @FXML
+    private void addReport() {
+
+    }
+
+    @FXML
+    private void addDamagedPerson() {
+
     }
 
 }
