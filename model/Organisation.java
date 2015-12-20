@@ -11,10 +11,9 @@ public class Organisation {
     public Organisation() {
     }
 
-    public Organisation(String name, String address, int id, Region region) {
+    public Organisation(String name, String address, Region region) {
         this.name = name;
         this.address = address;
-        this.id = id;
         this.region = region;
     }
 

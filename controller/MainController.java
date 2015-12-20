@@ -21,7 +21,7 @@ public class MainController {
             areaTypes.add(new AreaType(i, "type #" + i, i * 12.75));
             severities.add(new SeverityType(i, "Blya Fuck" + i));
             regions.add(new Region(i, "Region #"+i));
-            organisations.add(new Organisation("Organisation #"+i, "Address #"+i, i, regions.get(i)));
+            organisations.add(new Organisation("Organisation #"+i, "Address #"+i, regions.get(i)));
             emergencies.add(new Emergency(new Date(2000+i, i, i), i, areaTypes.get(i), severities.get(i), organisations.get(i)));
         }
 
