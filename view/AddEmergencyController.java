@@ -14,6 +14,8 @@ import model.*;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.time.Instant;
+import java.time.ZoneId;
 
 /**
  * Created by Крава on 20.12.2015.
@@ -72,7 +74,8 @@ public class AddEmergencyController {
     @FXML
     private void handleOk() {
         if (isInputValid()) {
-            Emergency emergency = new Emergency(new Date(dateField.getValue().toEpochDay()), areaField.getValue(), severityField.getValue(), organisationField.getValue());
+            Instant instant = dateField.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
+            Emergency emergency = new Emergency(new Date(Date.from(instant).getTime()), areaField.getValue(), severityField.getValue(), organisationField.getValue());
             EmergencyDao dao;
             try (Connection con = DaoFactory.getConnection()) {
                 dao = DaoFactory.getEmergencyDao(con);
