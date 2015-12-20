@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 
 import java.io.IOException;
@@ -16,6 +17,7 @@ import java.io.IOException;
 public class LogFormController {
     private Main application;
     private AnchorPane rootLayout;
+    private Stage primaryStage;
 
     @FXML
     private TextField username;
@@ -41,6 +43,7 @@ public class LogFormController {
                 application.getPrimaryStage().show();
 
                 EmFormController controller = loader.getController();
+            controller.setPrimaryStage(primaryStage);
                 controller.initialize();
 
         } catch (IOException e) {
@@ -48,6 +51,9 @@ public class LogFormController {
         }
     }
 
+    public void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+    }
 
     @FXML
     private void cancelLogInButtonPressed() {

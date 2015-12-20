@@ -1,16 +1,19 @@
 package view;
 
 import dao.DaoFactory;
+import dao.EmergencyDao;
 import dao.OrganisationDao;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.Emergency;
 import model.Organisation;
 import model.Region;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 /**
  * Created by Крава on 20.12.2015.
@@ -37,9 +40,6 @@ public class AddOrganisationController {
         this.dialogStage = dialogStage;
     }
 
-
-
-
     public boolean isOkClicked() {
         return okClicked;
     }
@@ -50,7 +50,10 @@ public class AddOrganisationController {
         if (isInputValid()) {
             Organisation organisation = new Organisation(nameField.getText(), adressField.getText(), new Region(regionField.getText()));
             OrganisationDao dao;
-
+           /* try (Connection con = DaoFactory.getConnection()) {
+                EmergencyDao dao = DaoFactory.getEmergencyDao(con);
+                Emergency em = dao.get(1);
+            }*/
             okClicked = true;
             dialogStage.close();
         }

@@ -35,6 +35,7 @@ public class Main extends Application {
 
             //Connection controller and main app
             LogFormController controller = loader.getController();
+            controller.setPrimaryStage(primaryStage);
             controller.setApplication(this);
 
         } catch (IOException e) {
