@@ -3,6 +3,7 @@ package dao;
 import model.AreaType;
 import model.Emergency;
 import model.Organisation;
+import model.Region;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -33,13 +34,20 @@ public class DaoFactory {
 
     }
 
-    public static void main(String[] args) throws SQLException, PersistException{
+    public static void main(String[] args) throws SQLException{
         System.out.println("DAO main");
         List<Emergency> list;
 
         try (Connection con = DaoFactory.getConnection()) {
-            EmergencyDao dao = DaoFactory.getEmergencyDao(con);
-            Emergency em = dao.get(1);
+            OrganisationDao dao = DaoFactory.getOrganisationDao(con);
+            Organisation org = new Organisation();
+            org.setName("Орг");
+            org.setAddress("Аддр");
+            Region reg = new Region("Регион");
+            reg.setId(1);
+            org.setRegion(reg);
+            dao.add(org);
+
         }
     }
 

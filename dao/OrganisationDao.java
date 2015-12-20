@@ -54,4 +54,24 @@ public class OrganisationDao {
 
         return list;
     }
+
+    public void add(Organisation obj) throws SQLException{
+        String sql = "INSERT INTO organisation (name, address, region_id) VALUES (?,?,?);";
+        try (PreparedStatement stm = connection.prepareStatement(sql)) {
+            stm.setString(1, obj.getName());
+            stm.setString(2, obj.getAddress());
+            stm.setInt(3, obj.getRegion().getId());
+            int count = stm.executeUpdate();
+            if (count != 1)
+                throw new SQLException(count + " records were modified instead of 1!");
+
+        }
+
+        sql = "SELECT MAX(orgranisation_id) FROM organisation;";
+        try (PreparedStatement stm = connection.prepareStatement(sql)) {
+            ResultSet rs = stm.executeQuery();
+            rs.next();
+            obj.setId(rs.getInt(1));
+        }
+    }
 }
