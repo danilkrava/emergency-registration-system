@@ -82,6 +82,7 @@ public class OrganisationDao {
             stm.setString(1, obj.getName());
             stm.setString(2, obj.getAddress());
             stm.setInt(3, obj.getRegion().getId());
+            stm.setInt(4, obj.getId());
             int count = stm.executeUpdate();
             if (count != 1) {
                 throw new SQLException(count + " records were modified instead of 1!");

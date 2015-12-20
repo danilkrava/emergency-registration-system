@@ -50,12 +50,29 @@ public class RegionDao {
         return list;
     }
 
-    /*public void update(Region obj) throws SQLException {
-        String sql = "UPDATE region SET name=?, address=?, region_id=? WHERE orgranisation_id=?";
+    public void add(Region obj) throws SQLException{
+        String sql = "INSERT INTO region (name) VALUES (?);";
         try (PreparedStatement stm = connection.prepareStatement(sql)) {
             stm.setString(1, obj.getName());
-            stm.setString(2, obj.getAddress());
-            stm.setInt(3, obj.getRegion().getId());
+            int count = stm.executeUpdate();
+            if (count != 1)
+                throw new SQLException(count + " records were modified instead of 1!");
+
+        }
+
+        sql = "SELECT MAX(region_id) FROM region;";
+        try (PreparedStatement stm = connection.prepareStatement(sql)) {
+            ResultSet rs = stm.executeQuery();
+            rs.next();
+            obj.setId(rs.getInt(1));
+        }
+    }
+
+    public void update(Region obj) throws SQLException {
+        String sql = "UPDATE region SET name=? WHERE region_id=?";
+        try (PreparedStatement stm = connection.prepareStatement(sql)) {
+            stm.setString(1, obj.getName());
+            stm.setInt(2, obj.getId());
             int count = stm.executeUpdate();
             if (count != 1) {
                 throw new SQLException(count + " records were modified instead of 1!");
@@ -63,8 +80,8 @@ public class RegionDao {
         }
     }
 
-    public void delete(Organisation obj) throws SQLException {
-        String sql = "DELETE FROM organisation WHERE orgranisation_id = ?;";
+    public void delete(Region obj) throws SQLException {
+        String sql = "DELETE FROM region WHERE region_id = ?;";
         try (PreparedStatement stm = connection.prepareStatement(sql)) {
             stm.setInt(1, obj.getId());
             int count = stm.executeUpdate();
@@ -72,5 +89,5 @@ public class RegionDao {
                 throw new SQLException(count + " records were modified instead of 1!");
             }
         }
-    }*/
+    }
 }

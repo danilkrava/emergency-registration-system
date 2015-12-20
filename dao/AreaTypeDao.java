@@ -68,4 +68,27 @@ public class AreaTypeDao {
 
         }
     }
+
+    public void update(AreaType obj) throws SQLException {
+        String sql = "UPDATE area_type SET name=? WHERE area_type_id=?";
+        try (PreparedStatement stm = connection.prepareStatement(sql)) {
+            stm.setString(1, obj.getName());
+            stm.setInt(2, obj.getId());
+            int count = stm.executeUpdate();
+            if (count != 1) {
+                throw new SQLException(count + " records were modified instead of 1!");
+            }
+        }
+    }
+
+    public void delete(AreaType obj) throws SQLException {
+        String sql = "DELETE FROM area_type WHERE area_type_id = ?;";
+        try (PreparedStatement stm = connection.prepareStatement(sql)) {
+            stm.setInt(1, obj.getId());
+            int count = stm.executeUpdate();
+            if (count != 1) {
+                throw new SQLException(count + " records were modified instead of 1!");
+            }
+        }
+    }
 }

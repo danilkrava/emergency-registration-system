@@ -34,7 +34,7 @@ public class SeverityTypeDao {
     public List<SeverityType> getAll() throws SQLException{
         List<SeverityType> list = new ArrayList<>();
 
-        String sql = "SELECT * FROM organisation;";
+        String sql = "SELECT * FROM severity_type;";
         PreparedStatement stm = connection.prepareStatement(sql);
         ResultSet rs = stm.executeQuery();
         while (rs.next()) {
@@ -43,7 +43,46 @@ public class SeverityTypeDao {
             s.setName(rs.getString("name"));
             list.add(s);
         }
-
         return list;
+    }
+
+    public void add(SeverityType obj) throws SQLException{
+        String sql = "INSERT INTO severity_type (name) VALUES (?);";
+        try (PreparedStatement stm = connection.prepareStatement(sql)) {
+            stm.setString(1, obj.getName());
+            int count = stm.executeUpdate();
+            if (count != 1)
+                throw new SQLException(count + " records were modified instead of 1!");
+        }
+
+        sql = "SELECT MAX(severity_type_id) FROM severity_type;";
+        try (PreparedStatement stm = connection.prepareStatement(sql)) {
+            ResultSet rs = stm.executeQuery();
+            rs.next();
+            obj.setId(rs.getInt(1));
+        }
+    }
+
+    public void update(SeverityType obj) throws SQLException {
+        String sql = "UPDATE severity_type SET name=? WHERE severity_type_id=?";
+        try (PreparedStatement stm = connection.prepareStatement(sql)) {
+            stm.setString(1, obj.getName());
+            stm.setInt(2, obj.getId());
+            int count = stm.executeUpdate();
+            if (count != 1) {
+                throw new SQLException(count + " records were modified instead of 1!");
+            }
+        }
+    }
+
+    public void delete(SeverityType obj) throws SQLException {
+        String sql = "DELETE FROM severity_type WHERE severity_type_id = ?;";
+        try (PreparedStatement stm = connection.prepareStatement(sql)) {
+            stm.setInt(1, obj.getId());
+            int count = stm.executeUpdate();
+            if (count != 1) {
+                throw new SQLException(count + " records were modified instead of 1!");
+            }
+        }
     }
 }
