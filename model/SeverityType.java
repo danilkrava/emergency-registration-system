@@ -5,11 +5,11 @@ package model;
  */
 public class SeverityType {
     private int id;
-    private String info;
+    private String name;
 
-    public SeverityType(int id, String info) {
+    public SeverityType(int id, String name) {
         this.id = id;
-        this.info = info;
+        this.name = name;
     }
 
     public SeverityType() {
@@ -23,19 +23,19 @@ public class SeverityType {
         this.id = id;
     }
 
-    public String getInfo() {
-        return info;
+    public String getName() {
+        return name;
     }
 
-    public void setInfo(String info) {
-        this.info = info;
+    public void setName(String info) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
         return "Severity{" +
                 "id=" + id +
-                ", info='" + info + '\'' +
+                ", info='" + name + '\'' +
                 '}';
     }
 }

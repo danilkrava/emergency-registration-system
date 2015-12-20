@@ -39,7 +39,7 @@ public class EmFormController {
     private ObservableList<SeverityType> list = FXCollections.observableArrayList();
 
     public void initialize(){
-        col1.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getInfo()));
+        col1.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
         for (SeverityType sev :
                 controller.getSeverities()) {
             list.add(sev);
@@ -53,7 +53,7 @@ public class EmFormController {
     private void showPersonDetails(SeverityType info) {
         if (info != null) {
 
-            this.info.setText(info.getInfo());
+            this.info.setText(info.getName());
             this.id.setText(String.valueOf(info.getId()));
 
         } else {
