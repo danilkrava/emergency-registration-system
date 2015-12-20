@@ -98,11 +98,13 @@
                                                                          AnchorPane.topAnchor="0.0">
                                                                    <columnConstraints>
                                                                        <ColumnConstraints hgrow="SOMETIMES"
+                                                                                          maxWidth="263.0"
                                                                                           minWidth="10.0"
-                                                                                          prefWidth="100.0"/>
+                                                                                          prefWidth="160.0"/>
                                                                        <ColumnConstraints hgrow="SOMETIMES"
+                                                                                          maxWidth="379.0"
                                                                                           minWidth="10.0"
-                                                                                          prefWidth="100.0"/>
+                                                                                          prefWidth="379.0"/>
                                                                    </columnConstraints>
                                                                    <rowConstraints>
                                                                        <RowConstraints minHeight="10.0"
@@ -143,11 +145,13 @@
                                                                                  GridPane.rowIndex="1">
                                                                            <columnConstraints>
                                                                                <ColumnConstraints hgrow="SOMETIMES"
+                                                                                                  maxWidth="179.0"
                                                                                                   minWidth="10.0"
-                                                                                                  prefWidth="100.0"/>
+                                                                                                  prefWidth="139.0"/>
                                                                                <ColumnConstraints hgrow="SOMETIMES"
+                                                                                                  maxWidth="230.0"
                                                                                                   minWidth="10.0"
-                                                                                                  prefWidth="100.0"/>
+                                                                                                  prefWidth="230.0"/>
                                                                            </columnConstraints>
                                                                            <rowConstraints>
                                                                                <RowConstraints minHeight="10.0"
@@ -171,15 +175,18 @@
                                                                                <Insets left="10.0"/>
                                                                            </GridPane.margin>
                                                                        </GridPane>
-                                                                       <GridPane GridPane.columnIndex="1"
+                                                                       <GridPane prefHeight="74.0" prefWidth="330.0"
+                                                                                 GridPane.columnIndex="1"
                                                                                  GridPane.rowIndex="3">
                                                                            <columnConstraints>
                                                                                <ColumnConstraints hgrow="SOMETIMES"
+                                                                                                  maxWidth="169.0"
                                                                                                   minWidth="10.0"
-                                                                                                  prefWidth="100.0"/>
+                                                                                                  prefWidth="102.0"/>
                                                                                <ColumnConstraints hgrow="SOMETIMES"
+                                                                                                  maxWidth="310.0"
                                                                                                   minWidth="10.0"
-                                                                                                  prefWidth="100.0"/>
+                                                                                                  prefWidth="267.0"/>
                                                                            </columnConstraints>
                                                                            <rowConstraints>
                                                                                <RowConstraints minHeight="10.0"
@@ -198,9 +205,13 @@
                                                                                           GridPane.columnIndex="1"
                                                                                           GridPane.rowIndex="2"/>
                                                                                <TextField fx:id="organisationAdress"
+                                                                                          prefHeight="25.0"
+                                                                                          prefWidth="162.0"
                                                                                           GridPane.columnIndex="1"
                                                                                           GridPane.rowIndex="1"/>
                                                                                <TextField fx:id="organisationName"
+                                                                                          prefHeight="25.0"
+                                                                                          prefWidth="221.0"
                                                                                           GridPane.columnIndex="1"/>
                                                                                <Label text="Регион"
                                                                                       GridPane.rowIndex="2"/>
