@@ -3,9 +3,13 @@ package view;
 import dao.DaoFactory;
 import dao.EmergencyDao;
 import dao.OrganisationDao;
+import dao.RegionDao;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Emergency;
@@ -24,15 +28,25 @@ public class AddOrganisationController {
     @FXML
     private TextField adressField;
     @FXML
-    private TextField regionField;
+    private ComboBox<Region> regionField;
+    private ObservableList<Region> list = FXCollections.observableArrayList();
 
     private Stage dialogStage;
     //  private Person person;
     private boolean okClicked = false;
 
-
-    @FXML
-    private void initialize() {
+    public void initialize() {
+        try (Connection con = DaoFactory.getConnection()) {
+            RegionDao dao = DaoFactory.getRegionDao(con);
+            list.addAll(dao.getAll());
+            regionField.setItems(list);
+        } catch (SQLException e) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.initOwner(dialogStage);
+            alert.setTitle("Error");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
     }
 
 
@@ -48,9 +62,7 @@ public class AddOrganisationController {
     @FXML
     private void handleOk() {
         if (isInputValid()) {
-            Region region = new Region(regionField.getText());
-            region.setId(1);
-            Organisation organisation = new Organisation(nameField.getText(), adressField.getText(), region);
+            Organisation organisation = new Organisation(nameField.getText(), adressField.getText(), regionField.getValue());
             OrganisationDao dao;
             try (Connection con = DaoFactory.getConnection()) {
                 dao = DaoFactory.getOrganisationDao(con);
@@ -84,7 +96,7 @@ public class AddOrganisationController {
         if (adressField.getText() == null || adressField.getText().length() == 0) {
             errorMessage += "No valid last name!\n";
         }
-        if (regionField.getText() == null || regionField.getText().length() == 0) {
+        if (regionField.getSelectionModel().getSelectedItem() == null) {
             errorMessage += "No valid street!\n";
         }
 
