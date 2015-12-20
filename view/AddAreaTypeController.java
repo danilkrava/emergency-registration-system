@@ -45,7 +45,7 @@ public class AddAreaTypeController {
     @FXML
     private void handleOk() {
         if (isInputValid()) {
-            AreaType areaType = new AreaType(nameField.getText(), Integer.parseInt(areaField.getText()));
+            AreaType areaType = new AreaType(nameField.getText(), Double.parseDouble(areaField.getText()));
             AreaTypeDao dao;
             try (Connection con = DaoFactory.getConnection()) {
                 dao = DaoFactory.getAreaTypeDao(con);
