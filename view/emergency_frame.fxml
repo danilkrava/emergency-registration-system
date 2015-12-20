@@ -50,7 +50,9 @@
                </AnchorPane>
                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                    <children>
-                       <TabPane prefHeight="327.0" prefWidth="788.0" tabClosingPolicy="UNAVAILABLE">
+                       <TabPane prefHeight="327.0" prefWidth="790.0" tabClosingPolicy="UNAVAILABLE"
+                                AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0"
+                                AnchorPane.topAnchor="0.0">
                            <tabs>
                                <Tab text="Untitled Tab 1">
                                    <content>
