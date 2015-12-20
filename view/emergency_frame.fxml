@@ -20,18 +20,23 @@
                            <menus>
                                <Menu mnemonicParsing="false" text="Добавить">
                                    <items>
-                                       <MenuItem mnemonicParsing="false" text="НС"/>
-                                       <MenuItem mnemonicParsing="false" text="Організація"/>
+                                       <MenuItem mnemonicParsing="false" onAction="#addEm" text="НС"/>
+                                       <MenuItem mnemonicParsing="false" onAction="#addOrganisation"
+                                                 text="Організація"/>
                                        <Menu mnemonicParsing="false" text="Тип">
                                            <items>
-                                               <MenuItem mnemonicParsing="false" text="За важкістю"/>
-                                               <MenuItem mnemonicParsing="false" text="За часом"/>
-                                               <MenuItem mnemonicParsing="false" text="За площею"/>
+                                               <MenuItem mnemonicParsing="false" onAction="#addSeverityType"
+                                                         text="За важкістю"/>
+                                               <MenuItem mnemonicParsing="false" onAction="#addTimeType"
+                                                         text="За часом"/>
+                                               <MenuItem mnemonicParsing="false" onAction="#addAreaType"
+                                                         text="За площею"/>
                                            </items>
                                        </Menu>
-                                       <MenuItem mnemonicParsing="false" text="Контрзахід"/>
-                                       <MenuItem mnemonicParsing="false" text="Звіт"/>
-                                       <MenuItem mnemonicParsing="false" text="Потерпілий"/>
+                                       <MenuItem mnemonicParsing="false" onAction="#addMeasure" text="Контрзахід"/>
+                                       <MenuItem mnemonicParsing="false" onAction="#addReport" text="Звіт"/>
+                                       <MenuItem mnemonicParsing="false" onAction="#addDamagedPerson"
+                                                 text="Потерпілий"/>
                                    </items>
                                </Menu>
                                <Menu mnemonicParsing="false" text="Help">
