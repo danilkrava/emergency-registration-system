@@ -1,4 +1,4 @@
-package course.controller;
+package controller;
 
 /**
  * Created by Крава on 06.12.2015.
