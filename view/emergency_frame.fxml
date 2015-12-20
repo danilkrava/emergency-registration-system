@@ -48,13 +48,13 @@
                        </MenuBar>
                    </children>
                </AnchorPane>
-               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="327.0" prefWidth="766.0">
                    <children>
                        <TabPane prefHeight="327.0" prefWidth="790.0" tabClosingPolicy="UNAVAILABLE"
                                 AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0"
                                 AnchorPane.topAnchor="0.0">
                            <tabs>
-                               <Tab text="Untitled Tab 1">
+                               <Tab text="Надзвичайні ситуації">
                                    <content>
                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                            <children>
@@ -124,25 +124,12 @@
                                                                                <Insets left="10.0"/>
                                                                            </GridPane.margin>
                                                                        </Label>
-                                                                       <Label fx:id="emergencyId"
-                                                                              GridPane.columnIndex="1">
-                                                                           <GridPane.margin>
-                                                                               <Insets left="10.0"/>
-                                                                           </GridPane.margin>
-                                                                       </Label>
                                                                        <Label text="Площадь" GridPane.rowIndex="1">
                                                                            <GridPane.margin>
                                                                                <Insets left="10.0"/>
                                                                            </GridPane.margin>
                                                                        </Label>
                                                                        <Label text="Тяжесть" GridPane.rowIndex="2">
-                                                                           <GridPane.margin>
-                                                                               <Insets left="10.0"/>
-                                                                           </GridPane.margin>
-                                                                       </Label>
-                                                                       <Label fx:id="severityName"
-                                                                              GridPane.columnIndex="1"
-                                                                              GridPane.rowIndex="2">
                                                                            <GridPane.margin>
                                                                                <Insets left="10.0"/>
                                                                            </GridPane.margin>
@@ -172,11 +159,11 @@
                                                                            </rowConstraints>
                                                                            <children>
                                                                                <Label text="Название"/>
-                                                                               <Label fx:id="areaName"
-                                                                                      GridPane.columnIndex="1"/>
-                                                                               <Label fx:id="areaSize"
-                                                                                      GridPane.columnIndex="1"
-                                                                                      GridPane.rowIndex="1"/>
+                                                                               <TextField fx:id="areaSize"
+                                                                                          GridPane.columnIndex="1"
+                                                                                          GridPane.rowIndex="1"/>
+                                                                               <TextField fx:id="areaName"
+                                                                                          GridPane.columnIndex="1"/>
                                                                                <Label text="Охватываема площадь"
                                                                                       GridPane.rowIndex="1"/>
                                                                            </children>
@@ -207,14 +194,14 @@
                                                                            </rowConstraints>
                                                                            <children>
                                                                                <Label text="Имя"/>
-                                                                               <Label fx:id="organisationAdress"
-                                                                                      GridPane.columnIndex="1"
-                                                                                      GridPane.rowIndex="1"/>
-                                                                               <Label fx:id="organisationRegion"
-                                                                                      GridPane.columnIndex="1"
-                                                                                      GridPane.rowIndex="2"/>
-                                                                               <Label fx:id="organisationName"
-                                                                                      GridPane.columnIndex="1"/>
+                                                                               <TextField fx:id="organisationRegion"
+                                                                                          GridPane.columnIndex="1"
+                                                                                          GridPane.rowIndex="2"/>
+                                                                               <TextField fx:id="organisationAdress"
+                                                                                          GridPane.columnIndex="1"
+                                                                                          GridPane.rowIndex="1"/>
+                                                                               <TextField fx:id="organisationName"
+                                                                                          GridPane.columnIndex="1"/>
                                                                                <Label text="Регион"
                                                                                       GridPane.rowIndex="2"/>
                                                                                <Label text="Адрес"
@@ -224,6 +211,11 @@
                                                                                <Insets left="10.0"/>
                                                                            </GridPane.margin>
                                                                        </GridPane>
+                                                                       <TextField fx:id="emergencyId"
+                                                                                  GridPane.columnIndex="1"/>
+                                                                       <TextField fx:id="severityName"
+                                                                                  GridPane.columnIndex="1"
+                                                                                  GridPane.rowIndex="2"/>
                                                                    </children>
                                                                </GridPane>
                                                            </children>
@@ -234,9 +226,9 @@
                                        </AnchorPane>
                                    </content>
                                </Tab>
-                               <Tab text="Untitled Tab 2">
+                               <Tab text="Організації">
                                    <content>
-                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="298.0" prefWidth="778.0"/>
                                    </content>
                                </Tab>
                            </tabs>

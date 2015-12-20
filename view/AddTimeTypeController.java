@@ -1,37 +1,34 @@
 package view;
 
-import dao.AreaTypeDao;
 import dao.DaoFactory;
-import dao.OrganisationDao;
+import dao.SeverityTypeDao;
+import dao.TimeTypeDao;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import model.AreaType;
-import model.Organisation;
-import model.Region;
+import model.SeverityType;
 import model.TimeType;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
- * Created by Крава on 20.12.2015.
+ * Created by Крава on 21.12.2015.
  */
-public class AddAreaTypeController {
+public class AddTimeTypeController {
     @FXML
     private TextField nameField;
     @FXML
-    private TextField areaField;
+    private TextField timeField;
 
     private Stage dialogStage;
     private boolean okClicked = false;
 
-
     @FXML
     private void initialize() {
     }
-
 
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
@@ -45,11 +42,11 @@ public class AddAreaTypeController {
     @FXML
     private void handleOk() {
         if (isInputValid()) {
-            AreaType areaType = new AreaType(nameField.getText(), Double.parseDouble(areaField.getText()));
-            AreaTypeDao dao;
+            TimeType timeType = new TimeType(nameField.getText(), Integer.parseInt(timeField.getText()));
+            TimeTypeDao dao;
             try (Connection con = DaoFactory.getConnection()) {
-                dao = DaoFactory.getAreaTypeDao(con);
-                dao.add(areaType);
+                dao = DaoFactory.getTimeTypeDao(con);
+                dao.add(timeType);
             } catch (SQLException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.initOwner(dialogStage);
@@ -57,7 +54,6 @@ public class AddAreaTypeController {
                 alert.setContentText(e.getMessage());
                 alert.showAndWait();
             }
-
             okClicked = true;
             dialogStage.close();
         }
@@ -77,12 +73,12 @@ public class AddAreaTypeController {
             errorMessage += "No valid name!\n";
         }
         try {
-            Double.parseDouble(areaField.getText());
+            Integer.parseInt(timeField.getText());
         } catch (Exception ex) {
-            errorMessage += "No valid area!\n";
+            errorMessage += "No valid time!\n";
         }
-        if (areaField.getText() == null || areaField.getText().length() == 0) {
-            errorMessage += "No valid area!\n";
+        if (timeField.getText() == null || nameField.getText().length() == 0) {
+            errorMessage += "No valid time!\n";
         }
         if (errorMessage.length() == 0) {
             return true;
