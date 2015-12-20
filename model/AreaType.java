@@ -17,6 +17,15 @@ public class AreaType {
     public AreaType() {
     }
 
+    @Override
+    public String toString() {
+        return "AreaType{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", area=" + area +
+                '}';
+    }
+
     public int getId() {
 
         return id;

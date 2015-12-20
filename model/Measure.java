@@ -4,57 +4,60 @@ package model;
  * Created by Oleksandr on 28.11.2015.
  */
 public class Measure {
-    private int id, timeTypeId, severityTypeId, areaTypeId;
-
-    public Measure(int id, int timeTypeId, int severityTypeId, int areaTypeId) {
-        this.id = id;
-        this.timeTypeId = timeTypeId;
-        this.severityTypeId = severityTypeId;
-        this.areaTypeId = areaTypeId;
-    }
+    private int id;
+    private TimeType timeType;
+    private Severity severity;
+    private AreaType areaType;
 
     public Measure() {
     }
 
-    public int getId() {
-        return id;
+    public Measure(int id, TimeType timeType, Severity severity, AreaType areaType) {
+        this.id = id;
+        this.timeType = timeType;
+        this.severity = severity;
+        this.areaType = areaType;
     }
 
     @Override
     public String toString() {
         return "Measure{" +
                 "id=" + id +
-                ", timeTypeId=" + timeTypeId +
-                ", severityTypeId=" + severityTypeId +
-                ", areaTypeId=" + areaTypeId +
+                ", timeType=" + timeType +
+                ", severity=" + severity +
+                ", areaType=" + areaType +
                 '}';
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public int getTimeTypeId() {
-        return timeTypeId;
+    public TimeType getTimeType() {
+        return timeType;
     }
 
-    public void setTimeTypeId(int timeTypeId) {
-        this.timeTypeId = timeTypeId;
+    public void setTimeType(TimeType timeType) {
+        this.timeType = timeType;
     }
 
-    public int getSeverityTypeId() {
-        return severityTypeId;
+    public Severity getSeverity() {
+        return severity;
     }
 
-    public void setSeverityTypeId(int severityTypeId) {
-        this.severityTypeId = severityTypeId;
+    public void setSeverity(Severity severity) {
+        this.severity = severity;
     }
 
-    public int getAreaTypeId() {
-        return areaTypeId;
+    public AreaType getAreaType() {
+        return areaType;
     }
 
-    public void setAreaTypeId(int areaTypeId) {
-        this.areaTypeId = areaTypeId;
+    public void setAreaType(AreaType areaType) {
+        this.areaType = areaType;
     }
 }

@@ -3,16 +3,24 @@ package model;
 /**
  * Created by Oleksandr on 20.12.2015.
  */
-public class Severity {
+public class TimeType {
     private int id;
     private String info;
 
-    public Severity(int id, String info) {
+    public TimeType() {
+    }
+
+    public TimeType(int id, String info) {
         this.id = id;
         this.info = info;
     }
 
-    public Severity() {
+    @Override
+    public String toString() {
+        return "TimeType{" +
+                "id=" + id +
+                ", info='" + info + '\'' +
+                '}';
     }
 
     public int getId() {
@@ -29,13 +37,5 @@ public class Severity {
 
     public void setInfo(String info) {
         this.info = info;
-    }
-
-    @Override
-    public String toString() {
-        return "Severity{" +
-                "id=" + id +
-                ", info='" + info + '\'' +
-                '}';
     }
 }

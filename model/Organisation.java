@@ -5,24 +5,27 @@ package model;
  */
 public class Organisation {
     private String name, address;
-    private int id, regionId;
-
-    public Organisation(int id, String name, String address, int regionId) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.regionId = regionId;
-    }
+    private int id;
+    private Region region;
 
     public Organisation() {
     }
 
-    public int getId() {
-        return id;
+    public Organisation(String name, String address, int id, Region region) {
+        this.name = name;
+        this.address = address;
+        this.id = id;
+        this.region = region;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    @Override
+    public String toString() {
+        return "Organisation{" +
+                "name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", id=" + id +
+                ", region=" + region +
+                '}';
     }
 
     public String getName() {
@@ -41,11 +44,19 @@ public class Organisation {
         this.address = address;
     }
 
-    public int getRegionId() {
-        return regionId;
+    public int getId() {
+        return id;
     }
 
-    public void setRegionId(int regionId) {
-        this.regionId = regionId;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Region getRegion() {
+        return region;
+    }
+
+    public void setRegion(Region region) {
+        this.region = region;
     }
 }

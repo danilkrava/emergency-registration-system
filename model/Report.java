@@ -1,17 +1,23 @@
 package model;
 
+import java.sql.Date;
+
 public class Report {
-    private int id, emergencyId;
+    private int id;
+    private Emergency emergency;
     private Date date;
     private double radiation;
     private String info;
 
-    public Report(int id, int emergencyId, Date date, double radiation, String info) {
+    public Report(int id, Emergency emergency, Date date, double radiation, String info) {
         this.id = id;
-        this.emergencyId = emergencyId;
+        this.emergency = emergency;
         this.date = date;
         this.radiation = radiation;
         this.info = info;
+    }
+
+    public Report() {
     }
 
     public int getId() {
@@ -22,12 +28,12 @@ public class Report {
         this.id = id;
     }
 
-    public int getEmergencyId() {
-        return emergencyId;
+    public Emergency getEmergency() {
+        return emergency;
     }
 
-    public void setEmergencyId(int emergencyId) {
-        this.emergencyId = emergencyId;
+    public void setEmergency(Emergency emergency) {
+        this.emergency = emergency;
     }
 
     public Date getDate() {
@@ -42,9 +48,6 @@ public class Report {
         return radiation;
     }
 
-    public Report() {
-    }
-
     public void setRadiation(double radiation) {
         this.radiation = radiation;
     }
@@ -55,5 +58,16 @@ public class Report {
 
     public void setInfo(String info) {
         this.info = info;
+    }
+
+    @Override
+    public String toString() {
+        return "Report{" +
+                "id=" + id +
+                ", emergency=" + emergency +
+                ", date=" + date +
+                ", radiation=" + radiation +
+                ", info='" + info + '\'' +
+                '}';
     }
 }

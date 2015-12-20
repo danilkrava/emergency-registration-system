@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.Date;
 /**
  * Created by Oleksandr on 28.11.2015.
  */
@@ -21,6 +22,17 @@ public class Person {
     }
 
     public Person() {
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", birthDate=" + birthDate +
+                '}';
     }
 
     public void setId(int id) {
