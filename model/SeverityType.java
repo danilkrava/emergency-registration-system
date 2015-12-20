@@ -23,11 +23,11 @@ public class SeverityType {
         this.id = id;
     }
 
-    public String getInfo() {
+    public String getName() {
         return name;
     }
 
-    public void setInfo(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
