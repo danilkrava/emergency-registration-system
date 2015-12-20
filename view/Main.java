@@ -25,7 +25,7 @@ public class Main extends Application {
             FXMLLoader loader = new FXMLLoader();
 
             //Load log form
-            loader.setLocation(Main.class.getResource("view/logform/log_form.fxml"));
+            loader.setLocation(Main.class.getResource("log_form.fxml"));
             AnchorPane anchorPane = (AnchorPane) loader.load();
 
             // Show the scene containing the root layout.

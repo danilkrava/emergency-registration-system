@@ -31,7 +31,7 @@ public class LogFormController {
         try {
                 //Loading root frame for all frames
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(application.getClass().getResource("view/root_frame.fxml"));
+            loader.setLocation(application.getClass().getResource("root_frame.fxml"));
                 rootLayout = loader.load();
 
                 application.getPrimaryStage().setTitle("Emergency frame");
@@ -40,7 +40,7 @@ public class LogFormController {
                 application.getPrimaryStage().show();
 
                 FXMLLoader loader1 = new FXMLLoader();
-                loader1.setLocation(application.getClass().getResource("view/emergencyform/emergency_frame.fxml"));
+            loader1.setLocation(application.getClass().getResource("emergency_frame.fxml"));
                 rootLayout.setCenter(loader1.load());
 
                 EmFormController controller = loader.getController();

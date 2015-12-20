@@ -6,13 +6,13 @@ package model;
 public class Measure {
     private int id;
     private TimeType timeType;
-    private Severity severity;
+    private SeverityType severity;
     private AreaType areaType;
 
     public Measure() {
     }
 
-    public Measure(int id, TimeType timeType, Severity severity, AreaType areaType) {
+    public Measure(int id, TimeType timeType, SeverityType severity, AreaType areaType) {
         this.id = id;
         this.timeType = timeType;
         this.severity = severity;
@@ -45,11 +45,11 @@ public class Measure {
         this.timeType = timeType;
     }
 
-    public Severity getSeverity() {
+    public SeverityType getSeverity() {
         return severity;
     }
 
-    public void setSeverity(Severity severity) {
+    public void setSeverity(SeverityType severity) {
         this.severity = severity;
     }
 
