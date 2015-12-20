@@ -19,12 +19,7 @@ public class Organisation {
 
     @Override
     public String toString() {
-        return "Organisation{" +
-                "name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", id=" + id +
-                ", region=" + region +
-                '}';
+        return name;
     }
 
     public String getName() {
