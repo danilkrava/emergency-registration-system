@@ -1,5 +1,6 @@
 package model;
 
+import javax.print.attribute.standard.Severity;
 import java.sql.Date;
 
 /**
@@ -9,17 +10,17 @@ public class Emergency {
     private Date date;
     private int id;
     private AreaType areaType;
-    private Severity severity;
+    private SeverityType severityType;
     private Organisation organisation;
 
     public Emergency() {
     }
 
-    public Emergency(Date date, int id, AreaType areaType, Severity severity, Organisation organisation) {
+    public Emergency(Date date, int id, AreaType areaType, SeverityType severityType, Organisation organisation) {
         this.date = date;
         this.id = id;
         this.areaType = areaType;
-        this.severity = severity;
+        this.severityType = severityType;
         this.organisation = organisation;
     }
 
@@ -29,7 +30,7 @@ public class Emergency {
                 "date=" + date +
                 ", id=" + id +
                 ", areaType=" + areaType +
-                ", severity=" + severity +
+                ", severity=" + severityType +
                 ", organisation=" + organisation +
                 '}';
     }
@@ -58,12 +59,12 @@ public class Emergency {
         this.areaType = areaType;
     }
 
-    public Severity getSeverity() {
-        return severity;
+    public SeverityType getSeverityType() {
+        return severityType;
     }
 
-    public void setSeverity(Severity severity) {
-        this.severity = severity;
+    public void setSeverityType(SeverityType severityType) {
+        this.severityType = severityType;
     }
 
     public Organisation getOrganisation() {

@@ -3,16 +3,16 @@ package model;
 /**
  * Created by Oleksandr on 20.12.2015.
  */
-public class Severity {
+public class SeverityType {
     private int id;
     private String info;
 
-    public Severity(int id, String info) {
+    public SeverityType(int id, String info) {
         this.id = id;
         this.info = info;
     }
 
-    public Severity() {
+    public SeverityType() {
     }
 
     public int getId() {
