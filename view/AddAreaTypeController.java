@@ -78,12 +78,13 @@ public class AddAreaTypeController {
         }
         try {
             Double.parseDouble(areaField.getText());
+            if (areaField.getText() == null || areaField.getText().length() == 0 || Double.parseDouble(areaField.getText()) < 0) {
+                errorMessage += "No valid area!\n";
+            }
         } catch (Exception ex) {
             errorMessage += "No valid area!\n";
         }
-        if (areaField.getText() == null || areaField.getText().length() == 0) {
-            errorMessage += "No valid area!\n";
-        }
+
         if (errorMessage.length() == 0) {
             return true;
         } else {
