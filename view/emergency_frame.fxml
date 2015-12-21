@@ -430,7 +430,11 @@
                                                                        </Label>
                                                                        <Label fx:id="measuresCount"
                                                                               GridPane.columnIndex="1"
-                                                                              GridPane.rowIndex="5"/>
+                                                                              GridPane.rowIndex="5">
+                                                                           <GridPane.margin>
+                                                                               <Insets left="10.0"/>
+                                                                           </GridPane.margin>
+                                                                       </Label>
                                                                        <Button mnemonicParsing="false"
                                                                                onAction="#showMeasures"
                                                                                prefHeight="25.0" prefWidth="315.0"

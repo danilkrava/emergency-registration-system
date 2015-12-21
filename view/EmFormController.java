@@ -186,6 +186,7 @@ public class EmFormController {
     private ObservableList<Emergency> emergencies = FXCollections.observableArrayList();
     private ObservableList<Organisation> organisations = FXCollections.observableArrayList();
     private ObservableList<Person> damagedPeople = FXCollections.observableArrayList();
+    private ObservableList<Measure> emergencyMeasures = FXCollections.observableArrayList();
     private ObservableList<SeverityType> severities = FXCollections.observableArrayList();
     private ObservableList<AreaType> areas = FXCollections.observableArrayList();
     private ObservableList<Region> regions = FXCollections.observableArrayList();
@@ -263,7 +264,11 @@ public class EmFormController {
         if (info != null) {
             try (Connection con = DaoFactory.getConnection()) {
                 PersonDao personDao = DaoFactory.getPersonDao(con);
+                MeasureDao measureDao = DaoFactory.getMeasureDao(con);
+
+                emergencyMeasures.clear();
                 damagedPeople.clear();
+                emergencyMeasures.addAll(measureDao.getByEmergency(info));
                 damagedPeople.addAll(personDao.getByEmergency(info.getId()));
             } catch (SQLException e) {
                 showMessage(Alert.AlertType.ERROR, "Error", e.getMessage());
@@ -276,7 +281,7 @@ public class EmFormController {
             this.organisationRegion.setText(info.getOrganisation().getRegion().getName());
             this.severityName.setValue(info.getSeverityType());
             this.damagedPeopleCount.setText(String.valueOf(damagedPeople.size()));
-            this.measuresCount.setText(String.valueOf(measures.size()));
+            this.measuresCount.setText(String.valueOf(emergencyMeasures.size()));
         } else {
             //label.setText("");
         }

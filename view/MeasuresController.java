@@ -55,7 +55,6 @@ public class MeasuresController {
 
     public void start() {
         measureNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getInfo()));
-
         try (Connection con = DaoFactory.getConnection()) {
             MeasureDao measureDao = DaoFactory.getMeasureDao(con);
             measures.addAll(measureDao.getByEmergency(currentEmergency));
