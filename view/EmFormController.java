@@ -42,6 +42,17 @@ public class EmFormController {
     private TableView<Organisation> organisationTableView;
 
     @FXML
+    private TableView<TimeType> timeTypeTableView;
+
+    @FXML
+    private TableView<AreaType> areaTypeTableView;
+
+    @FXML
+    private TableView<SeverityType> severityTypeTableView;
+
+    ///////////////////////////////////////////////
+
+    @FXML
     private TableColumn<Organisation, String> orgName;
 
     @FXML
@@ -49,6 +60,17 @@ public class EmFormController {
 
     @FXML
     private TableColumn<Emergency, String> emergencyPlace;
+
+    @FXML
+    private TableColumn<TimeType, String> timeTypeName;
+
+    @FXML
+    private TableColumn<AreaType, String> areaTypeName;
+
+    @FXML
+    private TableColumn<SeverityType, String> severityTypeName;
+
+    //////////////////////////////////////////////////
 
     @FXML
     private Label emergencyId;
@@ -75,7 +97,7 @@ public class EmFormController {
 
 
     @FXML
-    private TextField organisationId;
+    private Label organisationId;
 
     @FXML
     private TextField organisationNamePane2;
@@ -85,6 +107,36 @@ public class EmFormController {
 
     @FXML
     private TextField regionName;
+
+    //////////////////////////////////////////
+
+    @FXML
+    private Label timeId;
+
+    @FXML
+    private TextField timeName;
+
+    @FXML
+    private TextField timeElapsedTime;
+
+    //////////////////////////////////////////
+
+    @FXML
+    private Label areaId;
+
+    @FXML
+    private TextField areasAreaName;
+
+    @FXML
+    private TextField areaSize;
+
+    //////////////////////////////////////////
+
+    @FXML
+    private Label severityId;
+
+    @FXML
+    private TextField severitiesSeverityName;
 
     //////////////////////////////////////////
 
@@ -112,10 +164,17 @@ public class EmFormController {
     private ObservableList<SeverityType> severities = FXCollections.observableArrayList();
     private ObservableList<AreaType> areas = FXCollections.observableArrayList();
     private ObservableList<Region> regions = FXCollections.observableArrayList();
+    private ObservableList<TimeType> timeTypes = FXCollections.observableArrayList();
+
     public void initialize() {
         emergencyDate.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDate().toString()));
         emergencyPlace.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getOrganisation().getName()));
         orgName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+        timeTypeName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+        areaTypeName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+        severityTypeName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+
+
         try (Connection con = DaoFactory.getConnection()) {
 
             EmergencyDao emergencyDao = DaoFactory.getEmergencyDao(con);
@@ -123,18 +182,25 @@ public class EmFormController {
             SeverityTypeDao severityDao = DaoFactory.getSeverityTypeDao(con);
             AreaTypeDao areaDao = DaoFactory.getAreaTypeDao(con);
             RegionDao regionDao = DaoFactory.getRegionDao(con);
+            TimeTypeDao timeTypeDao = DaoFactory.getTimeTypeDao(con);
 
             emergencies.addAll(emergencyDao.getAll());
             organisations.addAll(organisationDao.getAll());
             severities.addAll(severityDao.getAll());
             areas.addAll(areaDao.getAll());
             regions.addAll(regionDao.getAll());
+            timeTypes.addAll(timeTypeDao.getAll());
 
             emergencyTableView.setItems(emergencies);
             organisationTableView.setItems(organisations);
+            areaTypeTableView.setItems(areas);
+            severityTypeTableView.setItems(severities);
+            timeTypeTableView.setItems(timeTypes);
+
             severityName.setItems(severities);
             areaName.setItems(areas);
             organisationName.setItems(organisations);
+
 
             filterArea.setItems(areas);
             filterOrganisation.setItems(organisations);
@@ -151,6 +217,12 @@ public class EmFormController {
                 (observable, oldValue, newValue) -> showEmergencyDetails(newValue));
         organisationTableView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showOrganisationDetails(newValue));
+        timeTypeTableView.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> showTimeTypeDetails(newValue));
+        areaTypeTableView.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> showAreaTypeDetails(newValue));
+        severityTypeTableView.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> showSeverityTypeDetails(newValue));
     }
 
     private void showEmergencyDetails(Emergency info) {
@@ -185,6 +257,36 @@ public class EmFormController {
             this.organisationAdressPane2.setText(String.valueOf(info.getAddress()));
             this.regionName.setText(info.getRegion().getName());
 
+        } else {
+            //label.setText("");
+        }
+    }
+
+    private void showTimeTypeDetails(TimeType info) {
+        if (info != null) {
+            this.timeId.setText(String.valueOf(info.getId()));
+            this.timeName.setText(info.getName());
+            this.timeElapsedTime.setText(String.valueOf(info.getTimeElapsed()));
+
+        } else {
+            //label.setText("");
+        }
+    }
+
+    private void showAreaTypeDetails(AreaType info) {
+        if (info != null) {
+            this.areaId.setText(String.valueOf(info.getId()));
+            this.areasAreaName.setText(info.getName());
+            this.areaSize.setText(String.valueOf(info.getArea()));
+        } else {
+            //label.setText("");
+        }
+    }
+
+    private void showSeverityTypeDetails(SeverityType info) {
+        if (info != null) {
+            this.severityId.setText(String.valueOf(info.getId()));
+            this.severitiesSeverityName.setText(info.getName());
         } else {
             //label.setText("");
         }
