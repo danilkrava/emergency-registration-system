@@ -417,4 +417,9 @@ public class EmFormController {
             alert.showAndWait();
         }
     }
+
+    @FXML
+    private void refresh() {
+        initialize();
+    }
 }

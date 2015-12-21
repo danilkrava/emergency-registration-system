@@ -42,11 +42,7 @@
                                        <MenuItem mnemonicParsing="false" text="About"/>
                                    </items>
                                </Menu>
-                               <Menu mnemonicParsing="false" text="Оновити">
-                                   <items>
-                                       <MenuItem mnemonicParsing="false" text="Action 1"/>
-                                   </items>
-                               </Menu>
+                               <Menu mnemonicParsing="false" onAction="#refresh" text="Оновити"/>
                            </menus>
                        </MenuBar>
                    </children>
