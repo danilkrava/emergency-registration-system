@@ -261,6 +261,7 @@ public class EmFormController {
         if (info != null) {
             try (Connection con = DaoFactory.getConnection()) {
                 PersonDao personDao = DaoFactory.getPersonDao(con);
+                damagedPeople.clear();
                 damagedPeople.addAll(personDao.getByEmergency(info.getId()));
             } catch (SQLException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
