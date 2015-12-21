@@ -615,6 +615,13 @@ public class EmFormController {
 
             emergencyDao.update(emergency);
             emergencyTableView.refresh();
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.initOwner(dialogStage);
+            alert.setTitle("Збережено");
+            alert.setContentText("Запис оновлено");
+            alert.showAndWait();
+
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initOwner(dialogStage);
