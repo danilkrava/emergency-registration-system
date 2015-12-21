@@ -61,6 +61,8 @@ public class MeasuresController {
             measureTableView.setItems(measures);
         } catch (SQLException e) {
             Message.showErrorMessage(e.getMessage());
+        } catch (NullPointerException e) {
+            Message.showInformationMessage("Немає рекомендацій");
         }
         measureTableView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showMeasureDetails(newValue));

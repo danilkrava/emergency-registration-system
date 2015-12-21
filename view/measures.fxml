@@ -5,13 +5,17 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="307.0" prefWidth="636.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MeasuresController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="307.0"
+            prefWidth="636.0" xmlns="http://javafx.com/javafx/8.0.66" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="view.MeasuresController">
     <children>
         <SplitPane dividerPositions="0.36789297658862874" layoutX="64.0" layoutY="104.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                     <children>
-                        <TableView fx:id="personTableView" layoutX="9.0" layoutY="70.0" prefHeight="398.0" prefWidth="217.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TableView fx:id="measureTableView" layoutX="9.0" layoutY="70.0" prefHeight="398.0"
+                                   prefWidth="217.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <columns>
                                 <TableColumn fx:id="measureNameColumn" prefWidth="75.0" text="Назва" />
                             </columns>
