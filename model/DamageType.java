@@ -7,6 +7,10 @@ public class DamageType {
     private int id;
     private String name;
 
+    public DamageType() {
+
+    }
+
     public DamageType(String name) {
         this.name = name;
     }
