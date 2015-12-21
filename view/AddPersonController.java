@@ -88,7 +88,7 @@ public class AddPersonController {
             errorMessage += "No valid surname!\n";
         }
         if (middlename.getText() == null || middlename.getText().length() == 0) {
-            errorMessage += "No valid middle!\n";
+            errorMessage += "No valid middle name!\n";
         }
 
         if (errorMessage.length() == 0) {
