@@ -38,7 +38,7 @@ public class PersonDao {
     public List<Person> getByEmergency(int emergencyId) throws SQLException{
         List<Person> list = new ArrayList<>();
 
-        String sql = "SELECT * FROM person INNER JOIN emergency_person_mapping as epm on epm.person_id=person.person_id WHERE emp.organisation_id=?;";
+        String sql = "SELECT * FROM person INNER JOIN emergency_person_mapping as epm on epm.person_id=person.person_id WHERE epm.emergency_id=?;";
         PreparedStatement stm = connection.prepareStatement(sql);
         stm.setInt(1,emergencyId);
         ResultSet rs = stm.executeQuery();
