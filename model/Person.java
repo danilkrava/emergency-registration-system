@@ -25,13 +25,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", middleName='" + middleName + '\'' +
-                ", birthDate=" + birthDate +
-                '}';
+        return name + " " + surname;
     }
 
     public void setId(int id) {
