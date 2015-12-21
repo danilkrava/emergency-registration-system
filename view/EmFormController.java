@@ -370,7 +370,31 @@ public class EmFormController {
 
     @FXML
     private void showMeasures() {
-        System.out.println("Саня хуяра!");
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("measures.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Рекомендації");
+            // dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Set the person into the controller.
+
+            MeasuresController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setEmergency(emergencyTableView.getSelectionModel().getSelectedItem());
+            controller.start();
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
