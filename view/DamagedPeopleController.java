@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -93,7 +94,9 @@ public class DamagedPeopleController {
                 DamageTypeDao damageTypeDao = DaoFactory.getDamageTypeDao(con);
                 List<DamageType> damagedList = damageTypeDao.getByPerson(info.getId());
                 for (int i = 0; i < damagedList.size(); i++) {
-                    damagedParts.add(new Label(damagedList.get(i).getName()), 0, i);
+                    Label label = new Label(damagedList.get(i).getName());
+                    damagedParts.add(label, 0, i);
+                    damagedParts.setMargin(label, new Insets(0.0, 0.0, 0.0, 20.0));
                 }
 
             } catch (SQLException e) {
