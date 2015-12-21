@@ -50,6 +50,9 @@ public class EmFormController {
     @FXML
     private TableView<SeverityType> severityTypeTableView;
 
+    @FXML
+    private TableView<Measure> measureTableView;
+
     ///////////////////////////////////////////////
 
     @FXML
@@ -69,6 +72,9 @@ public class EmFormController {
 
     @FXML
     private TableColumn<SeverityType, String> severityTypeName;
+
+    @FXML
+    private TableColumn<Measure, String> measureName;
 
     //////////////////////////////////////////////////
 
@@ -141,6 +147,23 @@ public class EmFormController {
     //////////////////////////////////////////
 
     @FXML
+    private Label measureId;
+
+    @FXML
+    private ComboBox<SeverityType> measureSeverityType;
+
+    @FXML
+    private ComboBox<AreaType> measureAreaType;
+
+    @FXML
+    private ComboBox<TimeType> measureTimeType;
+
+    @FXML
+    private TextField measureInfo;
+
+    ////////////////////////////////
+
+    @FXML
     private DatePicker filterDateFrom;
     @FXML
     private DatePicker filterDateTo;
@@ -165,6 +188,7 @@ public class EmFormController {
     private ObservableList<AreaType> areas = FXCollections.observableArrayList();
     private ObservableList<Region> regions = FXCollections.observableArrayList();
     private ObservableList<TimeType> timeTypes = FXCollections.observableArrayList();
+    private ObservableList<Measure> measures = FXCollections.observableArrayList();
 
     public void initialize() {
         emergencyDate.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDate().toString()));
@@ -173,7 +197,7 @@ public class EmFormController {
         timeTypeName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
         areaTypeName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
         severityTypeName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
-
+        measureName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getInfo()));
 
         try (Connection con = DaoFactory.getConnection()) {
 
@@ -183,6 +207,7 @@ public class EmFormController {
             AreaTypeDao areaDao = DaoFactory.getAreaTypeDao(con);
             RegionDao regionDao = DaoFactory.getRegionDao(con);
             TimeTypeDao timeTypeDao = DaoFactory.getTimeTypeDao(con);
+            MeasureDao measureDao = DaoFactory.getMeasureDao(con);
 
             emergencies.addAll(emergencyDao.getAll());
             organisations.addAll(organisationDao.getAll());
@@ -190,16 +215,21 @@ public class EmFormController {
             areas.addAll(areaDao.getAll());
             regions.addAll(regionDao.getAll());
             timeTypes.addAll(timeTypeDao.getAll());
+            measures.addAll(measureDao.getAll());
 
             emergencyTableView.setItems(emergencies);
             organisationTableView.setItems(organisations);
             areaTypeTableView.setItems(areas);
             severityTypeTableView.setItems(severities);
             timeTypeTableView.setItems(timeTypes);
+            measureTableView.setItems(measures);
 
             severityName.setItems(severities);
             areaName.setItems(areas);
             organisationName.setItems(organisations);
+            measureAreaType.setItems(areas);
+            measureSeverityType.setItems(severities);
+            measureTimeType.setItems(timeTypes);
 
 
             filterArea.setItems(areas);
@@ -223,6 +253,8 @@ public class EmFormController {
                 (observable, oldValue, newValue) -> showAreaTypeDetails(newValue));
         severityTypeTableView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showSeverityTypeDetails(newValue));
+        measureTableView.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> showMeasureDetails(newValue));
     }
 
     private void showEmergencyDetails(Emergency info) {
@@ -292,6 +324,18 @@ public class EmFormController {
         }
     }
 
+    private void showMeasureDetails(Measure info) {
+        if (info != null) {
+            this.measureId.setText(String.valueOf(info.getId()));
+            this.measureTimeType.setValue(info.getTimeType());
+            this.measureSeverityType.setValue(info.getSeverityType());
+            this.measureAreaType.setValue(info.getAreaType());
+            this.measureInfo.setText(info.getInfo());
+        } else {
+            //label.setText("");
+        }
+    }
+
     @FXML
     private void updateOrganisationName() {
         this.organisationAdress.setText(organisationName.getValue().getAddress());
@@ -301,6 +345,11 @@ public class EmFormController {
     @FXML
     private void showDamagedPeople() {
         System.out.println("ИЛюша членяра!");
+    }
+
+    @FXML
+    private void showMeasures() {
+        System.out.println("Саня хуяра!");
     }
 
     @FXML
