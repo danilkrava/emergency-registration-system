@@ -68,4 +68,9 @@ public class DaoFactory {
     }
 
     public static TimeTypeDao getTimeTypeDao (Connection connection) {return  new TimeTypeDao(connection); }
+
+    public static PersonDao getPersonDao (Connection connection) {return  new PersonDao(connection); }
+
+    public static DamageTypeDao getDamageTypeDao (Connection connection) {return  new DamageTypeDao(connection); }
+
 }
