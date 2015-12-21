@@ -420,7 +420,22 @@ public class EmFormController {
 
     @FXML
     private void refresh() {
-        System.out.println("fuck");
+        organisations.clear();
+        emergencies.clear();
+
         initialize();
+    }
+
+    @FXML
+    private void removeFilters() {
+        filterDateFrom.setValue(null);
+        filterDateTo.setValue(null);
+        filterName.setText("");
+        filterRegion.setValue(null);
+        filterArea.setValue(null);
+        filterOrganisation.setValue(null);
+        filterSeverity.setValue(null);
+        filtrEmergencies();
+        filtrOrganisations();
     }
 }
