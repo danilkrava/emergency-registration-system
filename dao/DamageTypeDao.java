@@ -1,5 +1,7 @@
 package dao;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import model.DamageType;
 
 import java.sql.Connection;
@@ -47,8 +49,8 @@ public class DamageTypeDao {
         return list;
     }
 
-    public List<DamageType> getByPerson(int personId) throws  SQLException{
-        List<DamageType> list = new ArrayList<>();
+    public ObservableList<DamageType> getByPerson(int personId) throws  SQLException{
+        ObservableList<DamageType> list = FXCollections.observableArrayList();
 
         String sql = "SELECT * FROM damage_type INNER JOIN damage_person_mapping as dpm on dpm.damage_type_id=damage_type.damage_type where dpm.person_id=?;";
         PreparedStatement stm = connection.prepareStatement(sql);
