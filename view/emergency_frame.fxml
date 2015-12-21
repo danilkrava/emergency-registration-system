@@ -343,6 +343,7 @@
                                                                                <Label text="Имя"/>
                                                                                <TextField fx:id="organisationRegion"
                                                                                           disable="true"
+                                                                                          editable="false"
                                                                                           GridPane.columnIndex="1"
                                                                                           GridPane.rowIndex="2">
                                                                                    <GridPane.margin>
@@ -360,6 +361,7 @@
                                                                                </ComboBox>
                                                                                <TextField fx:id="organisationAdress"
                                                                                           disable="true"
+                                                                                          editable="false"
                                                                                           prefHeight="25.0"
                                                                                           prefWidth="162.0"
                                                                                           GridPane.columnIndex="1"
