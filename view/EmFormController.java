@@ -1,10 +1,7 @@
 package view;
 
 import controller.MainController;
-import dao.DaoFactory;
-import dao.EmergencyDao;
-import dao.OrganisationDao;
-import dao.RegionDao;
+import dao.*;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -23,6 +20,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.Emergency;
 import model.Organisation;
+import model.Person;
 import model.SeverityType;
 
 import java.io.IOException;
@@ -94,6 +92,7 @@ public class EmFormController {
 
     private ObservableList<Emergency> emergencies = FXCollections.observableArrayList();
     private ObservableList<Organisation> organisations = FXCollections.observableArrayList();
+    private ObservableList<Person> damagedPeople = FXCollections.observableArrayList();
 
     public void initialize(){
         emergencyDate.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDate().toString()));
@@ -103,6 +102,7 @@ public class EmFormController {
 
             EmergencyDao emergencyDao = DaoFactory.getEmergencyDao(con);
             OrganisationDao organisationDao = DaoFactory.getOrganisationDao(con);
+
 
             emergencies.addAll(emergencyDao.getAll());
             organisations.addAll(organisationDao.getAll());
@@ -124,6 +124,17 @@ public class EmFormController {
 
     private void showEmergencyDetails(Emergency info) {
         if (info != null) {
+            try (Connection con = DaoFactory.getConnection()) {
+                PersonDao personDao = DaoFactory.getPersonDao(con);
+                damagedPeople.addAll(personDao.getByEmergency(info.getId()));
+            } catch (SQLException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.initOwner(dialogStage);
+                alert.setTitle("Error");
+                alert.setContentText(e.getMessage());
+                alert.showAndWait();
+            }
+
             this.emergencyId.setText(String.valueOf(info.getId()));
             this.areaSize.setText(String.valueOf(info.getAreaType().getArea()));
             this.areaName.setText(String.valueOf(info.getAreaType().getName()));
@@ -131,6 +142,7 @@ public class EmFormController {
             this.organisationAdress.setText(info.getOrganisation().getAddress());
             this.organisationRegion.setText(info.getOrganisation().getRegion().getName());
             this.severityName.setText(info.getSeverityType().getName());
+            this.damagedPeopleCount.setText(String.valueOf(damagedPeople.size()));
         } else {
             //label.setText("");
         }
