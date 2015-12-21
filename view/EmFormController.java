@@ -99,6 +99,8 @@ public class EmFormController {
     @FXML
     private Label damagedPeopleCount;
 
+    @FXML
+    private Label measuresCount;
     ////////////////////////////////
 
 
@@ -274,6 +276,7 @@ public class EmFormController {
             this.organisationRegion.setText(info.getOrganisation().getRegion().getName());
             this.severityName.setValue(info.getSeverityType());
             this.damagedPeopleCount.setText(String.valueOf(damagedPeople.size()));
+            this.measuresCount.setText(String.valueOf(measures.size()));
         } else {
             //label.setText("");
         }
@@ -385,7 +388,6 @@ public class EmFormController {
             dialogStage.setScene(scene);
 
             // Set the person into the controller.
-
             MeasuresController controller = loader.getController();
             controller.setDialogStage(dialogStage);
             controller.setEmergency(emergencyTableView.getSelectionModel().getSelectedItem());
