@@ -64,9 +64,12 @@ public class OrganisationDao {
         if (name!=null || regionId!=-1){
             boolean isFirst = true;
             sb.append(" WHERE");
-            if (name!=null){
+            if (name!=""){
                 isFirst=false;
-                sb.append(" (name LIKE %" + name + "%)");
+                sb.append(" (name LIKE '%" + name + "%')");
+            } else {
+                isFirst=false;
+                sb.append(" (name LIKE '%')");
             }
             if (regionId != -1){
                 if (!isFirst)
