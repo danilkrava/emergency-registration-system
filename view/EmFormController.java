@@ -1,5 +1,6 @@
 package view;
 
+import com.oracle.javafx.scenebuilder.app.util.MessageBox;
 import controller.MainController;
 import dao.*;
 import javafx.beans.property.IntegerProperty;
@@ -162,8 +163,14 @@ public class EmFormController {
     }
 
     @FXML
-    private void showDamagedPeople() {
+    private void updateOrganisationName() {
+        this.organisationAdress.setText(organisationName.getValue().getAddress());
+        this.organisationRegion.setText(organisationName.getValue().getRegion().getName());
+    }
 
+    @FXML
+    private void showDamagedPeople() {
+        System.out.println("ИЛюша членяра!");
     }
 
     @FXML

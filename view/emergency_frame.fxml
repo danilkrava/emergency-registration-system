@@ -115,7 +115,14 @@
                                                                                <AnchorPane minHeight="0.0"
                                                                                            minWidth="0.0"
                                                                                            prefHeight="180.0"
-                                                                                           prefWidth="200.0"/>
+                                                                                           prefWidth="200.0">
+                                                                                   <children>
+                                                                                       <DatePicker layoutX="-7.0"
+                                                                                                   layoutY="29.0"/>
+                                                                                       <DatePicker layoutX="35.0"
+                                                                                                   layoutY="84.0"/>
+                                                                                   </children>
+                                                                               </AnchorPane>
                                                                            </content>
                                                                        </Tab>
                                                                    </tabs>
@@ -215,6 +222,7 @@
                                                                                    </GridPane.margin>
                                                                                </TextField>
                                                                                <ComboBox fx:id="organisationName"
+                                                                                         onAction="#updateOrganisationName"
                                                                                          prefHeight="25.0"
                                                                                          prefWidth="277.0"
                                                                                          GridPane.columnIndex="1">
