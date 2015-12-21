@@ -111,7 +111,7 @@ public class EmFormController {
     private ObservableList<Person> damagedPeople = FXCollections.observableArrayList();
     private ObservableList<SeverityType> severities = FXCollections.observableArrayList();
     private ObservableList<AreaType> areas = FXCollections.observableArrayList();
-
+    private ObservableList<Region> regions = FXCollections.observableArrayList();
     public void initialize() {
         emergencyDate.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDate().toString()));
         emergencyPlace.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getOrganisation().getName()));
@@ -122,17 +122,24 @@ public class EmFormController {
             OrganisationDao organisationDao = DaoFactory.getOrganisationDao(con);
             SeverityTypeDao severityDao = DaoFactory.getSeverityTypeDao(con);
             AreaTypeDao areaDao = DaoFactory.getAreaTypeDao(con);
+            RegionDao regionDao = DaoFactory.getRegionDao(con);
 
             emergencies.addAll(emergencyDao.getAll());
             organisations.addAll(organisationDao.getAll());
             severities.addAll(severityDao.getAll());
             areas.addAll(areaDao.getAll());
+            regions.addAll(regionDao.getAll());
 
             emergencyTableView.setItems(emergencies);
             organisationTableView.setItems(organisations);
             severityName.setItems(severities);
             areaName.setItems(areas);
             organisationName.setItems(organisations);
+
+            filterArea.setItems(areas);
+            filterOrganisation.setItems(organisations);
+            filterRegion.setItems(regions);
+            filterSeverity.setItems(severities);
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initOwner(dialogStage);
@@ -374,8 +381,13 @@ public class EmFormController {
     private void filtrEmergencies() {
         try (Connection con = DaoFactory.getConnection()) {
             EmergencyDao emergencyDao = DaoFactory.getEmergencyDao(con);
-            Instant instant = filterDateFrom.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
-            System.out.println(new Date(Date.from(instant).getTime()));
+            emergencies.addAll(emergencyDao.filter(
+                    filterDateFrom.getValue() == null ? null : new Date(Date.from(filterDateFrom.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()).getTime()),
+                    filterDateTo.getValue() == null ? null : new Date(Date.from(filterDateTo.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()).getTime()),
+                    filterOrganisation.getValue() == null ? -1 : filterOrganisation.getValue().getId(),
+                    filterArea.getValue() == null ? -1 : filterArea.getValue().getId(),
+                    filterSeverity.getValue() == null ? -1 : filterSeverity.getValue().getId()));
+            emergencyTableView.setItems(emergencies);
             // emergencies.addAll(emergencyDao.filter(new Date(Date.from(instant).getTime()),)));
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -384,13 +396,17 @@ public class EmFormController {
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }
+
     }
 
     @FXML
     private void filtrOrganisations() {
         try (Connection con = DaoFactory.getConnection()) {
-            PersonDao personDao = DaoFactory.getPersonDao(con);
-            //  damagedPeople.addAll(personDao.getByEmergency(info.getId()));
+            OrganisationDao organisationDao = DaoFactory.getOrganisationDao(con);
+            organisations.addAll(organisationDao.filter(
+                    filterName.getText() == "" ? "" : filterName.getText(),
+                    filterRegion.getValue() == null ? -1 : filterRegion.getValue().getId()));
+            organisationTableView.setItems(organisations);
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initOwner(dialogStage);
