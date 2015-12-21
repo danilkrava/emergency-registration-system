@@ -592,11 +592,36 @@ public class EmFormController {
         }
     }
 
-    @FXML
     private void refresh() {
         organisations.clear();
         emergencies.clear();
         initialize();
+    }
+
+    @FXML
+    private void save() {
+        try (Connection con = DaoFactory.getConnection()) {
+            EmergencyDao emergencyDao = DaoFactory.getEmergencyDao(con);
+
+            Emergency emergency = emergencyTableView.getSelectionModel().getSelectedItem();
+            emergency.setAreaType(areaName.getValue());
+            Organisation organisation = organisationName.getValue();
+            organisation.setAddress(organisationAdress.getText());
+            Region region = organisation.getRegion();
+            region.setName(organisationRegion.getText());
+            organisation.setRegion(region);
+            emergency.setOrganisation(organisation);
+            emergency.setSeverityType(severityName.getValue());
+
+            emergencyDao.update(emergency);
+            emergencyTableView.refresh();
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initOwner(dialogStage);
+            alert.setTitle("Error");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
     }
 
     @FXML
