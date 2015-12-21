@@ -6,11 +6,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Крава on 21.12.2015.
@@ -21,6 +24,9 @@ public class DamagedPeopleController {
 
     @FXML
     private TableView<Person> personTableView;
+
+    @FXML
+    private GridPane damagedParts;
 
     ///////////////////////////////////////////////
 
@@ -83,6 +89,20 @@ public class DamagedPeopleController {
 
     private void showPersonDetails(Person info) {
         if (info != null) {
+            try (Connection con = DaoFactory.getConnection()) {
+                DamageTypeDao damageTypeDao = DaoFactory.getDamageTypeDao(con);
+                List<DamageType> damagedList = damageTypeDao.getByPerson(info.getId());
+                for (int i = 0; i < damagedList.size(); i++) {
+                    damagedParts.add(new Label(damagedList.get(i).getName()), 0, i);
+                }
+
+            } catch (SQLException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.initOwner(dialogStage);
+                alert.setTitle("Error");
+                alert.setContentText(e.getMessage());
+                alert.showAndWait();
+            }
             this.personId.setText(String.valueOf(info.getId()));
             this.personName.setText(info.getName());
             this.personSurname.setText(String.valueOf(info.getSurname()));
