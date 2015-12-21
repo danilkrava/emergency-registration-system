@@ -8,24 +8,29 @@ public class Measure {
     private TimeType timeType;
     private SeverityType severity;
     private AreaType areaType;
+    private String info;
 
     public Measure() {
     }
 
-    public Measure(TimeType timeType, SeverityType severity, AreaType areaType) {
+    public Measure(TimeType timeType, SeverityType severity, AreaType areaType, String info) {
         this.timeType = timeType;
         this.severity = severity;
         this.areaType = areaType;
+        this.info = info;
     }
 
     @Override
     public String toString() {
-        return "Measure{" +
-                "id=" + id +
-                ", timeType=" + timeType +
-                ", severity=" + severity +
-                ", areaType=" + areaType +
-                '}';
+        return info;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
     }
 
     public int getId() {
