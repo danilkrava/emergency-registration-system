@@ -6,16 +6,16 @@ package model;
 public class Measure {
     private int id;
     private TimeType timeType;
-    private SeverityType severity;
+    private SeverityType severityType;
     private AreaType areaType;
     private String info;
 
     public Measure() {
     }
 
-    public Measure(TimeType timeType, SeverityType severity, AreaType areaType, String info) {
+    public Measure(TimeType timeType, SeverityType severityType, AreaType areaType, String info) {
         this.timeType = timeType;
-        this.severity = severity;
+        this.severityType = severityType;
         this.areaType = areaType;
         this.info = info;
     }
@@ -49,12 +49,12 @@ public class Measure {
         this.timeType = timeType;
     }
 
-    public SeverityType getSeverity() {
-        return severity;
+    public SeverityType getSeverityType() {
+        return severityType;
     }
 
-    public void setSeverity(SeverityType severity) {
-        this.severity = severity;
+    public void setSeverityType(SeverityType severityType) {
+        this.severityType = severityType;
     }
 
     public AreaType getAreaType() {
