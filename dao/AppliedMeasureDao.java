@@ -1,6 +1,7 @@
 package dao;
 
 import model.AppliedMeasure;
+import model.Emergency;
 import model.Measure;
 
 import java.sql.Connection;
@@ -60,6 +61,26 @@ public class AppliedMeasureDao {
         return list;
     }
 
+    public List<AppliedMeasure> getByEmergency(Emergency emergency) throws SQLException{
+        List<AppliedMeasure> list = new ArrayList<>();
+        MeasureDao measureDao = DaoFactory.getMeasureDao(connection);
+
+        String sql = "SELECT * FROM applied_measure INNER JOIN emergency_measure_mapping as emm on emm.applied_measure_id=applied_measure.applied_measure_id where emm.emergency_id=?;";
+        try (PreparedStatement stm = connection.prepareStatement(sql)) {
+            stm.setInt(1, emergency.getId());
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                AppliedMeasure e = new AppliedMeasure();
+                e.setId(rs.getInt("applied_measure_id"));
+                e.setDate(rs.getDate("date"));
+                e.setMoney(rs.getFloat("money"));
+                e.setMeasure(measureDao.get(rs.getInt("measure_id")));
+                e.setInfo(rs.getString("measure_info"));
+                list.add(e);
+            }
+        }
+        return list;
+    }
 
     public void add(AppliedMeasure obj) throws SQLException{
         String sql = "INSERT INTO applied_measure (date, money, measure_id, measure_info) VALUES (?,?,?,?);";
