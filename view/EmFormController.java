@@ -18,10 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
 import javafx.stage.Stage;
-import model.Emergency;
-import model.Organisation;
-import model.Person;
-import model.SeverityType;
+import model.*;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -51,16 +48,13 @@ public class EmFormController {
     private TableColumn<Emergency, String> emergencyPlace;
 
     @FXML
-    private TextField emergencyId;
+    private Label emergencyId;
 
     @FXML
-    private TextField severityName;
+    private ComboBox<SeverityType> severityName;
 
     @FXML
-    private TextField areaName;
-
-    @FXML
-    private TextField areaSize;
+    private ComboBox<AreaType> areaName;
 
     @FXML
     private TextField organisationName;
@@ -93,6 +87,8 @@ public class EmFormController {
     private ObservableList<Emergency> emergencies = FXCollections.observableArrayList();
     private ObservableList<Organisation> organisations = FXCollections.observableArrayList();
     private ObservableList<Person> damagedPeople = FXCollections.observableArrayList();
+    private ObservableList<SeverityType> severities = FXCollections.observableArrayList();
+    private ObservableList<AreaType> areas = FXCollections.observableArrayList();
 
     public void initialize() {
         emergencyDate.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDate().toString()));
@@ -102,13 +98,18 @@ public class EmFormController {
 
             EmergencyDao emergencyDao = DaoFactory.getEmergencyDao(con);
             OrganisationDao organisationDao = DaoFactory.getOrganisationDao(con);
-
+            SeverityTypeDao severityDao = DaoFactory.getSeverityTypeDao(con);
+            AreaTypeDao areaDao = DaoFactory.getAreaTypeDao(con);
 
             emergencies.addAll(emergencyDao.getAll());
             organisations.addAll(organisationDao.getAll());
+            severities.addAll(severityDao.getAll());
+            areas.addAll(areaDao.getAll());
 
             emergencyTableView.setItems(emergencies);
             organisationTableView.setItems(organisations);
+            severityName.setItems(severities);
+            areaName.setItems(areas);
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initOwner(dialogStage);
@@ -136,12 +137,11 @@ public class EmFormController {
             }
 
             this.emergencyId.setText(String.valueOf(info.getId()));
-            this.areaSize.setText(String.valueOf(info.getAreaType().getArea()));
-            this.areaName.setText(String.valueOf(info.getAreaType().getName()));
+            this.areaName.setValue(info.getAreaType());
             this.organisationName.setText(info.getOrganisation().getName());
             this.organisationAdress.setText(info.getOrganisation().getAddress());
             this.organisationRegion.setText(info.getOrganisation().getRegion().getName());
-            this.severityName.setText(info.getSeverityType().getName());
+            this.severityName.setValue(info.getSeverityType());
             this.damagedPeopleCount.setText(String.valueOf(damagedPeople.size()));
         } else {
             //label.setText("");
@@ -302,11 +302,6 @@ public class EmFormController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    @FXML
-    private void addMeasure() {
-
     }
 
     @FXML
