@@ -84,10 +84,7 @@ public class DamagedPeopleController {
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         } catch (NullPointerException e) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.initOwner(dialogStage);
-            alert.setContentText("Немає постраждалих");
-            alert.showAndWait();
+            showMessage(Alert.AlertType.INFORMATION, "", "Немає постраждалих");
         }
         personTableView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showPersonDetails(newValue));
@@ -124,5 +121,13 @@ public class DamagedPeopleController {
 
     public void setEmergency(Emergency emergency) {
         this.currentEmergency = emergency;
+    }
+
+    private void showMessage(Alert.AlertType type, String title, String text) {
+        Alert alert = new Alert(type);
+        alert.initOwner(dialogStage);
+        alert.setTitle(title);
+        alert.setContentText(text);
+        alert.showAndWait();
     }
 }

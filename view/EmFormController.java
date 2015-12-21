@@ -264,11 +264,7 @@ public class EmFormController {
                 damagedPeople.clear();
                 damagedPeople.addAll(personDao.getByEmergency(info.getId()));
             } catch (SQLException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.initOwner(dialogStage);
-                alert.setTitle("Error");
-                alert.setContentText(e.getMessage());
-                alert.showAndWait();
+                showMessage(Alert.AlertType.ERROR, "Error", e.getMessage());
             }
 
             this.emergencyId.setText(String.valueOf(info.getId()));
@@ -565,11 +561,7 @@ public class EmFormController {
                     filterSeverity.getValue() == null ? -1 : filterSeverity.getValue().getId()));
             emergencyTableView.setItems(emergencies);
         } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initOwner(dialogStage);
-            alert.setTitle("Error");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
+            showMessage(Alert.AlertType.ERROR, "Error", e.getMessage());
         }
 
     }
@@ -584,11 +576,7 @@ public class EmFormController {
                     filterRegion.getValue() == null ? -1 : filterRegion.getValue().getId()));
             organisationTableView.setItems(organisations);
         } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initOwner(dialogStage);
-            alert.setTitle("Error");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
+            showMessage(Alert.AlertType.ERROR, "Error", e.getMessage());
         }
     }
 
@@ -597,6 +585,15 @@ public class EmFormController {
         emergencies.clear();
         initialize();
     }
+
+    private void showMessage(Alert.AlertType type, String title, String text) {
+        Alert alert = new Alert(type);
+        alert.initOwner(dialogStage);
+        alert.setTitle(title);
+        alert.setContentText(text);
+        alert.showAndWait();
+    }
+
 
     @FXML
     private void save() {
@@ -616,18 +613,9 @@ public class EmFormController {
             emergencyDao.update(emergency);
             emergencyTableView.refresh();
 
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.initOwner(dialogStage);
-            alert.setTitle("Збережено");
-            alert.setContentText("Запис оновлено");
-            alert.showAndWait();
-
+            showMessage(Alert.AlertType.CONFIRMATION, "Оновлено", "Запис успішно оновлено");
         } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initOwner(dialogStage);
-            alert.setTitle("Error");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
+            showMessage(Alert.AlertType.ERROR, "Error", e.getMessage());
         }
     }
 

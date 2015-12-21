@@ -95,14 +95,16 @@ public class AddPersonController {
             return true;
         } else {
             // Show the error message.
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initOwner(dialogStage);
-            alert.setTitle("Invalid Fields");
-            alert.setHeaderText("Please correct invalid fields");
-            alert.setContentText(errorMessage);
-
-            alert.showAndWait();
+            showMessage(Alert.AlertType.ERROR, "Помилка", "Некоректні значення полів, виправте помилки");
             return false;
         }
+    }
+
+    private void showMessage(Alert.AlertType type, String title, String text) {
+        Alert alert = new Alert(type);
+        alert.initOwner(dialogStage);
+        alert.setTitle(title);
+        alert.setContentText(text);
+        alert.showAndWait();
     }
 }
