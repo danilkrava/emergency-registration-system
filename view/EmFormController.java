@@ -166,6 +166,11 @@ public class EmFormController {
     }
 
     @FXML
+    private void addMeasure() {
+
+    }
+
+    @FXML
     private void addEm() {
         try {
             // Load the fxml file and create a new stage for the popup dialog.
