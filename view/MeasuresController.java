@@ -1,8 +1,6 @@
 package view;
 
-import dao.DamageTypeDao;
-import dao.DaoFactory;
-import dao.MeasureDao;
+import dao.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -49,6 +47,10 @@ public class MeasuresController {
     ///////////////////////////////////////////////
 
     ObservableList<Measure> measures = FXCollections.observableArrayList();
+    ObservableList<TimeType> timeTypes = FXCollections.observableArrayList();
+    ObservableList<SeverityType> severityTypes = FXCollections.observableArrayList();
+    ObservableList<AreaType> areaTypes = FXCollections.observableArrayList();
+
     public void initialize() {
 
     }
@@ -57,8 +59,20 @@ public class MeasuresController {
         measureNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getInfo()));
         try (Connection con = DaoFactory.getConnection()) {
             MeasureDao measureDao = DaoFactory.getMeasureDao(con);
+            TimeTypeDao timeTypeDao = DaoFactory.getTimeTypeDao(con);
+            SeverityTypeDao severityTypeDao = DaoFactory.getSeverityTypeDao(con);
+            AreaTypeDao areaTypeDao = DaoFactory.getAreaTypeDao(con);
+
             measures.addAll(measureDao.getByEmergency(currentEmergency));
+            timeTypes.addAll(timeTypeDao.getAll());
+            severityTypes.addAll(severityTypeDao.getAll());
+            areaTypes.addAll(areaTypeDao.getAll());
             measureTableView.setItems(measures);
+
+            timeTypeComboBox.setItems(timeTypes);
+            severityTypeComboBox.setItems(severityTypes);
+            areaTypeComboBox.setItems(areaTypes);
+
         } catch (SQLException e) {
             Message.showErrorMessage(e.getMessage());
         } catch (NullPointerException e) {
