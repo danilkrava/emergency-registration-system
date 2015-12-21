@@ -316,7 +316,7 @@
                                                                           AnchorPane.rightAnchor="0.0"
                                                                           AnchorPane.topAnchor="0.0">
                                                                    <columns>
-                                                                       <TableColumn fx:id="col11" prefWidth="136.0"
+                                                                       <TableColumn fx:id="orgName" prefWidth="136.0"
                                                                                     text="Назва"/>
                                                                    </columns>
                                                                    <columnResizePolicy>
