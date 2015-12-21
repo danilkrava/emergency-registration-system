@@ -420,6 +420,7 @@ public class EmFormController {
 
     @FXML
     private void refresh() {
+        System.out.println("fuck");
         initialize();
     }
 }
