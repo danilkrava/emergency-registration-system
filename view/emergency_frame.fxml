@@ -207,25 +207,27 @@
                                                                            <children>
                                                                                <Label text="Имя"/>
                                                                                <TextField fx:id="organisationRegion"
+                                                                                          disable="true"
                                                                                           GridPane.columnIndex="1"
                                                                                           GridPane.rowIndex="2">
                                                                                    <GridPane.margin>
                                                                                        <Insets right="10.0"/>
                                                                                    </GridPane.margin>
                                                                                </TextField>
+                                                                               <ComboBox fx:id="organisationName"
+                                                                                         prefHeight="25.0"
+                                                                                         prefWidth="277.0"
+                                                                                         GridPane.columnIndex="1">
+                                                                                   <GridPane.margin>
+                                                                                       <Insets right="10.0"/>
+                                                                                   </GridPane.margin>
+                                                                               </ComboBox>
                                                                                <TextField fx:id="organisationAdress"
+                                                                                          disable="true"
                                                                                           prefHeight="25.0"
                                                                                           prefWidth="162.0"
                                                                                           GridPane.columnIndex="1"
                                                                                           GridPane.rowIndex="1">
-                                                                                   <GridPane.margin>
-                                                                                       <Insets right="10.0"/>
-                                                                                   </GridPane.margin>
-                                                                               </TextField>
-                                                                               <TextField fx:id="organisationName"
-                                                                                          prefHeight="25.0"
-                                                                                          prefWidth="221.0"
-                                                                                          GridPane.columnIndex="1">
                                                                                    <GridPane.margin>
                                                                                        <Insets right="10.0"/>
                                                                                    </GridPane.margin>

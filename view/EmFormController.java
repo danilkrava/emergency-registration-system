@@ -57,7 +57,7 @@ public class EmFormController {
     private ComboBox<AreaType> areaName;
 
     @FXML
-    private TextField organisationName;
+    private ComboBox<Organisation> organisationName;
 
     @FXML
     private TextField organisationAdress;
@@ -110,6 +110,7 @@ public class EmFormController {
             organisationTableView.setItems(organisations);
             severityName.setItems(severities);
             areaName.setItems(areas);
+            organisationName.setItems(organisations);
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initOwner(dialogStage);
@@ -138,7 +139,7 @@ public class EmFormController {
 
             this.emergencyId.setText(String.valueOf(info.getId()));
             this.areaName.setValue(info.getAreaType());
-            this.organisationName.setText(info.getOrganisation().getName());
+            this.organisationName.setValue(info.getOrganisation());
             this.organisationAdress.setText(info.getOrganisation().getAddress());
             this.organisationRegion.setText(info.getOrganisation().getRegion().getName());
             this.severityName.setValue(info.getSeverityType());
