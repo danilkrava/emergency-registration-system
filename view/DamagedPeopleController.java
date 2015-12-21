@@ -52,15 +52,17 @@ public class DamagedPeopleController {
     private ObservableList<Person> people = FXCollections.observableArrayList();
 
     public void initialize() {
+
+    }
+
+    public void start() {
         personNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
         personSurnameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSurname()));
 
         try (Connection con = DaoFactory.getConnection()) {
             PersonDao personDao = DaoFactory.getPersonDao(con);
 
-
             people.addAll(personDao.getByEmergency(currentEmergency.getId()));
-
 
             personTableView.setItems(people);
         } catch (SQLException e) {
@@ -77,7 +79,6 @@ public class DamagedPeopleController {
         }
         personTableView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showPersonDetails(newValue));
-
     }
 
     private void showPersonDetails(Person info) {

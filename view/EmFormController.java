@@ -360,10 +360,11 @@ public class EmFormController {
             dialogStage.setScene(scene);
 
             // Set the person into the controller.
-            DamagedPeopleController controller = new DamagedPeopleController();
-            controller.setEmergency(emergencyTableView.getSelectionModel().getSelectedItem());
-            controller = loader.getController();
+
+            DamagedPeopleController controller = loader.getController();
             controller.setDialogStage(dialogStage);
+            controller.setEmergency(emergencyTableView.getSelectionModel().getSelectedItem());
+            controller.start();
             // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();
         } catch (IOException e) {
