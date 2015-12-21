@@ -94,7 +94,7 @@ public class EmFormController {
     private ObservableList<Organisation> organisations = FXCollections.observableArrayList();
     private ObservableList<Person> damagedPeople = FXCollections.observableArrayList();
 
-    public void initialize(){
+    public void initialize() {
         emergencyDate.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDate().toString()));
         emergencyPlace.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getOrganisation().getName()));
         orgName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
@@ -316,7 +316,28 @@ public class EmFormController {
 
     @FXML
     private void addDamagedPerson() {
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("add_person_frame.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
 
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Add person");
+            // dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Set the person into the controller.
+            AddPersonController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-
 }
