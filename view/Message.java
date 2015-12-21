@@ -7,19 +7,19 @@ import javafx.scene.control.Alert;
  */
 public class Message {
 
-    public static void showErrorMessage(String title, String text) {
+    public static void showErrorMessage(String text) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        showMessage(alert, title, text);
+        showMessage(alert, "Помилка", text);
     }
 
-    public static void showInformationMessage(String title, String text) {
+    public static void showInformationMessage(String text) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        showMessage(alert, title, text);
+        showMessage(alert, "Увага", text);
     }
 
-    public static void showConfirmationnMessage(String title, String text) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        showMessage(alert, title, text);
+    public static void showConfirmationnMessage(String text) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        showMessage(alert, "Успіх", text);
     }
 
     private static void showMessage(Alert alert, String title, String text) {

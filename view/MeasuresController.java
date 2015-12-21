@@ -61,11 +61,7 @@ public class MeasuresController {
             measures.addAll(measureDao.getByEmergency(currentEmergency));
             measureTableView.setItems(measures);
         } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initOwner(dialogStage);
-            alert.setTitle("Error");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
+            Message.showErrorMessage(e.getMessage());
         }
         measureTableView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showMeasureDetails(newValue));
