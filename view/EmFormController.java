@@ -1,6 +1,5 @@
 package view;
 
-import com.oracle.javafx.scenebuilder.app.util.MessageBox;
 import controller.MainController;
 import dao.*;
 import javafx.beans.property.IntegerProperty;
