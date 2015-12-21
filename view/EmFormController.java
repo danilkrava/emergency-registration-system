@@ -344,7 +344,7 @@ public class EmFormController {
 
     @FXML
     private void showDamagedPeople() {
-      /*  try {
+        try {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("damaged_people.fxml"));
@@ -360,13 +360,13 @@ public class EmFormController {
 
             // Set the person into the controller.
             DamagedPeopleController controller = loader.getController();
-            controller.setDialogStage(dialogStage);*/
-        System.out.println(emergencyTableView.getSelectionModel().getSelectedItem());
-        /*    // Show the dialog and wait until the user closes it
+            controller.setEmergency(emergencyTableView.getSelectionModel().getSelectedItem());
+            controller.setDialogStage(dialogStage);
+            // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
     @FXML
