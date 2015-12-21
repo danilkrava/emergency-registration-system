@@ -98,7 +98,7 @@ public class DamagedPeopleController {
             try (Connection con = DaoFactory.getConnection()) {
                 damageTypeTableView.refresh();
                 DamageTypeDao damageTypeDao = DaoFactory.getDamageTypeDao(con);
-                damageTypes = (ObservableList<DamageType>) damageTypeDao.getByPerson(info.getId());
+                damageTypes = damageTypeDao.getByPerson(info.getId());
                 damageTypeTableView.setItems(damageTypes);
 
             } catch (SQLException e) {
