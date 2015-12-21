@@ -55,6 +55,43 @@ public class OrganisationDao {
         return list;
     }
 
+    public List<Organisation> filter(String name, int regionId) throws SQLException{
+        List<Organisation> list = new ArrayList<>();
+        RegionDao regionDao = DaoFactory.getRegionDao(connection);
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("SELECT * FROM organisation");
+        if (name!=null || regionId!=-1){
+            boolean isFirst = true;
+            sb.append(" WHERE");
+            if (name!=null){
+                isFirst=false;
+                sb.append(" (name LIKE %" + name + "%)");
+            }
+            if (regionId != -1){
+                if (!isFirst)
+                    sb.append(" AND");
+                else
+                    isFirst=false;
+                sb.append(" (region_id = " + regionId + ")");
+            }
+            sb.append(";");
+        }
+
+        String sql = sb.toString();
+        PreparedStatement stm = connection.prepareStatement(sql);
+        ResultSet rs = stm.executeQuery();
+        while (rs.next()) {
+            Organisation o = new Organisation();
+            o.setId(rs.getInt("orgranisation_id"));
+            o.setName(rs.getString("name"));
+            o.setAddress(rs.getString("address"));
+            o.setRegion(regionDao.get(rs.getInt("region_id")));
+            list.add(o);
+        }
+        return list;
+    }
+
     public void add(Organisation obj) throws SQLException{
         String sql = "INSERT INTO organisation (name, address, region_id) VALUES (?,?,?);";
         try (PreparedStatement stm = connection.prepareStatement(sql)) {
