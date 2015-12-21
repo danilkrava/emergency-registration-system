@@ -3,6 +3,7 @@ package view;
 import controller.MainController;
 import dao.DaoFactory;
 import dao.EmergencyDao;
+import dao.OrganisationDao;
 import dao.RegionDao;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -21,6 +22,7 @@ import javafx.scene.layout.GridPane;
 
 import javafx.stage.Stage;
 import model.Emergency;
+import model.Organisation;
 import model.SeverityType;
 
 import java.io.IOException;
@@ -36,13 +38,19 @@ public class EmFormController {
     private Stage dialogStage;
     MainController controller = new MainController();
     @FXML
-    private TableView<Emergency> emergencies;
+    private TableView<Emergency> emergencyTableView;
 
     @FXML
-    private TableColumn<Emergency, String> col1;
+    private TableView<Organisation> organisationTableView;
 
     @FXML
-    private TableColumn<Emergency, String> col2;
+    private TableColumn<Organisation, String> orgName;
+
+    @FXML
+    private TableColumn<Emergency, String> emergencyDate;
+
+    @FXML
+    private TableColumn<Emergency, String> emergencyPlace;
 
     @FXML
     private TextField emergencyId;
@@ -65,16 +73,42 @@ public class EmFormController {
     @FXML
     private TextField organisationRegion;
 
+    @FXML
+    private Label damagedPeopleCount;
 
-    private ObservableList<Emergency> list = FXCollections.observableArrayList();
+    ////////////////////////////////
+
+
+    @FXML
+    private TextField organisationId;
+
+    @FXML
+    private TextField organisationNamePane2;
+
+    @FXML
+    private TextField organisationAdressPane2;
+
+    @FXML
+    private TextField regionName;
+
+
+    private ObservableList<Emergency> emergencies = FXCollections.observableArrayList();
+    private ObservableList<Organisation> organisations = FXCollections.observableArrayList();
 
     public void initialize(){
-        col1.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDate().toString()));
-        col2.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getOrganisation().getName()));
+        emergencyDate.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDate().toString()));
+        emergencyPlace.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getOrganisation().getName()));
+        orgName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
         try (Connection con = DaoFactory.getConnection()) {
+
             EmergencyDao emergencyDao = DaoFactory.getEmergencyDao(con);
-            list.addAll(emergencyDao.getAll());
-            emergencies.setItems(list);
+            OrganisationDao organisationDao = DaoFactory.getOrganisationDao(con);
+
+            emergencies.addAll(emergencyDao.getAll());
+            organisations.addAll(organisationDao.getAll());
+
+            emergencyTableView.setItems(emergencies);
+            organisationTableView.setItems(organisations);
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initOwner(dialogStage);
@@ -82,11 +116,13 @@ public class EmFormController {
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }
-        emergencies.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> showPersonDetails(newValue));
+        emergencyTableView.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> showEmergencyDetails(newValue));
+        organisationTableView.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> showOrganisationDetails(newValue));
     }
 
-    private void showPersonDetails(Emergency info) {
+    private void showEmergencyDetails(Emergency info) {
         if (info != null) {
             this.emergencyId.setText(String.valueOf(info.getId()));
             this.areaSize.setText(String.valueOf(info.getAreaType().getArea()));
@@ -98,6 +134,23 @@ public class EmFormController {
         } else {
             //label.setText("");
         }
+    }
+
+    private void showOrganisationDetails(Organisation info) {
+        if (info != null) {
+            this.organisationId.setText(String.valueOf(info.getId()));
+            this.organisationNamePane2.setText(info.getName());
+            this.organisationAdressPane2.setText(String.valueOf(info.getAddress()));
+            this.regionName.setText(info.getRegion().getName());
+
+        } else {
+            //label.setText("");
+        }
+    }
+
+    @FXML
+    private void showDamagedPeople() {
+
     }
 
     @FXML
