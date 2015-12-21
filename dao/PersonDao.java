@@ -28,7 +28,7 @@ public class PersonDao {
 
         Person a = new Person();
         a.setId(rs.getInt("person_id"));
-        a.setName(rs.getString("name"));
+        a.setName(rs.getString("first_name"));
         a.setSurname(rs.getString("last_name"));
         a.setMiddleName(rs.getString("middle_name"));
         a.setBirthDate(rs.getDate("birth_date"));
@@ -45,7 +45,7 @@ public class PersonDao {
         while (rs.next()) {
             Person a = new Person();
             a.setId(rs.getInt("person_id"));
-            a.setName(rs.getString("name"));
+            a.setName(rs.getString("first_name"));
             a.setSurname(rs.getString("last_name"));
             a.setMiddleName(rs.getString("middle_name"));
             a.setBirthDate(rs.getDate("birth_date"));
@@ -55,7 +55,7 @@ public class PersonDao {
     }
 
     public void add(Person obj) throws SQLException{
-        String sql = "INSERT INTO person (name, last_name, middle_name, birth_date) VALUES (?,?,?,?);";
+        String sql = "INSERT INTO person (first_name, last_name, middle_name, birth_date) VALUES (?,?,?,?);";
         try (PreparedStatement stm = connection.prepareStatement(sql)) {
             stm.setString(1, obj.getName());
             stm.setString(2, obj.getSurname());
@@ -75,7 +75,7 @@ public class PersonDao {
     }
 
     public void update(Person obj) throws SQLException {
-        String sql = "UPDATE person SET name=?, middle_name=?, last_name=?, birth_date=? WHERE person_id=?";
+        String sql = "UPDATE person SET first_name=?, middle_name=?, last_name=?, birth_date=? WHERE person_id=?";
         try (PreparedStatement stm = connection.prepareStatement(sql)) {
             stm.setString(1, obj.getName());
             stm.setString(2, obj.getMiddleName());
