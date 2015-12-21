@@ -79,10 +79,10 @@
                                                                           AnchorPane.rightAnchor="0.0"
                                                                           AnchorPane.topAnchor="0.0">
                                                                    <columns>
-                                                                       <TableColumn fx:id="col1" prefWidth="136.0"
-                                                                                    text="Дата"/>
-                                                                       <TableColumn fx:id="col2" prefWidth="75.0"
-                                                                                    text="Где"/>
+                                                                       <TableColumn fx:id="emergencyDate"
+                                                                                    prefWidth="136.0" text="Дата"/>
+                                                                       <TableColumn fx:id="emergencyPlace"
+                                                                                    prefWidth="75.0" text="Где"/>
                                                                    </columns>
                                                                    <columnResizePolicy>
                                                                        <TableView
