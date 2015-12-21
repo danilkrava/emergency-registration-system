@@ -1,6 +1,7 @@
 package dao;
 
 import model.Emergency;
+import model.Measure;
 
 import java.sql.*;
 import java.util.ArrayList;
