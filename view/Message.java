@@ -24,6 +24,7 @@ public class Message {
 
     private static void showMessage(Alert alert, String title, String text) {
         alert.setTitle(title);
+        alert.setHeaderText(title);
         alert.setContentText(text);
         alert.showAndWait();
     }

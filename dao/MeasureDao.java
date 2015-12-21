@@ -1,5 +1,7 @@
 package dao;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import model.Emergency;
 import model.Measure;
 import model.TimeType;
@@ -62,8 +64,8 @@ public class MeasureDao {
         return list;
     }
 
-    public List<Measure> getByEmergency(Emergency emergency) throws SQLException{
-        List<Measure> list = new ArrayList<>();
+    public ObservableList<Measure> getByEmergency(Emergency emergency) throws SQLException{
+        ObservableList<Measure> list = FXCollections.observableArrayList();
         TimeTypeDao timeTypeDao = DaoFactory.getTimeTypeDao(connection);
         AreaTypeDao areaTypeDao = DaoFactory.getAreaTypeDao(connection);
         SeverityTypeDao severityTypeDao = DaoFactory.getSeverityTypeDao(connection);
@@ -80,9 +82,9 @@ public class MeasureDao {
 
         sql = "SELECT * FROM measure WHERE (((measure.area_type_id = " + emergency.getAreaType().getId()+") OR " +
                 "ISNULL(measure.area_type_id)) " +
-                "AND ((measure.severity_type_id = " + emergency.getSeverityType().getId() + ") OR" +
+                "AND ((measure.severity_type_id = " + emergency.getSeverityType().getId() + ") OR " +
                 "ISNULL(measure.severity_type_id))" +
-                "AND ((measure.time_type_id = " + type.getId() + ") OR" +
+                "AND ((measure.time_type_id = " + type.getId() + ") OR " +
                 "ISNULL(measure.time_type_id)))";
 
         try (PreparedStatement stm = connection.prepareStatement(sql)) {

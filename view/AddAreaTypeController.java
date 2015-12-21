@@ -51,11 +51,7 @@ public class AddAreaTypeController {
                 dao = DaoFactory.getAreaTypeDao(con);
                 dao.add(areaType);
             } catch (SQLException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.initOwner(dialogStage);
-                alert.setTitle("Error");
-                alert.setContentText(e.getMessage());
-                alert.showAndWait();
+                Message.showErrorMessage(e.getMessage());
             }
 
             okClicked = true;
@@ -74,28 +70,21 @@ public class AddAreaTypeController {
         String errorMessage = "";
 
         if (nameField.getText() == null || nameField.getText().length() == 0) {
-            errorMessage += "No valid name!\n";
+            errorMessage += "Назва\n";
         }
         try {
             Double.parseDouble(areaField.getText());
             if (areaField.getText() == null || areaField.getText().length() == 0 || Double.parseDouble(areaField.getText()) < 0) {
-                errorMessage += "No valid area!\n";
+                errorMessage += "Площа\n";
             }
         } catch (Exception ex) {
-            errorMessage += "No valid area!\n";
+            errorMessage += "Площа\n";
         }
 
         if (errorMessage.length() == 0) {
             return true;
         } else {
-            // Show the error message.
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initOwner(dialogStage);
-            alert.setTitle("Invalid Fields");
-            alert.setHeaderText("Please correct invalid fields");
-            alert.setContentText(errorMessage);
-
-            alert.showAndWait();
+            Message.showErrorMessage("Виправте невірно вказані поля: \n" + errorMessage);
             return false;
         }
     }
