@@ -71,6 +71,7 @@ public class MeasuresController {
     private void showMeasureDetails(Measure info) {
         if (info != null) {
             this.measureId.setText(String.valueOf(info.getId()));
+            this.name.setText(info.getInfo());
             this.timeTypeComboBox.setValue(info.getTimeType());
             this.severityTypeComboBox.setValue(info.getSeverityType());
             this.areaTypeComboBox.setValue(info.getAreaType());
