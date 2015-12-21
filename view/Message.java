@@ -7,20 +7,24 @@ import javafx.scene.control.Alert;
  */
 public class Message {
 
-    public static void showErrorMessage(Alert.AlertType type, String title, String text) {
-        Alert alert = new Alert(type);
-        // alert.initOwner(dialogStage);
+    public static void showErrorMessage(String title, String text) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        showMessage(alert, title, text);
+    }
+
+    public static void showInformationMessage(String title, String text) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        showMessage(alert, title, text);
+    }
+
+    public static void showConfirmationnMessage(String title, String text) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        showMessage(alert, title, text);
+    }
+
+    private static void showMessage(Alert alert, String title, String text) {
         alert.setTitle(title);
         alert.setContentText(text);
         alert.showAndWait();
     }
-
-    public static void showMessage(Alert.AlertType type, String title, String text) {
-        Alert alert = new Alert(type);
-        //alert.initOwner(dialogStage);
-        alert.setTitle(title);
-        alert.setContentText(text);
-        alert.showAndWait();
-    }
-
 }
