@@ -58,7 +58,9 @@ public class DamagedPeopleController {
         try (Connection con = DaoFactory.getConnection()) {
             PersonDao personDao = DaoFactory.getPersonDao(con);
 
+
             people.addAll(personDao.getByEmergency(currentEmergency.getId()));
+
 
             personTableView.setItems(people);
         } catch (SQLException e) {
@@ -66,6 +68,11 @@ public class DamagedPeopleController {
             alert.initOwner(dialogStage);
             alert.setTitle("Error");
             alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        } catch (NullPointerException e) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.initOwner(dialogStage);
+            alert.setContentText("Немає постраждалих");
             alert.showAndWait();
         }
         personTableView.getSelectionModel().selectedItemProperty().addListener(
