@@ -244,7 +244,6 @@ public class EmFormController {
             // Create the dialog Stage.
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Add organisation");
-            // dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(primaryStage);
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
@@ -389,7 +388,6 @@ public class EmFormController {
                     filterArea.getValue() == null ? -1 : filterArea.getValue().getId(),
                     filterSeverity.getValue() == null ? -1 : filterSeverity.getValue().getId()));
             emergencyTableView.setItems(emergencies);
-            // emergencies.addAll(emergencyDao.filter(new Date(Date.from(instant).getTime()),)));
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initOwner(dialogStage);
@@ -422,7 +420,6 @@ public class EmFormController {
     private void refresh() {
         organisations.clear();
         emergencies.clear();
-
         initialize();
     }
 
