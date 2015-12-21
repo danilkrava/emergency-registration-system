@@ -38,7 +38,7 @@ public class EmergencyDao {
         return e;
     }
 
-    public List<Emergency> getAll() throws SQLException{
+    public List<Emergency> getAll() throws SQLException {
         List<Emergency> list = new ArrayList<>();
         OrganisationDao orgDao = DaoFactory.getOrganisationDao(connection);
         AreaTypeDao areaTypeDao = DaoFactory.getAreaTypeDao(connection);
@@ -61,7 +61,7 @@ public class EmergencyDao {
         return list;
     }
 
-    public List<Emergency> filter(Date from, Date to, int organisationId, int areaTypeId, int severityTypeId) throws SQLException{
+    public List<Emergency> filter(Date from, Date to, int organisationId, int areaTypeId, int severityTypeId) throws SQLException {
         List<Emergency> list = new ArrayList<>();
         OrganisationDao orgDao = DaoFactory.getOrganisationDao(connection);
         AreaTypeDao areaTypeDao = DaoFactory.getAreaTypeDao(connection);
@@ -69,39 +69,37 @@ public class EmergencyDao {
 
         StringBuilder sb = new StringBuilder();
         sb.append("SELECT * FROM emergency");
-        if (from!=null || to!=null || organisationId!=-1 || areaTypeId!=-1 || severityTypeId!=-1){
+        if (from != null || to != null || organisationId != -1 || areaTypeId != -1 || severityTypeId != -1) {
             sb.append(" where");
             boolean isFirst = true;
-            if (from!=null && to!=null) {
-                sb.append("(date BETWEEN from AND to)");
+            if (from != null && to != null) {
+                sb.append("(date BETWEEN " + from + " AND " + to + ")");
                 isFirst = false;
-            }
-            else
-            {
-                if (from!=null){
-                    sb.append("(date >= from)");
+            } else {
+                if (from != null) {
+                    sb.append("(date >= " + from + ")");
                     isFirst = false;
                 }
-                if (to!=null){
-                    sb.append("(date <= to)");
+                if (to != null) {
+                    sb.append("(date <=" + to + ")");
                     isFirst = false;
                 }
             }
-            if (organisationId!=-1){
+            if (organisationId != -1) {
                 if (!isFirst)
                     sb.append(" AND");
                 else
                     isFirst = false;
                 sb.append("(organisation_id = " + organisationId + ")");
             }
-            if (areaTypeId!=-1){
+            if (areaTypeId != -1) {
                 if (!isFirst)
                     sb.append(" AND");
                 else
                     isFirst = false;
                 sb.append("(area_type_id = " + areaTypeId + ")");
             }
-            if (severityTypeId!=-1){
+            if (severityTypeId != -1) {
                 if (!isFirst)
                     sb.append(" AND");
                 else
@@ -127,7 +125,7 @@ public class EmergencyDao {
         return list;
     }
 
-    public void add(Emergency obj) throws SQLException{
+    public void add(Emergency obj) throws SQLException {
         String sql = "INSERT INTO emergency (date, organisation_id, area_type_id, severity_type_id) VALUES (?,?,?,?);";
         try (PreparedStatement stm = connection.prepareStatement(sql)) {
             stm.setDate(1, obj.getDate());
