@@ -73,15 +73,15 @@ public class EmergencyDao {
             sb.append(" where");
             boolean isFirst = true;
             if (from != null && to != null) {
-                sb.append("(date BETWEEN " + from + " AND " + to + ")");
+                sb.append("(date BETWEEN '" + from + "' AND '" + to + "')");
                 isFirst = false;
             } else {
                 if (from != null) {
-                    sb.append("(date >= " + from + ")");
+                    sb.append("(date >= '" + from + "')");
                     isFirst = false;
                 }
                 if (to != null) {
-                    sb.append("(date <=" + to + ")");
+                    sb.append("(date <= '" + to + "')");
                     isFirst = false;
                 }
             }
