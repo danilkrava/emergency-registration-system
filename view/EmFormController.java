@@ -381,6 +381,7 @@ public class EmFormController {
     private void filtrEmergencies() {
         try (Connection con = DaoFactory.getConnection()) {
             EmergencyDao emergencyDao = DaoFactory.getEmergencyDao(con);
+            emergencies.clear();
             emergencies.addAll(emergencyDao.filter(
                     filterDateFrom.getValue() == null ? null : new Date(Date.from(filterDateFrom.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()).getTime()),
                     filterDateTo.getValue() == null ? null : new Date(Date.from(filterDateTo.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()).getTime()),
@@ -403,6 +404,7 @@ public class EmFormController {
     private void filtrOrganisations() {
         try (Connection con = DaoFactory.getConnection()) {
             OrganisationDao organisationDao = DaoFactory.getOrganisationDao(con);
+            organisations.clear();
             organisations.addAll(organisationDao.filter(
                     filterName.getText() == "" ? "" : filterName.getText(),
                     filterRegion.getValue() == null ? -1 : filterRegion.getValue().getId()));
