@@ -22,7 +22,10 @@ import model.*;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.time.Instant;
+import java.time.ZoneId;
 
 /**
  * Created by Крава on 06.12.2015.
@@ -83,6 +86,25 @@ public class EmFormController {
     @FXML
     private TextField regionName;
 
+    //////////////////////////////////////////
+
+    @FXML
+    private DatePicker filterDateFrom;
+    @FXML
+    private DatePicker filterDateTo;
+    @FXML
+    private ComboBox<AreaType> filterArea;
+    @FXML
+    private ComboBox<SeverityType> filterSeverity;
+    @FXML
+    private ComboBox<Organisation> filterOrganisation;
+
+    /////////////////////////////////////////
+
+    @FXML
+    private TextField filterName;
+    @FXML
+    private ComboBox<Region> filterRegion;
 
     private ObservableList<Emergency> emergencies = FXCollections.observableArrayList();
     private ObservableList<Organisation> organisations = FXCollections.observableArrayList();
@@ -345,6 +367,36 @@ public class EmFormController {
             dialogStage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void filtrEmergencies() {
+        try (Connection con = DaoFactory.getConnection()) {
+            EmergencyDao emergencyDao = DaoFactory.getEmergencyDao(con);
+            Instant instant = filterDateFrom.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
+            System.out.println(new Date(Date.from(instant).getTime()));
+            // emergencies.addAll(emergencyDao.filter(new Date(Date.from(instant).getTime()),)));
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initOwner(dialogStage);
+            alert.setTitle("Error");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    private void filtrOrganisations() {
+        try (Connection con = DaoFactory.getConnection()) {
+            PersonDao personDao = DaoFactory.getPersonDao(con);
+            //  damagedPeople.addAll(personDao.getByEmergency(info.getId()));
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initOwner(dialogStage);
+            alert.setTitle("Error");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
         }
     }
 }

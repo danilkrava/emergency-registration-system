@@ -117,10 +117,133 @@
                                                                                            prefHeight="180.0"
                                                                                            prefWidth="200.0">
                                                                                    <children>
-                                                                                       <DatePicker layoutX="-7.0"
-                                                                                                   layoutY="29.0"/>
-                                                                                       <DatePicker layoutX="35.0"
-                                                                                                   layoutY="84.0"/>
+                                                                                       <VBox layoutX="10.0"
+                                                                                             layoutY="10.0">
+                                                                                           <children>
+                                                                                               <HBox>
+                                                                                                   <children>
+                                                                                                       <VBox>
+                                                                                                           <children>
+                                                                                                               <Label text="Від">
+                                                                                                                   <VBox.margin>
+                                                                                                                       <Insets bottom="5.0"
+                                                                                                                               top="5.0"/>
+                                                                                                                   </VBox.margin>
+                                                                                                               </Label>
+                                                                                                               <Label text="До">
+                                                                                                                   <VBox.margin>
+                                                                                                                       <Insets top="5.0"/>
+                                                                                                                   </VBox.margin>
+                                                                                                               </Label>
+                                                                                                           </children>
+                                                                                                           <HBox.margin>
+                                                                                                               <Insets right="5.0"/>
+                                                                                                           </HBox.margin>
+                                                                                                       </VBox>
+                                                                                                       <VBox>
+                                                                                                           <children>
+                                                                                                               <DatePicker
+                                                                                                                       fx:id="filterDateFrom"
+                                                                                                                       maxHeight="-Infinity"
+                                                                                                                       maxWidth="-Infinity"
+                                                                                                                       minHeight="-Infinity"
+                                                                                                                       minWidth="-Infinity"
+                                                                                                                       prefHeight="25.0"
+                                                                                                                       prefWidth="150.0">
+                                                                                                                   <VBox.margin>
+                                                                                                                       <Insets bottom="5.0"
+                                                                                                                               left="23.0"/>
+                                                                                                                   </VBox.margin>
+                                                                                                               </DatePicker>
+                                                                                                               <DatePicker
+                                                                                                                       fx:id="filterDateTo"
+                                                                                                                       maxHeight="-Infinity"
+                                                                                                                       maxWidth="-Infinity"
+                                                                                                                       minHeight="-Infinity"
+                                                                                                                       minWidth="-Infinity"
+                                                                                                                       prefHeight="25.0"
+                                                                                                                       prefWidth="150.0">
+                                                                                                                   <VBox.margin>
+                                                                                                                       <Insets left="23.0"/>
+                                                                                                                   </VBox.margin>
+                                                                                                               </DatePicker>
+                                                                                                           </children>
+                                                                                                           <HBox.margin>
+                                                                                                               <Insets left="30.0"/>
+                                                                                                           </HBox.margin>
+                                                                                                       </VBox>
+                                                                                                   </children>
+                                                                                                   <VBox.margin>
+                                                                                                       <Insets bottom="5.0"/>
+                                                                                                   </VBox.margin>
+                                                                                               </HBox>
+                                                                                               <HBox>
+                                                                                                   <children>
+                                                                                                       <VBox>
+                                                                                                           <children>
+                                                                                                               <Label text="Площа">
+                                                                                                                   <VBox.margin>
+                                                                                                                       <Insets bottom="5.0"
+                                                                                                                               top="5.0"/>
+                                                                                                                   </VBox.margin>
+                                                                                                               </Label>
+                                                                                                               <Label text="Важкість">
+                                                                                                                   <VBox.margin>
+                                                                                                                       <Insets top="10.0"/>
+                                                                                                                   </VBox.margin>
+                                                                                                               </Label>
+                                                                                                               <Label text="Організація">
+                                                                                                                   <VBox.margin>
+                                                                                                                       <Insets top="15.0"/>
+                                                                                                                   </VBox.margin>
+                                                                                                               </Label>
+                                                                                                           </children>
+                                                                                                           <HBox.margin>
+                                                                                                               <Insets right="5.0"/>
+                                                                                                           </HBox.margin>
+                                                                                                       </VBox>
+                                                                                                       <VBox>
+                                                                                                           <children>
+                                                                                                               <ComboBox
+                                                                                                                       fx:id="filterArea"
+                                                                                                                       prefWidth="150.0">
+                                                                                                                   <VBox.margin>
+                                                                                                                       <Insets bottom="5.0"/>
+                                                                                                                   </VBox.margin>
+                                                                                                               </ComboBox>
+                                                                                                               <ComboBox
+                                                                                                                       fx:id="filterSeverity"
+                                                                                                                       prefWidth="150.0">
+                                                                                                                   <VBox.margin>
+                                                                                                                       <Insets bottom="5.0"/>
+                                                                                                                   </VBox.margin>
+                                                                                                               </ComboBox>
+                                                                                                               <ComboBox
+                                                                                                                       fx:id="filterOrganisation"
+                                                                                                                       prefWidth="150.0"/>
+                                                                                                           </children>
+                                                                                                           <HBox.margin>
+                                                                                                               <Insets left="5.0"/>
+                                                                                                           </HBox.margin>
+                                                                                                       </VBox>
+                                                                                                   </children>
+                                                                                                   <VBox.margin>
+                                                                                                       <Insets top="5.0"/>
+                                                                                                   </VBox.margin>
+                                                                                               </HBox>
+                                                                                           </children>
+                                                                                       </VBox>
+                                                                                       <Button layoutX="85.0"
+                                                                                               layoutY="192.0"
+                                                                                               mnemonicParsing="false"
+                                                                                               onAction="#filtrEmergencies"
+                                                                                               prefHeight="88.0"
+                                                                                               prefWidth="223.0"
+                                                                                               text="Фільтрувати"
+                                                                                               AnchorPane.bottomAnchor="10.0"
+                                                                                               AnchorPane.leftAnchor="10.0"
+                                                                                               AnchorPane.rightAnchor="10.0"
+                                                                                               AnchorPane.topAnchor="170.0"/>
                                                                                    </children>
                                                                                </AnchorPane>
                                                                            </content>
@@ -358,7 +481,62 @@
                                                                                <AnchorPane minHeight="0.0"
                                                                                            minWidth="0.0"
                                                                                            prefHeight="180.0"
-                                                                                           prefWidth="200.0"/>
+                                                                                           prefWidth="200.0">
+                                                                                   <children>
+                                                                                       <HBox layoutX="28.0"
+                                                                                             layoutY="10.0"
+                                                                                             AnchorPane.leftAnchor="10.0"
+                                                                                             AnchorPane.rightAnchor="10.0"
+                                                                                             AnchorPane.topAnchor="10.0">
+                                                                                           <children>
+                                                                                               <VBox prefHeight="55.0"
+                                                                                                     prefWidth="72.0">
+                                                                                                   <children>
+                                                                                                       <Label text="Ім'я">
+                                                                                                           <VBox.margin>
+                                                                                                               <Insets bottom="5.0"
+                                                                                                                       top="4.0"/>
+                                                                                                           </VBox.margin>
+                                                                                                       </Label>
+                                                                                                       <Label text="Область">
+                                                                                                           <VBox.margin>
+                                                                                                               <Insets top="10.0"/>
+                                                                                                           </VBox.margin>
+                                                                                                       </Label>
+                                                                                                   </children>
+                                                                                                   <HBox.margin>
+                                                                                                       <Insets/>
+                                                                                                   </HBox.margin>
+                                                                                               </VBox>
+                                                                                               <VBox>
+                                                                                                   <children>
+                                                                                                       <TextField
+                                                                                                               fx:id="filterName">
+                                                                                                           <VBox.margin>
+                                                                                                               <Insets bottom="5.0"/>
+                                                                                                           </VBox.margin>
+                                                                                                       </TextField>
+                                                                                                       <ComboBox
+                                                                                                               fx:id="filterRegion"
+                                                                                                               prefWidth="150.0"/>
+                                                                                                   </children>
+                                                                                                   <HBox.margin>
+                                                                                                       <Insets left="35.0"/>
+                                                                                                   </HBox.margin>
+                                                                                               </VBox>
+                                                                                           </children>
+                                                                                       </HBox>
+                                                                                       <Button layoutX="82.0"
+                                                                                               layoutY="163.0"
+                                                                                               mnemonicParsing="false"
+                                                                                               onAction="#filtrOrganisations"
+                                                                                               text="Фільтрувати"
+                                                                                               AnchorPane.bottomAnchor="10.0"
+                                                                                               AnchorPane.leftAnchor="10.0"
+                                                                                               AnchorPane.rightAnchor="10.0"
+                                                                                               AnchorPane.topAnchor="75.0"/>
+                                                                                   </children>
+                                                                               </AnchorPane>
                                                                            </content>
                                                                        </Tab>
                                                                    </tabs>
