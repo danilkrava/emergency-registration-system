@@ -344,7 +344,29 @@ public class EmFormController {
 
     @FXML
     private void showDamagedPeople() {
-        System.out.println("ИЛюша членяра!");
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("damaged_people.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Постраждалі");
+            // dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Set the person into the controller.
+            DamagedPeopleController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setEmergency(emergencyTableView.getSelectionModel().getSelectedItem());
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
