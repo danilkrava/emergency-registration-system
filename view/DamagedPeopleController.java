@@ -27,7 +27,7 @@ public class DamagedPeopleController {
     private TableView<Person> personTableView;
 
     @FXML
-    private GridPane damagedParts;
+    private TableView<DamageType> damageTypeTableView;
 
     ///////////////////////////////////////////////
 
@@ -36,6 +36,9 @@ public class DamagedPeopleController {
 
     @FXML
     private TableColumn<Person, String> personSurnameColumn;
+
+    @FXML
+    private TableColumn<DamageType, String> damageTypeColumn;
 
     ///////////////////////////////////////////////
 
@@ -57,6 +60,7 @@ public class DamagedPeopleController {
     ///////////////////////////////////////////////
 
     private ObservableList<Person> people = FXCollections.observableArrayList();
+    private ObservableList<DamageType> damageTypes = FXCollections.observableArrayList();
 
     public void initialize() {
 
@@ -65,6 +69,7 @@ public class DamagedPeopleController {
     public void start() {
         personNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
         personSurnameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSurname()));
+        damageTypeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
 
         try (Connection con = DaoFactory.getConnection()) {
             PersonDao personDao = DaoFactory.getPersonDao(con);
@@ -91,13 +96,10 @@ public class DamagedPeopleController {
     private void showPersonDetails(Person info) {
         if (info != null) {
             try (Connection con = DaoFactory.getConnection()) {
+                damageTypeTableView.refresh();
                 DamageTypeDao damageTypeDao = DaoFactory.getDamageTypeDao(con);
-                List<DamageType> damagedList = damageTypeDao.getByPerson(info.getId());
-                for (int i = 0; i < damagedList.size(); i++) {
-                    Label label = new Label(damagedList.get(i).getName());
-                    damagedParts.add(label, 0, i);
-                    damagedParts.setMargin(label, new Insets(0.0, 0.0, 0.0, 20.0));
-                }
+                damageTypes = (ObservableList<DamageType>) damageTypeDao.getByPerson(info.getId());
+                damageTypeTableView.setItems(damageTypes);
 
             } catch (SQLException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
