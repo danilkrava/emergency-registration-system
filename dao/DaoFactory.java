@@ -1,9 +1,6 @@
 package dao;
 
-import model.AreaType;
-import model.Emergency;
-import model.Organisation;
-import model.Region;
+import model.*;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -72,5 +69,9 @@ public class DaoFactory {
     public static PersonDao getPersonDao (Connection connection) {return  new PersonDao(connection); }
 
     public static DamageTypeDao getDamageTypeDao (Connection connection) {return  new DamageTypeDao(connection); }
+
+    public static MeasureDao getMeasureDao(Connection connection) {return new MeasureDao(connection);}
+
+    public static AppliedMeasureDao getAppliedMeasureDao(Connection connection) {return new AppliedMeasureDao(connection);}
 
 }
