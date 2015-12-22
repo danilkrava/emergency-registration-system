@@ -35,6 +35,10 @@ public class EmFormController {
     private Stage primaryStage;
     private Stage dialogStage;
     MainController controller = new MainController();
+
+    @FXML
+    private TabPane pane;
+
     @FXML
     private TableView<Emergency> emergencyTableView;
 
@@ -628,26 +632,29 @@ public class EmFormController {
 
     @FXML
     private void save() {
-        try (Connection con = DaoFactory.getConnection()) {
-            EmergencyDao emergencyDao = DaoFactory.getEmergencyDao(con);
+        if (Integer.parseInt(pane.getSelectionModel().getSelectedItem().getId()) == 0) {
+            try (Connection con = DaoFactory.getConnection()) {
+                EmergencyDao emergencyDao = DaoFactory.getEmergencyDao(con);
 
-            Emergency emergency = emergencyTableView.getSelectionModel().getSelectedItem();
-            emergency.setAreaType(areaName.getValue());
-            Organisation organisation = organisationName.getValue();
-            organisation.setAddress(organisationAdress.getText());
-            Region region = organisation.getRegion();
-            region.setName(organisationRegion.getText());
-            organisation.setRegion(region);
-            emergency.setOrganisation(organisation);
-            emergency.setSeverityType(severityName.getValue());
+                Emergency emergency = emergencyTableView.getSelectionModel().getSelectedItem();
+                emergency.setAreaType(areaName.getValue());
+                Organisation organisation = organisationName.getValue();
+                organisation.setAddress(organisationAdress.getText());
+                Region region = organisation.getRegion();
+                region.setName(organisationRegion.getText());
+                organisation.setRegion(region);
+                emergency.setOrganisation(organisation);
+                emergency.setSeverityType(severityName.getValue());
 
-            emergencyDao.update(emergency);
-            emergencyTableView.refresh();
+                emergencyDao.update(emergency);
+                emergencyTableView.refresh();
 
-            showMessage(Alert.AlertType.CONFIRMATION, "Оновлено", "Запис успішно оновлено");
-        } catch (SQLException e) {
-            showMessage(Alert.AlertType.ERROR, "Error", e.getMessage());
+                showMessage(Alert.AlertType.CONFIRMATION, "Оновлено", "Запис успішно оновлено");
+            } catch (SQLException e) {
+                showMessage(Alert.AlertType.ERROR, "Error", e.getMessage());
+            }
         }
+
     }
 
     @FXML
