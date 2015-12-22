@@ -340,7 +340,8 @@
                                                                                <Insets left="10.0"/>
                                                                            </GridPane.margin>
                                                                        </Label>
-                                                                       <Label GridPane.columnIndex="1"
+                                                                       <Label fx:id="reportsCount"
+                                                                              GridPane.columnIndex="1"
                                                                               GridPane.rowIndex="7">
                                                                            <GridPane.margin>
                                                                                <Insets left="10.0"/>

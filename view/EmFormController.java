@@ -107,6 +107,9 @@ public class EmFormController {
 
     @FXML
     private Label measuresCount;
+
+    @FXML
+    private Label reportsCount;
     ////////////////////////////////
 
 
@@ -216,6 +219,7 @@ public class EmFormController {
     private ObservableList<Region> regions = FXCollections.observableArrayList();
     private ObservableList<TimeType> timeTypes = FXCollections.observableArrayList();
     private ObservableList<Measure> measures = FXCollections.observableArrayList();
+    private ObservableList<Report> reports = FXCollections.observableArrayList();
 
     public void initialize() {
         emergencyDate.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDate().toString()));
@@ -235,6 +239,7 @@ public class EmFormController {
             RegionDao regionDao = DaoFactory.getRegionDao(con);
             TimeTypeDao timeTypeDao = DaoFactory.getTimeTypeDao(con);
             MeasureDao measureDao = DaoFactory.getMeasureDao(con);
+
 
             emergencies.addAll(emergencyDao.getAll());
             organisations.addAll(organisationDao.getAll());
@@ -296,10 +301,13 @@ public class EmFormController {
             try (Connection con = DaoFactory.getConnection()) {
                 PersonDao personDao = DaoFactory.getPersonDao(con);
                 MeasureDao measureDao = DaoFactory.getMeasureDao(con);
+                ReportDao reportDao = DaoFactory.getReportDao(con);
 
+                reports.clear();
                 emergencyMeasures.clear();
                 damagedPeople.clear();
 
+                reports.addAll(reportDao.getByEmergency(info));
                 emergencyMeasures.addAll(measureDao.getByEmergency(info));
                 damagedPeople.addAll(personDao.getByEmergency(info.getId()));
             } catch (SQLException e) {
@@ -314,6 +322,8 @@ public class EmFormController {
             this.severityName.setValue(info.getSeverityType());
             this.damagedPeopleCount.setText(String.valueOf(damagedPeople.size()));
             this.measuresCount.setText(String.valueOf(emergencyMeasures.size()));
+            this.reportsCount.setText(String.valueOf(reports.size()));
+
         } else {
             //label.setText("");
         }
