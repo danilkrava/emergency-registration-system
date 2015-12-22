@@ -30,12 +30,23 @@ public class AddPersonController {
     private TextField surname;
     @FXML
     private TextField middlename;
+    @FXML
+    private ComboBox<Emergency> emergency;
 
     private Stage dialogStage;
+
+    private ObservableList<Emergency> emergencies = FXCollections.observableArrayList();
     //  private Person person;
     private boolean okClicked = false;
 
     public void initialize() {
+        try (Connection con = DaoFactory.getConnection()) {
+            EmergencyDao emergencyDao = DaoFactory.getEmergencyDao(con);
+            emergencies.addAll(emergencyDao.getAll());
+            emergency.setItems(emergencies);
+        } catch (SQLException e) {
+            Message.showErrorMessage(e.getMessage());
+        }
     }
 
 
@@ -56,7 +67,7 @@ public class AddPersonController {
             PersonDao dao;
             try (Connection con = DaoFactory.getConnection()) {
                 dao = DaoFactory.getPersonDao(con);
-                dao.add(person);
+                dao.add(person, emergency.getValue());
             } catch (SQLException e) {
                 Message.showErrorMessage(e.getMessage());
             }
@@ -85,6 +96,9 @@ public class AddPersonController {
         }
         if (middlename.getText() == null || middlename.getText().length() == 0) {
             errorMessage += "По-батькові\n";
+        }
+        if (emergency.getValue() == null) {
+            errorMessage += "Надзвичайна ситуація\n";
         }
 
         if (errorMessage.length() == 0) {
