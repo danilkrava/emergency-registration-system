@@ -47,6 +47,7 @@
                                        <MenuItem mnemonicParsing="false" onAction="#removeFilters"
                                                  text="Скинути фільтри"/>
                                        <MenuItem mnemonicParsing="false" onAction="#save" text="Зберегти зміни"/>
+                                       <MenuItem mnemonicParsing="false" onAction="#refresh" text="Оновити"/>
                                    </items>
                                </Menu>
                            </menus>

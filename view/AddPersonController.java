@@ -64,7 +64,6 @@ public class AddPersonController {
                 alert.setContentText(e.getMessage());
                 alert.showAndWait();
             }
-
             okClicked = true;
             dialogStage.close();
         }

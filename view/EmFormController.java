@@ -436,9 +436,11 @@ public class EmFormController {
 
             // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     @FXML
@@ -616,9 +618,15 @@ public class EmFormController {
         }
     }
 
+    @FXML
     private void refresh() {
         organisations.clear();
         emergencies.clear();
+        severities.clear();
+        measures.clear();
+        areas.clear();
+        timeTypes.clear();
+        regions.clear();
         initialize();
     }
 
