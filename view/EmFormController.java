@@ -794,6 +794,56 @@ public class EmFormController {
     }
 
     @FXML
+    private void remove() {
+        try (Connection con = DaoFactory.getConnection()) {
+            if (pane.getSelectionModel().getSelectedItem().getText().equals("Надзвичайні ситуації")) {
+                EmergencyDao emergencyDao = DaoFactory.getEmergencyDao(con);
+                Emergency emergency = emergencyTableView.getSelectionModel().getSelectedItem();
+
+                emergencyDao.delete(emergency);
+                emergencyTableView.refresh();
+            } else if (pane.getSelectionModel().getSelectedItem().getText().equals("Організації")) {
+                OrganisationDao organisationDao = DaoFactory.getOrganisationDao(con);
+                Organisation organisation = organisationTableView.getSelectionModel().getSelectedItem();
+
+                organisationDao.delete(organisation);
+                organisationTableView.refresh();
+            } else if (pane.getSelectionModel().getSelectedItem().getText().equals("Типи за часом")) {
+                TimeTypeDao timeTypeDao = DaoFactory.getTimeTypeDao(con);
+                TimeType timeType = timeTypeTableView.getSelectionModel().getSelectedItem();
+
+                timeTypeDao.delete(timeType);
+                timeTypeTableView.refresh();
+
+            } else if (pane.getSelectionModel().getSelectedItem().getText().equals("Типи за площею")) {
+                AreaTypeDao areaTypeDao = DaoFactory.getAreaTypeDao(con);
+                AreaType areaType = areaTypeTableView.getSelectionModel().getSelectedItem();
+
+                areaTypeDao.delete(areaType);
+                areaTypeTableView.refresh();
+
+            } else if (pane.getSelectionModel().getSelectedItem().getText().equals("Типи за важкістю")) {
+                SeverityTypeDao severityTypeDao = DaoFactory.getSeverityTypeDao(con);
+                SeverityType severityType = severityTypeTableView.getSelectionModel().getSelectedItem();
+
+                severityTypeDao.delete(severityType);
+                severityTypeTableView.refresh();
+            } else if (pane.getSelectionModel().getSelectedItem().getText().equals("Рекомендації")) {
+                MeasureDao measureDao = DaoFactory.getMeasureDao(con);
+                Measure measure = measureTableView.getSelectionModel().getSelectedItem();
+
+                measureDao.delete(measure);
+                severityTypeTableView.refresh();
+            }
+            Message.showInformationMessage("Запис успішно видалено");
+        } catch (SQLException e) {
+            Message.showErrorMessage(e.getMessage());
+        } catch (NullPointerException e) {
+            Message.showInformationMessage("Виберіть запис для видалення");
+        }
+    }
+
+    @FXML
     private void removeFilters() {
         filterDateFrom.setValue(null);
         filterDateTo.setValue(null);
