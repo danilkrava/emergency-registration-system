@@ -1,6 +1,5 @@
 package view;
 
-import com.sun.java.util.jar.pack.Package;
 import controller.MainController;
 import dao.*;
 import javafx.beans.property.IntegerProperty;
