@@ -7,7 +7,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="146.0"
             prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.66" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="view.AddEmergencyController">
+            fx:controller="view.AddMeasureController">
     <children>
         <GridPane layoutX="16.0" layoutY="12.0" prefHeight="100.0" prefWidth="550.0" AnchorPane.leftAnchor="5.0"
                   AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
