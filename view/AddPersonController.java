@@ -15,6 +15,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.ZoneId;
 
 /**
@@ -78,7 +79,7 @@ public class AddPersonController {
     private boolean isInputValid() {
         String errorMessage = "";
 
-        if (dateField.getValue() == null) {
+        if (dateField.getValue() == null || LocalDate.now().toEpochDay() - dateField.getValue().toEpochDay() < 0) {
             errorMessage += "No valid data!\n";
         }
         if (name.getText() == null || name.getText().length() == 0) {
