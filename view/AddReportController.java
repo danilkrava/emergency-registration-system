@@ -101,6 +101,9 @@ public class AddReportController {
         } catch (Exception ex) {
             errorMessage += "Рівень радіації\n";
         }
+        if (infoField.getText() == null || infoField.getText().length() == 0) {
+            errorMessage += "Інформація\n";
+        }
 
         if (errorMessage.length() == 0) {
             return true;
