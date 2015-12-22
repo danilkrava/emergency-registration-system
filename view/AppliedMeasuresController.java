@@ -69,7 +69,7 @@ public class AppliedMeasuresController {
     private boolean isInputValid() {
         String errorMessage = "";
 
-        if (appliedDate.getValue() == null || appliedDate.getValue().toEpochDay() - LocalDate.now().toEpochDay() < 0) {
+        if (appliedDate.getValue() == null || LocalDate.now().toEpochDay() - appliedDate.getValue().toEpochDay() < 0) {
             errorMessage += "Дата\n";
         }
         try {

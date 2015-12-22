@@ -48,6 +48,9 @@ public class MeasuresController {
     @FXML
     private TextField areaType;
 
+    @FXML
+    private Button applyButton;
+
     ///////////////////////////////////////////////
 
     ObservableList<Measure> measures = FXCollections.observableArrayList();
@@ -70,11 +73,13 @@ public class MeasuresController {
         } catch (NullPointerException e) {
             Message.showInformationMessage("Немає рекомендацій");
         }
+        applyButton.setDisable(true);
         measureTableView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showMeasureDetails(newValue));
     }
 
     private void showMeasureDetails(Measure info) {
+        applyButton.setDisable(false);
         if (info != null) {
             this.measureId.setText(String.valueOf(info.getId()));
             this.name.setText(info.getInfo());
