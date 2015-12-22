@@ -88,8 +88,9 @@
                               <Insets left="10.0" right="10.0" />
                            </GridPane.margin>
                         </TextField>
-                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="210.0"
-                                            text="Застосувати..." GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                                    <Button mnemonicParsing="false" onAction="#applyMeasure" prefHeight="25.0"
+                                            prefWidth="210.0" text="Застосувати..." GridPane.columnIndex="1"
+                                            GridPane.halignment="RIGHT">
                                         <GridPane.margin>
                                             <Insets right="10.0"/>
                                         </GridPane.margin>

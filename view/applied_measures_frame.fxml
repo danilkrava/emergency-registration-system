@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="223.0"
+            prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.66" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="view.AppliedMeasuresController">
+    <children>
+        <GridPane layoutX="16.0" layoutY="12.0" prefHeight="185.0" prefWidth="590.0" AnchorPane.leftAnchor="5.0"
+                  AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="290.0" minWidth="10.0" prefWidth="243.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="347.0" minWidth="10.0" prefWidth="347.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="104.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="111.0" minHeight="10.0" prefHeight="111.0" vgrow="SOMETIMES"/>
+            </rowConstraints>
+            <children>
+                <Label text="Виділені кошти" GridPane.rowIndex="1"/>
+                <Label text="Дата"/>
+                <TextField fx:id="appliedMoney" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <GridPane.margin>
+                        <Insets left="10.0" right="10.0"/>
+                    </GridPane.margin>
+                </TextField>
+                <Label text="Додаткова інформація" GridPane.rowIndex="2"/>
+                <TextArea fx:id="information" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1"
+                          GridPane.rowIndex="2">
+                    <GridPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </GridPane.margin>
+                </TextArea>
+                <DatePicker fx:id="appliedDate" prefHeight="25.0" prefWidth="370.0" GridPane.columnIndex="1">
+                    <GridPane.margin>
+                        <Insets left="10.0" right="10.0"/>
+                    </GridPane.margin>
+                </DatePicker>
+            </children>
+        </GridPane>
+        <HBox layoutX="405.0" layoutY="190.0" prefHeight="25.0" prefWidth="190.0" AnchorPane.bottomAnchor="38.0"
+              AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="190.0">
+            <children>
+                <Button mnemonicParsing="false" onAction="#handleOk" prefHeight="25.0" prefWidth="90.0" text="Зберегти">
+                    <HBox.margin>
+                        <Insets right="5.0"/>
+                    </HBox.margin>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#handleCancel" prefHeight="25.0" prefWidth="90.0"
+                        text="Скасувати">
+                    <HBox.margin>
+                        <Insets left="5.0"/>
+                    </HBox.margin>
+                </Button>
+            </children>
+        </HBox>
+    </children>
+</AnchorPane>

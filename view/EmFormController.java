@@ -431,7 +431,7 @@ public class EmFormController {
 
             // Set the person into the controller.
             MeasuresController controller = loader.getController();
-            controller.setDialogStage(dialogStage);
+            controller.setPrimaryStage(primaryStage);
             controller.setEmergency(emergencyTableView.getSelectionModel().getSelectedItem());
             controller.start();
             // Show the dialog and wait until the user closes it
