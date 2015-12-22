@@ -112,7 +112,7 @@ public class AddPersonController {
         if (emergency.getValue() == null) {
             errorMessage += "Надзвичайна ситуація\n";
         }
-        if (damagedParts.getSelectionModel().getSelectedItems().size() == 0) {
+        if (damagedParts.getCheckModel().getCheckedItems().size() == 0) {
             errorMessage += "Уражені частини\n";
         }
 
