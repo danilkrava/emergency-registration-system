@@ -60,7 +60,7 @@ public class ShowReportController {
         try (Connection con = DaoFactory.getConnection()) {
             ReportDao reportDao = DaoFactory.getReportDao(con);
 
-            reports.addAll();
+            reports.addAll(reportDao.getByEmergency(currentEmergency));
 
             reportTableView.setItems(reports);
         } catch (SQLException e) {
