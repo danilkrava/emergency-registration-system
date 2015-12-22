@@ -49,7 +49,7 @@ public class LogFormController {
 
                 EmFormController controller = loader.getController();
                 controller.setPrimaryStage(primaryStage);
-
+                Message.showConfirmationnMessage("Ви успішно увійшли у систему як " + username.getText());
             } catch (IOException e) {
                 e.printStackTrace();
             }
