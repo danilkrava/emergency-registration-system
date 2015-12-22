@@ -632,7 +632,7 @@ public class EmFormController {
 
     @FXML
     private void save() {
-        if (Integer.parseInt(pane.getSelectionModel().getSelectedItem().getId()) == 0) {
+        if (pane.getSelectionModel().getSelectedItem().getText() == "Надзвичайні ситуації") {
             try (Connection con = DaoFactory.getConnection()) {
                 EmergencyDao emergencyDao = DaoFactory.getEmergencyDao(con);
 
