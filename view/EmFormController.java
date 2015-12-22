@@ -272,6 +272,7 @@ public class EmFormController {
 
                 emergencyMeasures.clear();
                 damagedPeople.clear();
+
                 emergencyMeasures.addAll(measureDao.getByEmergency(info));
                 damagedPeople.addAll(personDao.getByEmergency(info.getId()));
             } catch (SQLException e) {

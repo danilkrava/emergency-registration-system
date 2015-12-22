@@ -15,6 +15,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.ZoneId;
 
 /**
@@ -103,7 +104,7 @@ public class AddEmergencyController {
     private boolean isInputValid() {
         String errorMessage = "";
 
-        if (dateField.getValue() == null) {
+        if (dateField.getValue() == null || LocalDate.now().toEpochDay() - dateField.getValue().toEpochDay() < 0) {
             errorMessage += "No valid data!\n";
         }
         if (organisationField.getValue() == null) {
