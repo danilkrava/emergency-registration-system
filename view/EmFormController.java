@@ -747,6 +747,7 @@ public class EmFormController {
                 organisation.setRegion(region);
                 emergency.setOrganisation(organisation);
                 emergency.setSeverityType(severityName.getValue());
+                emergency.setInfo(emergencyInformation.getText());
 
                 emergencyDao.update(emergency);
                 emergencyTableView.refresh();
