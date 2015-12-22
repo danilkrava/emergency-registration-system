@@ -1,5 +1,6 @@
 package dao;
 
+import model.Emergency;
 import model.Person;
 
 import java.sql.Connection;
@@ -54,7 +55,17 @@ public class PersonDao {
         return list;
     }
 
-    public void add(Person obj) throws SQLException{
+    public void add(Person obj, Emergency em) throws SQLException{
+        add(obj);
+        String sql = "INSERT INTO emergency_person_mapping (person_id, emergency_id) VALUES (?,?);";
+        try (PreparedStatement stm = connection.prepareStatement(sql)) {
+            stm.setInt(1, obj.getId());
+            stm.setInt(2, em.getId());
+            stm.executeQuery();
+        }
+    }
+
+    private void add(Person obj) throws SQLException{
         String sql = "INSERT INTO person (first_name, last_name, middle_name, birth_date) VALUES (?,?,?,?);";
         try (PreparedStatement stm = connection.prepareStatement(sql)) {
             stm.setString(1, obj.getName());
@@ -73,6 +84,8 @@ public class PersonDao {
             obj.setId(rs.getInt(1));
         }
     }
+
+
 
     public void update(Person obj) throws SQLException {
         String sql = "UPDATE person SET first_name=?, middle_name=?, last_name=?, birth_date=? WHERE person_id=?";
