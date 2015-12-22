@@ -244,11 +244,7 @@ public class EmFormController {
             filterRegion.setItems(regions);
             filterSeverity.setItems(severities);
         } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initOwner(dialogStage);
-            alert.setTitle("Error");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
+            Message.showErrorMessage(e.getMessage());
         }
         emergencyTableView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showEmergencyDetails(newValue));
@@ -276,7 +272,7 @@ public class EmFormController {
                 emergencyMeasures.addAll(measureDao.getByEmergency(info));
                 damagedPeople.addAll(personDao.getByEmergency(info.getId()));
             } catch (SQLException e) {
-                showMessage(Alert.AlertType.ERROR, "Error", e.getMessage());
+                Message.showErrorMessage(e.getMessage());
             }
 
             this.emergencyId.setText(String.valueOf(info.getId()));
@@ -600,7 +596,7 @@ public class EmFormController {
                     filterSeverity.getValue() == null ? -1 : filterSeverity.getValue().getId()));
             emergencyTableView.setItems(emergencies);
         } catch (SQLException e) {
-            showMessage(Alert.AlertType.ERROR, "Error", e.getMessage());
+            Message.showErrorMessage(e.getMessage());
         }
 
     }
@@ -615,7 +611,7 @@ public class EmFormController {
                     filterRegion.getValue() == null ? -1 : filterRegion.getValue().getId()));
             organisationTableView.setItems(organisations);
         } catch (SQLException e) {
-            showMessage(Alert.AlertType.ERROR, "Error", e.getMessage());
+            Message.showErrorMessage(e.getMessage());
         }
     }
 
@@ -630,15 +626,6 @@ public class EmFormController {
         regions.clear();
         initialize();
     }
-
-    private void showMessage(Alert.AlertType type, String title, String text) {
-        Alert alert = new Alert(type);
-        alert.initOwner(dialogStage);
-        alert.setTitle(title);
-        alert.setContentText(text);
-        alert.showAndWait();
-    }
-
 
     @FXML
     private void save() {
@@ -671,9 +658,9 @@ public class EmFormController {
                 organisationDao.update(organisation);
                 organisationTableView.refresh();
             }
-            showMessage(Alert.AlertType.CONFIRMATION, "Оновлено", "Запис успішно оновлено");
+            Message.showInformationMessage("Запис успішно оновлено");
         } catch (SQLException e) {
-            showMessage(Alert.AlertType.ERROR, "Error", e.getMessage());
+            Message.showErrorMessage(e.getMessage());
         }
 
     }
