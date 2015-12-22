@@ -78,4 +78,6 @@ public class DaoFactory {
 
     public static AppliedMeasureDao getAppliedMeasureDao(Connection connection) {return new AppliedMeasureDao(connection);}
 
+    public static ReportDao getReportDao(Connection connection) { return new ReportDao(connection);}
+
 }
