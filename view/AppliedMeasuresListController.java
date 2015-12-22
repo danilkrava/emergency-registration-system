@@ -1,5 +1,6 @@
 package view;
 
+import dao.AppliedMeasureDao;
 import dao.DaoFactory;
 import dao.MeasureDao;
 import javafx.beans.property.SimpleStringProperty;
@@ -11,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.AppliedMeasure;
 import model.Emergency;
 import model.Measure;
 
@@ -26,12 +28,12 @@ public class AppliedMeasuresListController {
     Emergency currentEmergency;
 
     @FXML
-    private TableView<Measure> measureTableView;
+    private TableView<AppliedMeasure> measureTableView;
 
     ///////////////////////////////////////////////
 
     @FXML
-    private TableColumn<Measure, String> measureNameColumn;
+    private TableColumn<AppliedMeasure, String> measureNameColumn;
 
     ///////////////////////////////////////////////
 
@@ -42,20 +44,18 @@ public class AppliedMeasuresListController {
     private TextField name;
 
     @FXML
-    private TextField timeType;
+    private TextField moneyField;
 
     @FXML
-    private TextField severityType;
+    private TextField date;
 
     @FXML
-    private TextField areaType;
+    private TextArea info;
 
-    @FXML
-    private Button applyButton;
 
     ///////////////////////////////////////////////
 
-    ObservableList<Measure> measures = FXCollections.observableArrayList();
+    ObservableList<AppliedMeasure> measures = FXCollections.observableArrayList();
 
     public void initialize() {
 
@@ -64,7 +64,7 @@ public class AppliedMeasuresListController {
     public void start() {
         measureNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getInfo()));
         try (Connection con = DaoFactory.getConnection()) {
-            MeasureDao measureDao = DaoFactory.getMeasureDao(con);
+            AppliedMeasureDao measureDao = DaoFactory.getAppliedMeasureDao(con);
 
             measures.addAll(measureDao.getByEmergency(currentEmergency));
 
@@ -74,19 +74,18 @@ public class AppliedMeasuresListController {
         } catch (NullPointerException e) {
             Message.showInformationMessage("Немає рекомендацій");
         }
-        applyButton.setDisable(true);
         measureTableView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showMeasureDetails(newValue));
     }
 
-    private void showMeasureDetails(Measure info) {
-        applyButton.setDisable(false);
+    private void showMeasureDetails(AppliedMeasure info) {
+
         if (info != null) {
             this.measureId.setText(String.valueOf(info.getId()));
             this.name.setText(info.getInfo());
-            this.timeType.setText(info.getTimeType().getName());
-            this.severityType.setText(info.getSeverityType().getName());
-            this.areaType.setText(info.getAreaType().getName());
+            this.moneyField.setText(Double.toString(info.getMoney()));
+            this.date.setText(info.getDate().toString());
+            this.info.setText(info.getInfo());
         }
     }
 

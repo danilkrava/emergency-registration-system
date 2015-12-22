@@ -1,6 +1,7 @@
 package dao;
 
 import model.AppliedMeasure;
+import model.DamageType;
 import model.Emergency;
 import model.Measure;
 
@@ -82,7 +83,18 @@ public class AppliedMeasureDao {
         return list;
     }
 
-    public void add(AppliedMeasure obj) throws SQLException{
+    public void add(AppliedMeasure obj, Emergency em) throws SQLException{
+        add(obj);
+        String sql = "INSERT INTO emergency_measure_mapping (emergency_id, applied_measure_id) VALUES (?,?);";
+        try (PreparedStatement stm = connection.prepareStatement(sql)) {
+            stm.setInt(1, em.getId());
+            stm.setInt(2, obj.getId());
+            int count = stm.executeUpdate();
+            if (count != 1)
+                throw new SQLException(count + " records were modified instead of 1!");
+        }
+    }
+    private void add(AppliedMeasure obj) throws SQLException{
         String sql = "INSERT INTO applied_measure (date, money, measure_id, measure_info) VALUES (?,?,?,?);";
         try (PreparedStatement stm = connection.prepareStatement(sql)) {
             stm.setDate(1, obj.getDate());
