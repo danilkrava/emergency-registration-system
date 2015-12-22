@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import org.controlsfx.control.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="217.0"
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="257.0"
             prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.66" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="view.AddPersonController">
     <children>
-        <GridPane layoutX="16.0" layoutY="12.0" prefHeight="160.0" prefWidth="590.0" AnchorPane.leftAnchor="5.0"
+        <GridPane layoutX="16.0" layoutY="12.0" prefHeight="199.0" prefWidth="590.0" AnchorPane.leftAnchor="5.0"
                   AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="290.0" minWidth="10.0" prefWidth="243.0"/>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="347.0" minWidth="10.0" prefWidth="347.0"/>
             </columnConstraints>
             <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
@@ -55,9 +57,15 @@
                         <Insets left="10.0" right="10.0"/>
                     </GridPane.margin>
                 </ComboBox>
+                <CheckComboBox prefHeight="25.0" prefWidth="378.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                    <padding>
+                        <Insets left="10.0" right="10.0"/>
+                    </padding>
+                </CheckComboBox>
+                <Label text="Уражені частини тіла" GridPane.rowIndex="5"/>
             </children>
         </GridPane>
-        <HBox layoutX="387.0" layoutY="178.0">
+        <HBox layoutX="386.0" layoutY="218.0">
             <children>
                 <Button mnemonicParsing="false" onAction="#handleOk" prefHeight="25.0" prefWidth="90.0" text="Зберегти">
                     <HBox.margin>
