@@ -77,6 +77,7 @@ public class AddEmergencyController {
             try (Connection con = DaoFactory.getConnection()) {
                 dao = DaoFactory.getEmergencyDao(con);
                 dao.add(emergency);
+                Message.showConfirmationnMessage("Надзвичайна ситуація додана");
             } catch (SQLException e) {
                 Message.showErrorMessage(e.getMessage());
             }

@@ -48,6 +48,7 @@ public class AddSeverityTypeController {
             try (Connection con = DaoFactory.getConnection()) {
                 dao = DaoFactory.getSeverityTypeDao(con);
                 dao.add(severityType);
+                Message.showConfirmationnMessage("Тип додано");
             } catch (SQLException e) {
                 Message.showErrorMessage(e.getMessage());
             }

@@ -4,7 +4,6 @@ import dao.DaoFactory;
 import dao.SeverityTypeDao;
 import dao.TimeTypeDao;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -47,6 +46,7 @@ public class AddTimeTypeController {
             try (Connection con = DaoFactory.getConnection()) {
                 dao = DaoFactory.getTimeTypeDao(con);
                 dao.add(timeType);
+                Message.showConfirmationnMessage("Тип додано");
             } catch (SQLException e) {
                 Message.showErrorMessage(e.getMessage());
             }

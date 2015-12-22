@@ -50,6 +50,7 @@ public class AddAreaTypeController {
             try (Connection con = DaoFactory.getConnection()) {
                 dao = DaoFactory.getAreaTypeDao(con);
                 dao.add(areaType);
+                Message.showConfirmationnMessage("Тип додано");
             } catch (SQLException e) {
                 Message.showErrorMessage(e.getMessage());
             }

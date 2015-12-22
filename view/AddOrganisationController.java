@@ -41,11 +41,7 @@ public class AddOrganisationController {
             list.addAll(dao.getAll());
             regionField.setItems(list);
         } catch (SQLException e) {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.initOwner(dialogStage);
-            alert.setTitle("Error");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
+            Message.showErrorMessage(e.getMessage());
             dialogStage.close();
         }
     }
@@ -68,6 +64,7 @@ public class AddOrganisationController {
             try (Connection con = DaoFactory.getConnection()) {
                 dao = DaoFactory.getOrganisationDao(con);
                 dao.add(organisation);
+                Message.showConfirmationnMessage("Організацію додано");
             } catch (SQLException e) {
                 Message.showErrorMessage(e.getMessage());
             }
