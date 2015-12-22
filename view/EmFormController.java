@@ -192,6 +192,21 @@ public class EmFormController {
     @FXML
     private GridPane emergencyGridPane;
 
+    @FXML
+    private GridPane organisationGridPane;
+
+    @FXML
+    private GridPane timeGridPane;
+
+    @FXML
+    private GridPane areaGridPane;
+
+    @FXML
+    private GridPane severityGridPane;
+
+    @FXML
+    private GridPane measuresGridPane;
+
     private ObservableList<Emergency> emergencies = FXCollections.observableArrayList();
     private ObservableList<Organisation> organisations = FXCollections.observableArrayList();
     private ObservableList<Person> damagedPeople = FXCollections.observableArrayList();
@@ -249,7 +264,7 @@ public class EmFormController {
             filterRegion.setItems(regions);
             filterSeverity.setItems(severities);
 
-            emergencyGridPane.setVisible(false);
+            setUnVisibleGridPanes();
         } catch (SQLException e) {
             Message.showErrorMessage(e.getMessage());
         }
@@ -267,6 +282,14 @@ public class EmFormController {
                 (observable, oldValue, newValue) -> showMeasureDetails(newValue));
     }
 
+    private void setUnVisibleGridPanes() {
+        emergencyGridPane.setVisible(false);
+        timeGridPane.setVisible(false);
+        areaGridPane.setVisible(false);
+        severityGridPane.setVisible(false);
+        measuresGridPane.setVisible(false);
+        organisationGridPane.setVisible(false);
+    }
     private void showEmergencyDetails(Emergency info) {
         emergencyGridPane.setVisible(true);
         if (info != null) {
@@ -297,6 +320,7 @@ public class EmFormController {
     }
 
     private void showOrganisationDetails(Organisation info) {
+        organisationGridPane.setVisible(true);
         if (info != null) {
             this.organisationId.setText(String.valueOf(info.getId()));
             this.organisationNamePane2.setText(info.getName());
@@ -309,6 +333,7 @@ public class EmFormController {
     }
 
     private void showTimeTypeDetails(TimeType info) {
+        timeGridPane.setVisible(true);
         if (info != null) {
             this.timeId.setText(String.valueOf(info.getId()));
             this.timeName.setText(info.getName());
@@ -320,6 +345,7 @@ public class EmFormController {
     }
 
     private void showAreaTypeDetails(AreaType info) {
+        areaGridPane.setVisible(true);
         if (info != null) {
             this.areaId.setText(String.valueOf(info.getId()));
             this.areasAreaName.setText(info.getName());
@@ -330,6 +356,7 @@ public class EmFormController {
     }
 
     private void showSeverityTypeDetails(SeverityType info) {
+        severityGridPane.setVisible(true);
         if (info != null) {
             this.severityId.setText(String.valueOf(info.getId()));
             this.severitiesSeverityName.setText(info.getName());
@@ -339,6 +366,7 @@ public class EmFormController {
     }
 
     private void showMeasureDetails(Measure info) {
+        measuresGridPane.setVisible(true);
         if (info != null) {
             this.measureId.setText(String.valueOf(info.getId()));
             this.measureTimeType.setValue(info.getTimeType());
