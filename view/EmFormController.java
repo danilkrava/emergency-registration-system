@@ -905,6 +905,7 @@ public class EmFormController {
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
 
+
             // Set the person into the controller.
 
             AppliedMeasuresListController controller = loader.getController();
