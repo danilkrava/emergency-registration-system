@@ -35,6 +35,7 @@ public class EmergencyDao {
             e.setAreaType(areaTypeDao.get(rs.getInt("area_type_id")));
             e.setSeverityType(severityTypeDao.get(rs.getInt("severity_type_id")));
             e.setOrganisation(orgDao.get(rs.getInt("organisation_id")));
+            e.setInfo(rs.getString("info"));
         }
         return e;
     }
@@ -56,6 +57,7 @@ public class EmergencyDao {
                 e.setAreaType(areaTypeDao.get(rs.getInt("area_type_id")));
                 e.setSeverityType(severityTypeDao.get(rs.getInt("severity_type_id")));
                 e.setOrganisation(orgDao.get(rs.getInt("organisation_id")));
+                e.setInfo(rs.getString("info"));
                 list.add(e);
             }
         }
@@ -120,6 +122,7 @@ public class EmergencyDao {
                 e.setAreaType(areaTypeDao.get(rs.getInt("area_type_id")));
                 e.setSeverityType(severityTypeDao.get(rs.getInt("severity_type_id")));
                 e.setOrganisation(orgDao.get(rs.getInt("organisation_id")));
+                e.setInfo(rs.getString("info"));
                 list.add(e);
             }
         }
@@ -127,12 +130,13 @@ public class EmergencyDao {
     }
 
     public void add(Emergency obj) throws SQLException {
-        String sql = "INSERT INTO emergency (date, organisation_id, area_type_id, severity_type_id) VALUES (?,?,?,?);";
+        String sql = "INSERT INTO emergency (date, organisation_id, area_type_id, severity_type_id, info) VALUES (?,?,?,?,?);";
         try (PreparedStatement stm = connection.prepareStatement(sql)) {
             stm.setDate(1, obj.getDate());
             stm.setInt(2, obj.getOrganisation().getId());
             stm.setInt(3, obj.getAreaType().getId());
             stm.setInt(4, obj.getSeverityType().getId());
+            stm.setString(5, obj.getInfo());
             int count = stm.executeUpdate();
             if (count != 1)
                 throw new SQLException(count + " records were modified instead of 1!");
@@ -147,13 +151,15 @@ public class EmergencyDao {
     }
 
     public void update(Emergency obj) throws SQLException {
-        String sql = "UPDATE emergency SET date=?, organisation_id=?, area_type_id=?, severity_type_id=? WHERE emergency_id=?";
+        String sql = "UPDATE emergency SET date=?, organisation_id=?, area_type_id=?, severity_type_id=?, info=? WHERE emergency_id=?";
         try (PreparedStatement stm = connection.prepareStatement(sql)) {
             stm.setDate(1, obj.getDate());
             stm.setInt(2, obj.getOrganisation().getId());
             stm.setInt(3, obj.getAreaType().getId());
             stm.setInt(4, obj.getSeverityType().getId());
-            stm.setInt(5, obj.getId());
+            stm.setString(5, obj.getInfo());
+            stm.setInt(6, obj.getId());
+
             int count = stm.executeUpdate();
             if (count != 1) {
                 throw new SQLException(count + " records were modified instead of 1!");

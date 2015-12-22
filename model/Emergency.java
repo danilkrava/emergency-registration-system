@@ -13,6 +13,16 @@ public class Emergency {
     private SeverityType severityType;
     private Organisation organisation;
 
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    private String info;
+
     public Emergency() {
     }
 
