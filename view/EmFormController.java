@@ -581,6 +581,7 @@ public class EmFormController {
 
             // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();
+            Message.showInformationMessage("Запис додано");
         } catch (IOException e) {
             e.printStackTrace();
         }
