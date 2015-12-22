@@ -26,11 +26,12 @@ public class Emergency {
     public Emergency() {
     }
 
-    public Emergency(Date date, AreaType areaType, SeverityType severityType, Organisation organisation) {
+    public Emergency(Date date, AreaType areaType, SeverityType severityType, Organisation organisation, String info) {
         this.date = date;
         this.areaType = areaType;
         this.severityType = severityType;
         this.organisation = organisation;
+        this.info = info;
     }
 
     @Override

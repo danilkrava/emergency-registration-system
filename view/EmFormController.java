@@ -105,6 +105,10 @@ public class EmFormController {
     private TextField organisationRegion;
 
     @FXML
+    private TextArea emergencyInformation;
+
+
+    @FXML
     private Label damagedPeopleCount;
 
     @FXML
@@ -332,6 +336,7 @@ public class EmFormController {
             this.measuresCount.setText(String.valueOf(emergencyMeasures.size()));
             this.reportsCount.setText(String.valueOf(reports.size()));
             this.appliedMeasuresCount.setText(String.valueOf(appliedMeasures.size()));
+            this.emergencyInformation.setText(info.getInfo());
 
         } else {
             //label.setText("");

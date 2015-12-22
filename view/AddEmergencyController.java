@@ -4,10 +4,7 @@ import dao.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.*;
 
@@ -30,6 +27,9 @@ public class AddEmergencyController {
     private ComboBox<SeverityType> severityField;
     @FXML
     private ComboBox<Organisation> organisationField;
+
+    @FXML
+    private TextArea info;
 
     private ObservableList<AreaType> areaTypes = FXCollections.observableArrayList();
     private ObservableList<SeverityType> severityTypes = FXCollections.observableArrayList();
@@ -72,7 +72,7 @@ public class AddEmergencyController {
     private void handleOk() {
         if (isInputValid()) {
             Instant instant = dateField.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
-            Emergency emergency = new Emergency(new Date(Date.from(instant).getTime()), areaField.getValue(), severityField.getValue(), organisationField.getValue());
+            Emergency emergency = new Emergency(new Date(Date.from(instant).getTime()), areaField.getValue(), severityField.getValue(), organisationField.getValue(), info.getText());
             EmergencyDao dao;
             try (Connection con = DaoFactory.getConnection()) {
                 dao = DaoFactory.getEmergencyDao(con);
