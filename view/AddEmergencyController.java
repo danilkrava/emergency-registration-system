@@ -53,11 +53,7 @@ public class AddEmergencyController {
             severityField.setItems(severityTypes);
             organisationField.setItems(organisations);
         } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initOwner(dialogStage);
-            alert.setTitle("Error");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
+            Message.showErrorMessage(e.getMessage());
             dialogStage.close();
         }
     }
@@ -82,11 +78,7 @@ public class AddEmergencyController {
                 dao = DaoFactory.getEmergencyDao(con);
                 dao.add(emergency);
             } catch (SQLException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.initOwner(dialogStage);
-                alert.setTitle("Error");
-                alert.setContentText(e.getMessage());
-                alert.showAndWait();
+                Message.showErrorMessage(e.getMessage());
             }
 
             okClicked = true;

@@ -4,18 +4,15 @@ import dao.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
-import model.AreaType;
-import model.Emergency;
-import model.Organisation;
-import model.SeverityType;
+import model.*;
 
+import java.awt.geom.Area;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -25,17 +22,17 @@ import java.time.ZoneId;
  */
 public class AddMeasureController {
     @FXML
-    private DatePicker dateField;
+    private TextField infoField;
     @FXML
-    private ComboBox<AreaType> areaField;
+    private ComboBox<TimeType> timeTypeComboBox;
     @FXML
-    private ComboBox<SeverityType> severityField;
+    private ComboBox<SeverityType> severityTypeComboBox;
     @FXML
-    private ComboBox<Organisation> organisationField;
+    private ComboBox<AreaType> areaTypeComboBox;
 
     private ObservableList<AreaType> areaTypes = FXCollections.observableArrayList();
     private ObservableList<SeverityType> severityTypes = FXCollections.observableArrayList();
-    private ObservableList<Organisation> organisations = FXCollections.observableArrayList();
+    private ObservableList<TimeType> timeTypes = FXCollections.observableArrayList();
 
     private Stage dialogStage;
     //  private Person person;
@@ -45,21 +42,17 @@ public class AddMeasureController {
         try (Connection con = DaoFactory.getConnection()) {
             AreaTypeDao areaTypeDao = DaoFactory.getAreaTypeDao(con);
             SeverityTypeDao severityTypeDao = DaoFactory.getSeverityTypeDao(con);
-            OrganisationDao organisationDao = DaoFactory.getOrganisationDao(con);
+            TimeTypeDao timeTypeDao = DaoFactory.getTimeTypeDao(con);
 
             areaTypes.addAll(areaTypeDao.getAll());
             severityTypes.addAll(severityTypeDao.getAll());
-            organisations.addAll(organisationDao.getAll());
+            timeTypes.addAll(timeTypeDao.getAll());
 
-            areaField.setItems(areaTypes);
-            severityField.setItems(severityTypes);
-            organisationField.setItems(organisations);
+            areaTypeComboBox.setItems(areaTypes);
+            severityTypeComboBox.setItems(severityTypes);
+            timeTypeComboBox.setItems(timeTypes);
         } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initOwner(dialogStage);
-            alert.setTitle("Error");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
+            Message.showErrorMessage(e.getMessage());
             dialogStage.close();
         }
     }
@@ -77,18 +70,14 @@ public class AddMeasureController {
     @FXML
     private void handleOk() {
         if (isInputValid()) {
-            Instant instant = dateField.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
-            Emergency emergency = new Emergency(new Date(Date.from(instant).getTime()), areaField.getValue(), severityField.getValue(), organisationField.getValue());
-            EmergencyDao dao;
+
+            Measure measure = new Measure(timeTypeComboBox.getValue(), severityTypeComboBox.getValue(), areaTypeComboBox.getValue(), infoField.getText());
+            MeasureDao dao;
             try (Connection con = DaoFactory.getConnection()) {
-                dao = DaoFactory.getEmergencyDao(con);
-                dao.add(emergency);
+                dao = DaoFactory.getMeasureDao(con);
+                dao.add(measure);
             } catch (SQLException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.initOwner(dialogStage);
-                alert.setTitle("Error");
-                alert.setContentText(e.getMessage());
-                alert.showAndWait();
+                Message.showErrorMessage(e.getMessage());
             }
 
             okClicked = true;
@@ -106,17 +95,17 @@ public class AddMeasureController {
     private boolean isInputValid() {
         String errorMessage = "";
 
-        if (dateField.getValue() == null || LocalDate.now().toEpochDay() - dateField.getValue().toEpochDay() < 0) {
-            errorMessage += "Дата\n";
+        if (infoField.getText() == null || infoField.getText().length() == 0) {
+            errorMessage += "Інфо\n";
         }
-        if (organisationField.getValue() == null) {
-            errorMessage += "Організація\n";
+        if (timeTypeComboBox.getValue() == null) {
+            errorMessage += "Тип за часом\n";
         }
-        if (areaField.getValue() == null) {
-            errorMessage += "Площа\n";
+        if (areaTypeComboBox.getValue() == null) {
+            errorMessage += "Тип за площею\n";
         }
-        if (severityField.getValue() == null) {
-            errorMessage += "Важкість\n";
+        if (severityTypeComboBox.getValue() == null) {
+            errorMessage += "Тип за важкістю\n";
         }
 
         if (errorMessage.length() == 0) {
