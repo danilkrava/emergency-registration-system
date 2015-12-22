@@ -740,7 +740,10 @@ public class EmFormController {
             Message.showInformationMessage("Запис успішно оновлено");
         } catch (SQLException e) {
             Message.showErrorMessage(e.getMessage());
+        } catch (NullPointerException e) {
+            Message.showInformationMessage("Виберіть запис для оновлення");
         }
+
 
     }
 
