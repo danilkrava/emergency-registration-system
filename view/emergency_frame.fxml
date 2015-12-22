@@ -31,7 +31,7 @@
                                                          text="За площею"/>
                                            </items>
                                        </Menu>
-                                       <MenuItem mnemonicParsing="false" onAction="#addMeasure" text="Контрзахід"/>
+                                       <MenuItem mnemonicParsing="false" onAction="#addMeasure" text="Рекомендація"/>
                                        <MenuItem mnemonicParsing="false" onAction="#addReport" text="Звіт"/>
                                        <MenuItem mnemonicParsing="false" onAction="#addDamagedPerson"
                                                  text="Потерпілий"/>
