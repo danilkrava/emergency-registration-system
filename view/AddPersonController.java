@@ -78,7 +78,7 @@ public class AddPersonController {
             PersonDao dao;
             try (Connection con = DaoFactory.getConnection()) {
                 dao = DaoFactory.getPersonDao(con);
-                dao.add(person, emergency.getValue(), damagedParts.getSelectionModel().getSelectedItems());
+                dao.add(person, emergency.getValue(), damagedParts.getCheckModel().getCheckedItems());
             } catch (SQLException e) {
                 Message.showErrorMessage(e.getMessage());
             }
