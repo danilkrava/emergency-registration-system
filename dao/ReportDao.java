@@ -1,5 +1,6 @@
 package dao;
 
+import model.Emergency;
 import model.Organisation;
 import model.Report;
 
@@ -36,6 +37,25 @@ public class ReportDao {
         r.setRadiation(rs.getDouble("radiation"));
         r.setInfo(rs.getString("info"));
         return r;
+    }
+
+    public List<Report> getByEmergency(Emergency emergency) throws SQLException{
+        List<Report> list = new ArrayList<>();
+
+        String sql = "SELECT * FROM report WHERE emergency_id=?;";
+        PreparedStatement stm = connection.prepareStatement(sql);
+        stm.setInt(1, emergency.getId());
+        ResultSet rs = stm.executeQuery();
+        while (rs.next()) {
+            Report a = new Report();
+            a.setId(rs.getInt("report_id"));
+            a.setInfo(rs.getString("info"));
+            a.setRadiation(rs.getFloat("radiation"));
+            a.setEmergency(emergency);
+            a.setDate(rs.getDate("date"));
+            list.add(a);
+        }
+        return list;
     }
 
     public List<Report> getAll() throws SQLException{

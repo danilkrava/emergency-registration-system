@@ -15,7 +15,7 @@ import java.util.List;
 public class DaoFactory {
     private static String user = "root";
     private static String password = "";
-    private static String url = "jdbc:mysql://localhost:3306/emergencies";
+    private static String url = "jdbc:mysql://localhost:3306/emergencies2";
     private static String driver = "com.mysql.jdbc.Driver";
 
     static {
@@ -44,6 +44,7 @@ public class DaoFactory {
         user = user0;
         password = password0;
     }
+
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(url, user, password);
     }
