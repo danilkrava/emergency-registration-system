@@ -632,11 +632,11 @@ public class EmFormController {
 
     @FXML
     private void save() {
-        if (pane.getSelectionModel().getSelectedItem().getText().equals("Надзвичайні ситуації")) {
-            try (Connection con = DaoFactory.getConnection()) {
+        try (Connection con = DaoFactory.getConnection()) {
+            if (pane.getSelectionModel().getSelectedItem().getText().equals("Надзвичайні ситуації")) {
                 EmergencyDao emergencyDao = DaoFactory.getEmergencyDao(con);
-
                 Emergency emergency = emergencyTableView.getSelectionModel().getSelectedItem();
+
                 emergency.setAreaType(areaName.getValue());
                 Organisation organisation = organisationName.getValue();
                 organisation.setAddress(organisationAdress.getText());
@@ -648,11 +648,22 @@ public class EmFormController {
 
                 emergencyDao.update(emergency);
                 emergencyTableView.refresh();
+            } else {
+                OrganisationDao organisationDao = DaoFactory.getOrganisationDao(con);
+                Organisation organisation = organisationTableView.getSelectionModel().getSelectedItem();
+                organisation.setName(organisationNamePane2.getText());
+                organisation.setAddress(organisationAdressPane2.getText());
 
-                showMessage(Alert.AlertType.CONFIRMATION, "Оновлено", "Запис успішно оновлено");
-            } catch (SQLException e) {
-                showMessage(Alert.AlertType.ERROR, "Error", e.getMessage());
+                Region region = organisation.getRegion();
+                region.setName(regionName.getText());
+                organisation.setRegion(region);
+
+                organisationDao.update(organisation);
+                organisationTableView.refresh();
             }
+            showMessage(Alert.AlertType.CONFIRMATION, "Оновлено", "Запис успішно оновлено");
+        } catch (SQLException e) {
+            showMessage(Alert.AlertType.ERROR, "Error", e.getMessage());
         }
 
     }
