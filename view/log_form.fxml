@@ -12,11 +12,11 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.66" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LogFormController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LogFormController">
    <children>
       <VBox layoutX="36.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="10.0">
          <children>
-            <Label text="Username">
+            <Label text="Логін">
                <font>
                   <Font size="18.0" />
                </font>
@@ -26,7 +26,7 @@
                   <Font size="18.0" />
                </font>
             </TextField>
-            <Label text="Password">
+            <Label text="Пароль">
                <font>
                   <Font size="18.0" />
                </font>
@@ -38,12 +38,12 @@
             </TextField>
             <HBox alignment="CENTER" focusTraversable="true">
                <children>
-                  <Button mnemonicParsing="false" onAction="#logInButtonPressed" prefHeight="39.0" prefWidth="160.0" text="Log in">
+                  <Button mnemonicParsing="false" onAction="#logInButtonPressed" prefHeight="39.0" prefWidth="160.0" text="Увійти">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#cancelLogInButtonPressed" prefHeight="39.0" prefWidth="160.0" text="Cancel">
+                  <Button mnemonicParsing="false" onAction="#cancelLogInButtonPressed" prefHeight="39.0" prefWidth="160.0" text="Вихід">
                      <font>
                         <Font size="18.0" />
                      </font>

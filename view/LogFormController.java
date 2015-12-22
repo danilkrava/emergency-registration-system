@@ -1,5 +1,6 @@
 package view;
 
+import dao.DaoFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,6 +11,8 @@ import javafx.stage.Stage;
 
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 /**
  * Created by Крава on 06.12.2015.
@@ -31,10 +34,12 @@ public class LogFormController {
 
     @FXML
     private void logInButtonPressed() {
-        try {
+        DaoFactory.setLoginInfo(username.getText(), password.getText());
+        try (Connection con = DaoFactory.getConnection()) {
+            try {
                 //Loading root frame for all frames
                 FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(application.getClass().getResource("emergency_frame.fxml"));
+                loader.setLocation(application.getClass().getResource("emergency_frame.fxml"));
                 rootLayout = loader.load();
 
                 application.getPrimaryStage().setTitle("Emergency frame");
@@ -43,10 +48,13 @@ public class LogFormController {
                 application.getPrimaryStage().show();
 
                 EmFormController controller = loader.getController();
-            controller.setPrimaryStage(primaryStage);
+                controller.setPrimaryStage(primaryStage);
 
-        } catch (IOException e) {
-            e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (SQLException e) {
+            Message.showErrorMessage(e.getMessage());
         }
     }
 

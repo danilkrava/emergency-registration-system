@@ -69,7 +69,7 @@ public class TimeTypeDao {
     }
 
     public void update(TimeType obj) throws SQLException {
-        String sql = "UPDATE time_type SET name=?, years_elapsed=? WHERE severity_type_id=?";
+        String sql = "UPDATE time_type SET name=?, years_elapsed=? WHERE time_type_id=?";
         try (PreparedStatement stm = connection.prepareStatement(sql)) {
             stm.setString(1, obj.getName());
             stm.setInt(2, obj.getTimeElapsed());

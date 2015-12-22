@@ -40,6 +40,10 @@ public class DaoFactory {
         }
     }
 
+    public static void setLoginInfo(String user0, String password0) {
+        user = user0;
+        password = password0;
+    }
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(url, user, password);
     }
