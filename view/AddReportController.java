@@ -41,6 +41,7 @@ public class AddReportController {
         try (Connection con = DaoFactory.getConnection()) {
             EmergencyDao emergencyDao = DaoFactory.getEmergencyDao(con);
             emergencies.addAll(emergencyDao.getAll());
+            emergencyComboBox.setItems(emergencies);
         } catch (SQLException e) {
             Message.showErrorMessage(e.getMessage());
             dialogStage.close();
@@ -66,6 +67,7 @@ public class AddReportController {
             try (Connection con = DaoFactory.getConnection()) {
                 dao = DaoFactory.getReportDao(con);
                 dao.add(report);
+                Message.showConfirmationnMessage("Звіт додано");
             } catch (SQLException e) {
                 Message.showErrorMessage(e.getMessage());
             }

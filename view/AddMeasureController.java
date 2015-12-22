@@ -76,6 +76,7 @@ public class AddMeasureController {
             try (Connection con = DaoFactory.getConnection()) {
                 dao = DaoFactory.getMeasureDao(con);
                 dao.add(measure);
+                Message.showConfirmationnMessage("Рекомендацію додано");
             } catch (SQLException e) {
                 Message.showErrorMessage(e.getMessage());
             }
