@@ -579,8 +579,9 @@
                                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="310.0"
                                                                    prefWidth="415.0">
                                                            <children>
-                                                               <GridPane layoutX="14.0" layoutY="14.0"
-                                                                         prefHeight="310.0" prefWidth="546.0"
+                                                               <GridPane fx:id="organisationGridPane" layoutX="14.0"
+                                                                         layoutY="14.0" prefHeight="310.0"
+                                                                         prefWidth="546.0"
                                                                          style="-fx-grid-lines-visible: true;"
                                                                          AnchorPane.bottomAnchor="0.0"
                                                                          AnchorPane.leftAnchor="0.0"
@@ -698,8 +699,9 @@
                                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="310.0"
                                                                    prefWidth="415.0">
                                                            <children>
-                                                               <GridPane layoutX="14.0" layoutY="14.0"
-                                                                         prefHeight="310.0" prefWidth="546.0"
+                                                               <GridPane fx:id="timeGridPane" layoutX="14.0"
+                                                                         layoutY="14.0" prefHeight="310.0"
+                                                                         prefWidth="546.0"
                                                                          style="-fx-grid-lines-visible: true;"
                                                                          AnchorPane.bottomAnchor="0.0"
                                                                          AnchorPane.leftAnchor="0.0"
@@ -800,8 +802,9 @@
                                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="310.0"
                                                                    prefWidth="415.0">
                                                            <children>
-                                                               <GridPane layoutX="14.0" layoutY="14.0"
-                                                                         prefHeight="310.0" prefWidth="546.0"
+                                                               <GridPane fx:id="areaGridPane" layoutX="14.0"
+                                                                         layoutY="14.0" prefHeight="310.0"
+                                                                         prefWidth="546.0"
                                                                          style="-fx-grid-lines-visible: true;"
                                                                          AnchorPane.bottomAnchor="0.0"
                                                                          AnchorPane.leftAnchor="0.0"
@@ -902,8 +905,9 @@
                                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="310.0"
                                                                    prefWidth="415.0">
                                                            <children>
-                                                               <GridPane layoutX="14.0" layoutY="14.0"
-                                                                         prefHeight="310.0" prefWidth="546.0"
+                                                               <GridPane fx:id="severityGridPane" layoutX="14.0"
+                                                                         layoutY="14.0" prefHeight="310.0"
+                                                                         prefWidth="546.0"
                                                                          style="-fx-grid-lines-visible: true;"
                                                                          AnchorPane.bottomAnchor="0.0"
                                                                          AnchorPane.leftAnchor="0.0"
@@ -991,8 +995,9 @@
                                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="310.0"
                                                                    prefWidth="415.0">
                                                            <children>
-                                                               <GridPane layoutX="14.0" layoutY="14.0"
-                                                                         prefHeight="310.0" prefWidth="546.0"
+                                                               <GridPane fx:id="measuresGridPane" layoutX="14.0"
+                                                                         layoutY="14.0" prefHeight="310.0"
+                                                                         prefWidth="546.0"
                                                                          style="-fx-grid-lines-visible: true;"
                                                                          AnchorPane.bottomAnchor="0.0"
                                                                          AnchorPane.leftAnchor="0.0"
