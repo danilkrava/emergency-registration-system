@@ -315,8 +315,9 @@
                                                                                <Insets left="10.0"/>
                                                                            </GridPane.margin>
                                                                        </Label>
-                                                                       <Button mnemonicParsing="false" prefWidth="315.0"
-                                                                               text="Подробиці..."
+                                                                       <Button mnemonicParsing="false"
+                                                                               onAction="#showAppliedMeasures"
+                                                                               prefWidth="315.0" text="Подробиці..."
                                                                                GridPane.columnIndex="1"
                                                                                GridPane.halignment="RIGHT"
                                                                                GridPane.rowIndex="6">
@@ -334,7 +335,8 @@
                                                                                <Insets right="10.0"/>
                                                                            </GridPane.margin>
                                                                        </Button>
-                                                                       <Label GridPane.columnIndex="1"
+                                                                       <Label fx:id="appliedMeasuresCount"
+                                                                              GridPane.columnIndex="1"
                                                                               GridPane.rowIndex="6">
                                                                            <GridPane.margin>
                                                                                <Insets left="10.0"/>

@@ -5,10 +5,14 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.*;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -87,6 +91,7 @@ public class AppliedMeasuresController {
             return false;
         }
     }
+
 
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;

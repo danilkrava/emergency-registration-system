@@ -110,6 +110,9 @@ public class EmFormController {
 
     @FXML
     private Label reportsCount;
+
+    @FXML
+    private Label appliedMeasuresCount;
     ////////////////////////////////
 
 
@@ -220,6 +223,7 @@ public class EmFormController {
     private ObservableList<TimeType> timeTypes = FXCollections.observableArrayList();
     private ObservableList<Measure> measures = FXCollections.observableArrayList();
     private ObservableList<Report> reports = FXCollections.observableArrayList();
+    private ObservableList<AppliedMeasure> appliedMeasures = FXCollections.observableArrayList();
 
     public void initialize() {
         emergencyDate.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDate().toString()));
@@ -263,7 +267,6 @@ public class EmFormController {
             measureSeverityType.setItems(severities);
             measureTimeType.setItems(timeTypes);
 
-
             filterArea.setItems(areas);
             filterOrganisation.setItems(organisations);
             filterRegion.setItems(regions);
@@ -302,11 +305,14 @@ public class EmFormController {
                 PersonDao personDao = DaoFactory.getPersonDao(con);
                 MeasureDao measureDao = DaoFactory.getMeasureDao(con);
                 ReportDao reportDao = DaoFactory.getReportDao(con);
+                AppliedMeasureDao appliedMeasureDao = DaoFactory.getAppliedMeasureDao(con);
 
+                appliedMeasures.clear();
                 reports.clear();
                 emergencyMeasures.clear();
                 damagedPeople.clear();
 
+                appliedMeasures.addAll(appliedMeasureDao.getByEmergency(info));
                 reports.addAll(reportDao.getByEmergency(info));
                 emergencyMeasures.addAll(measureDao.getByEmergency(info));
                 damagedPeople.addAll(personDao.getByEmergency(info.getId()));
@@ -323,6 +329,7 @@ public class EmFormController {
             this.damagedPeopleCount.setText(String.valueOf(damagedPeople.size()));
             this.measuresCount.setText(String.valueOf(emergencyMeasures.size()));
             this.reportsCount.setText(String.valueOf(reports.size()));
+            this.appliedMeasuresCount.setText(String.valueOf(appliedMeasures.size()));
 
         } else {
             //label.setText("");
@@ -873,6 +880,34 @@ public class EmFormController {
 
             ShowReportController controller = loader.getController();
             controller.setDialogStage(dialogStage);
+            controller.setEmergency(emergencyTableView.getSelectionModel().getSelectedItem());
+            controller.start();
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void showAppliedMeasures() {
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("applied_measures_list.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Застосовані рекомендації");
+            // dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Set the person into the controller.
+
+            AppliedMeasuresListController controller = loader.getController();
             controller.setEmergency(emergencyTableView.getSelectionModel().getSelectedItem());
             controller.start();
             // Show the dialog and wait until the user closes it

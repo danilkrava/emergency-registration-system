@@ -22,7 +22,7 @@ import java.sql.SQLException;
  * Created by Крава on 21.12.2015.
  */
 public class AppliedMeasuresListController {
-    Stage primaryStage;
+    Stage dialogStage;
     Emergency currentEmergency;
 
     @FXML
@@ -66,7 +66,6 @@ public class AppliedMeasuresListController {
         try (Connection con = DaoFactory.getConnection()) {
             MeasureDao measureDao = DaoFactory.getMeasureDao(con);
 
-
             measures.addAll(measureDao.getByEmergency(currentEmergency));
 
             measureTableView.setItems(measures);
@@ -91,36 +90,8 @@ public class AppliedMeasuresListController {
         }
     }
 
-    @FXML
-    private void applyMeasure() {
-        try {
-            // Load the fxml file and create a new stage for the popup dialog.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("applied_measures_frame.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
-
-            // Create the dialog Stage.
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Застосування рекомендації");
-            // dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(primaryStage);
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
-
-            // Set the person into the controller.
-
-            AppliedMeasuresController controller = loader.getController();
-            controller.setDialogStage(dialogStage);
-            controller.setMeasure(measureTableView.getSelectionModel().getSelectedItem());
-            // Show the dialog and wait until the user closes it
-            dialogStage.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void setPrimaryStage(Stage primaryStage) {
-        this.primaryStage = primaryStage;
+    public void setDialogStage(Stage dialogStage) {
+        this.dialogStage = dialogStage;
     }
 
     public void setEmergency(Emergency emergency) {
