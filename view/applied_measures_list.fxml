@@ -5,7 +5,9 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="288.0" prefWidth="636.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AppliedMeasuresListController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="288.0"
+            prefWidth="636.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="view.AppliedMeasuresListController">
     <children>
         <SplitPane dividerPositions="0.36789297658862874" layoutX="64.0" layoutY="104.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
@@ -71,24 +73,27 @@
                                             <Insets left="10.0" right="10.0" />
                                         </GridPane.margin>
                                     </TextField>
-                        <TextField fx:id="moneyField" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                    <TextField fx:id="moneyField" editable="false" GridPane.columnIndex="1"
+                                               GridPane.rowIndex="2">
                            <GridPane.margin>
                               <Insets left="10.0" right="10.0" />
                            </GridPane.margin>
                         </TextField>
-                        <TextField fx:id="date" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                    <TextField fx:id="date" editable="false" GridPane.columnIndex="1"
+                                               GridPane.rowIndex="3">
                            <GridPane.margin>
                               <Insets left="10.0" right="10.0" />
                            </GridPane.margin>
                         </TextField>
-                        <TextArea fx:id="info" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
+                                    <TextArea fx:id="info" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1"
+                                              GridPane.rowIndex="4">
+                                        <opaqueInsets>
+                                            <Insets/>
+                                        </opaqueInsets>
                            <GridPane.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                            </GridPane.margin>
-                        </TextArea>
+                                    </TextArea>
                                 </children>
                             </GridPane>
                     </children>

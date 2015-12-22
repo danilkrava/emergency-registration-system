@@ -110,6 +110,7 @@ public class MeasuresController {
             AppliedMeasuresController controller = loader.getController();
             controller.setDialogStage(dialogStage);
             controller.setMeasure(measureTableView.getSelectionModel().getSelectedItem());
+            controller.setEmergency(currentEmergency);
             // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();
         } catch (IOException e) {

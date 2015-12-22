@@ -26,6 +26,7 @@ import java.time.ZoneId;
 public class AppliedMeasuresController {
     Stage dialogStage;
     Measure currentMeasure;
+    Emergency currentEmergency;
 
     @FXML
     private TextField appliedMoney;
@@ -53,7 +54,7 @@ public class AppliedMeasuresController {
             try (Connection con = DaoFactory.getConnection()) {
                 AppliedMeasureDao appliedMeasureDao = DaoFactory.getAppliedMeasureDao(con);
                 Instant instant = appliedDate.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
-                appliedMeasureDao.add(new AppliedMeasure(new Date(Date.from(instant).getTime()), Double.parseDouble(appliedMoney.getText()), currentMeasure, information.getText()));
+                appliedMeasureDao.add(new AppliedMeasure(new Date(Date.from(instant).getTime()), Double.parseDouble(appliedMoney.getText()), currentMeasure, information.getText()), currentEmergency);
                 Message.showConfirmationnMessage("Рекомендація застосована");
             } catch (SQLException e) {
                 Message.showErrorMessage(e.getMessage());
@@ -92,6 +93,9 @@ public class AppliedMeasuresController {
         }
     }
 
+    public void setEmergency(Emergency emergency) {
+        this.currentEmergency = emergency;
+    }
 
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
