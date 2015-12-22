@@ -1,5 +1,7 @@
 package dao;
 
+import javafx.collections.ObservableList;
+import model.DamageType;
 import model.Emergency;
 import model.Person;
 
@@ -55,14 +57,28 @@ public class PersonDao {
         return list;
     }
 
-    public void add(Person obj, Emergency em) throws SQLException{
+    public void add(Person obj, Emergency em, ObservableList<DamageType> dt) throws SQLException{
         add(obj);
         String sql = "INSERT INTO emergency_person_mapping (person_id, emergency_id) VALUES (?,?);";
         try (PreparedStatement stm = connection.prepareStatement(sql)) {
             stm.setInt(1, obj.getId());
             stm.setInt(2, em.getId());
-            stm.executeQuery();
+            int count = stm.executeUpdate();
+            if (count != 1)
+                throw new SQLException(count + " records were modified instead of 1!");
         }
+
+        sql = "INSERT INTO damage_person_mapping (person_id, damage_type_id) VALUES (?,?);";
+        for (DamageType d : dt) {
+            try (PreparedStatement stm = connection.prepareStatement(sql)) {
+                stm.setInt(1, obj.getId());
+                stm.setInt(2, d.getId());
+                int count = stm.executeUpdate();
+                if (count != 1)
+                    throw new SQLException(count + " records were modified instead of 1!");
+            }
+        }
+
     }
 
     private void add(Person obj) throws SQLException{

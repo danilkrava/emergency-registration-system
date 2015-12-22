@@ -25,13 +25,7 @@ public class Emergency {
 
     @Override
     public String toString() {
-        return "Emergency{" +
-                "date=" + date +
-                ", id=" + id +
-                ", areaType=" + areaType +
-                ", severity=" + severityType +
-                ", organisation=" + organisation +
-                '}';
+        return organisation + " " + date;
     }
 
     public Date getDate() {
