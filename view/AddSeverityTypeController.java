@@ -49,11 +49,7 @@ public class AddSeverityTypeController {
                 dao = DaoFactory.getSeverityTypeDao(con);
                 dao.add(severityType);
             } catch (SQLException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.initOwner(dialogStage);
-                alert.setTitle("Error");
-                alert.setContentText(e.getMessage());
-                alert.showAndWait();
+                Message.showErrorMessage(e.getMessage());
             }
             okClicked = true;
             dialogStage.close();
@@ -71,19 +67,13 @@ public class AddSeverityTypeController {
         String errorMessage = "";
 
         if (nameField.getText() == null || nameField.getText().length() == 0) {
-            errorMessage += "No valid name!\n";
+            errorMessage += "Назва\n";
         }
         if (errorMessage.length() == 0) {
             return true;
         } else {
             // Show the error message.
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initOwner(dialogStage);
-            alert.setTitle("Invalid Fields");
-            alert.setHeaderText("Please correct invalid fields");
-            alert.setContentText(errorMessage);
-
-            alert.showAndWait();
+            Message.showErrorMessage("Виправте невірно вказані поля: \n" + errorMessage);
             return false;
         }
     }

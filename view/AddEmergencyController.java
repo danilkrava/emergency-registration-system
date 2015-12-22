@@ -105,29 +105,23 @@ public class AddEmergencyController {
         String errorMessage = "";
 
         if (dateField.getValue() == null || LocalDate.now().toEpochDay() - dateField.getValue().toEpochDay() < 0) {
-            errorMessage += "No valid data!\n";
+            errorMessage += "Дата\n";
         }
         if (organisationField.getValue() == null) {
-            errorMessage += "No valid organisation\n";
+            errorMessage += "Організація\n";
         }
         if (areaField.getValue() == null) {
-            errorMessage += "No valid area!\n";
+            errorMessage += "Площа\n";
         }
         if (severityField.getValue() == null) {
-            errorMessage += "No valid severity!\n";
+            errorMessage += "Важкість\n";
         }
 
         if (errorMessage.length() == 0) {
             return true;
         } else {
             // Show the error message.
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initOwner(dialogStage);
-            alert.setTitle("Invalid Fields");
-            alert.setHeaderText("Please correct invalid fields");
-            alert.setContentText(errorMessage);
-
-            alert.showAndWait();
+            Message.showErrorMessage("Виправте невірно вказані поля: \n" + errorMessage);
             return false;
         }
     }

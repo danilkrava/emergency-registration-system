@@ -58,11 +58,7 @@ public class AddPersonController {
                 dao = DaoFactory.getPersonDao(con);
                 dao.add(person);
             } catch (SQLException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.initOwner(dialogStage);
-                alert.setTitle("Error");
-                alert.setContentText(e.getMessage());
-                alert.showAndWait();
+                Message.showErrorMessage(e.getMessage());
             }
             okClicked = true;
             dialogStage.close();
@@ -79,32 +75,24 @@ public class AddPersonController {
         String errorMessage = "";
 
         if (dateField.getValue() == null || LocalDate.now().toEpochDay() - dateField.getValue().toEpochDay() < 0) {
-            errorMessage += "No valid data!\n";
+            errorMessage += "Дата\n";
         }
         if (name.getText() == null || name.getText().length() == 0) {
-            errorMessage += "No valid name\n";
+            errorMessage += "Ім'я\n";
         }
         if (surname.getText() == null || surname.getText().length() == 0) {
-            errorMessage += "No valid surname!\n";
+            errorMessage += "Прізвище\n";
         }
         if (middlename.getText() == null || middlename.getText().length() == 0) {
-            errorMessage += "No valid middle name!\n";
+            errorMessage += "По-батькові\n";
         }
 
         if (errorMessage.length() == 0) {
             return true;
         } else {
             // Show the error message.
-            showMessage(Alert.AlertType.ERROR, "Помилка", "Некоректні значення полів, виправте помилки");
+            Message.showErrorMessage("Виправте невірно вказані поля: \n" + errorMessage);
             return false;
         }
-    }
-
-    private void showMessage(Alert.AlertType type, String title, String text) {
-        Alert alert = new Alert(type);
-        alert.initOwner(dialogStage);
-        alert.setTitle(title);
-        alert.setContentText(text);
-        alert.showAndWait();
     }
 }

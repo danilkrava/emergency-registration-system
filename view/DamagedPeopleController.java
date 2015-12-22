@@ -78,13 +78,9 @@ public class DamagedPeopleController {
 
             personTableView.setItems(people);
         } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initOwner(dialogStage);
-            alert.setTitle("Error");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
+            Message.showErrorMessage(e.getMessage());
         } catch (NullPointerException e) {
-            showMessage(Alert.AlertType.INFORMATION, "", "Немає постраждалих");
+            Message.showErrorMessage("Немає постраждалих");
         }
         personTableView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showPersonDetails(newValue));
@@ -99,11 +95,7 @@ public class DamagedPeopleController {
                 damageTypeTableView.setItems(damageTypes);
 
             } catch (SQLException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.initOwner(dialogStage);
-                alert.setTitle("Error");
-                alert.setContentText(e.getMessage());
-                alert.showAndWait();
+                Message.showErrorMessage(e.getMessage());
             }
             this.personId.setText(String.valueOf(info.getId()));
             this.personName.setText(info.getName());
@@ -123,11 +115,4 @@ public class DamagedPeopleController {
         this.currentEmergency = emergency;
     }
 
-    private void showMessage(Alert.AlertType type, String title, String text) {
-        Alert alert = new Alert(type);
-        alert.initOwner(dialogStage);
-        alert.setTitle(title);
-        alert.setContentText(text);
-        alert.showAndWait();
-    }
 }

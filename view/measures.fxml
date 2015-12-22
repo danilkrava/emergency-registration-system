@@ -66,22 +66,22 @@
                                             <Insets left="10.0" right="10.0" />
                                         </GridPane.margin>
                                     </Label>
-                                    <TextField fx:id="name" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <TextField fx:id="name" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                         <GridPane.margin>
                                             <Insets left="10.0" right="10.0" />
                                         </GridPane.margin>
                                     </TextField>
-                        <TextField fx:id="timeType" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <TextField fx:id="timeType" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <GridPane.margin>
                               <Insets left="10.0" right="10.0" />
                            </GridPane.margin>
                         </TextField>
-                        <TextField fx:id="areaType" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <TextField fx:id="areaType" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <GridPane.margin>
                               <Insets left="10.0" right="10.0" />
                            </GridPane.margin>
                         </TextField>
-                        <TextField fx:id="severityType" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                        <TextField fx:id="severityType" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <GridPane.margin>
                               <Insets left="10.0" right="10.0" />
                            </GridPane.margin>

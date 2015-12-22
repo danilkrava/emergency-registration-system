@@ -48,11 +48,7 @@ public class AddTimeTypeController {
                 dao = DaoFactory.getTimeTypeDao(con);
                 dao.add(timeType);
             } catch (SQLException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.initOwner(dialogStage);
-                alert.setTitle("Error");
-                alert.setContentText(e.getMessage());
-                alert.showAndWait();
+                Message.showErrorMessage(e.getMessage());
             }
             okClicked = true;
             dialogStage.close();
@@ -70,28 +66,22 @@ public class AddTimeTypeController {
         String errorMessage = "";
 
         if (nameField.getText() == null || nameField.getText().length() == 0) {
-            errorMessage += "No valid name!\n";
+            errorMessage += "Назва\n";
         }
         try {
             Integer.parseInt(timeField.getText());
             if (timeField.getText() == null || nameField.getText().length() == 0 || Integer.parseInt(timeField.getText()) < 0) {
-                errorMessage += "No valid time!\n";
+                errorMessage += "Час\n";
             }
         } catch (Exception ex) {
-            errorMessage += "No valid time!\n";
+            errorMessage += "Час\n";
         }
 
         if (errorMessage.length() == 0) {
             return true;
         } else {
             // Show the error message.
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initOwner(dialogStage);
-            alert.setTitle("Invalid Fields");
-            alert.setHeaderText("Please correct invalid fields");
-            alert.setContentText(errorMessage);
-
-            alert.showAndWait();
+            Message.showErrorMessage("Виправте невірно вказані поля: \n" + errorMessage);
             return false;
         }
     }

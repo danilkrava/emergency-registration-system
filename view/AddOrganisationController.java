@@ -69,11 +69,7 @@ public class AddOrganisationController {
                 dao = DaoFactory.getOrganisationDao(con);
                 dao.add(organisation);
             } catch (SQLException e) {
-                Alert alert = new Alert(AlertType.ERROR);
-                alert.initOwner(dialogStage);
-                alert.setTitle("Error");
-                alert.setContentText(e.getMessage());
-                alert.showAndWait();
+                Message.showErrorMessage(e.getMessage());
             }
 
             okClicked = true;
@@ -92,26 +88,20 @@ public class AddOrganisationController {
         String errorMessage = "";
 
         if (nameField.getText() == null || nameField.getText().length() == 0) {
-            errorMessage += "No valid first name!\n";
+            errorMessage += "Ім'я\n";
         }
         if (adressField.getText() == null || adressField.getText().length() == 0) {
-            errorMessage += "No valid last name!\n";
+            errorMessage += "Місто\n";
         }
         if (regionField.getSelectionModel().getSelectedItem() == null) {
-            errorMessage += "No valid street!\n";
+            errorMessage += "Область\n";
         }
 
         if (errorMessage.length() == 0) {
             return true;
         } else {
             // Show the error message.
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.initOwner(dialogStage);
-            alert.setTitle("Invalid Fields");
-            alert.setHeaderText("Please correct invalid fields");
-            alert.setContentText(errorMessage);
-
-            alert.showAndWait();
+            Message.showErrorMessage("Виправте невірно вказані поля: \n" + errorMessage);
             return false;
         }
     }
