@@ -1,6 +1,5 @@
 package view;
 
-import controller.MainController;
 import dao.*;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -38,7 +37,7 @@ public class EmFormController {
 
     private Stage primaryStage;
     private Stage dialogStage;
-    MainController controller = new MainController();
+
 
     @FXML
     private TabPane pane;
@@ -928,8 +927,8 @@ public class EmFormController {
     private void toFile() {
         try (Connection con = DaoFactory.getConnection()) {
             FileChooser fileChooser = new FileChooser();
-            FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("DOC Files (*.doc)");
-            fileChooser.getExtensionFilters().add(extensionFilter);
+            //FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("DOC Files (*.doc)");
+            //fileChooser.getExtensionFilters().add(extensionFilter);
             File file = fileChooser.showSaveDialog(primaryStage);
 
             ReportDao reportDao = DaoFactory.getReportDao(con);
