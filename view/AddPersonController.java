@@ -83,6 +83,7 @@ public class AddPersonController {
                 Message.showErrorMessage(e.getMessage());
             }
             okClicked = true;
+            Message.showInformationMessage("Запис додано");
             dialogStage.close();
         }
     }
