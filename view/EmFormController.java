@@ -935,7 +935,7 @@ public class EmFormController {
 
             // Set the person into the controller.
 
-            ShowReportController controller = loader.getController();
+            SaveToFileController controller = loader.getController();
             controller.setEmergency(emergencyTableView.getSelectionModel().getSelectedItem());
             controller.start();
             // Show the dialog and wait until the user closes it

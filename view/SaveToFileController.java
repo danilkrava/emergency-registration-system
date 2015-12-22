@@ -1,9 +1,6 @@
 package view;
 
-import dao.DamageTypeDao;
-import dao.DaoFactory;
-import dao.EmergencyDao;
-import dao.PersonDao;
+import dao.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,6 +12,7 @@ import javafx.stage.Stage;
 import model.DamageType;
 import model.Emergency;
 import model.Person;
+import model.Report;
 import org.controlsfx.control.CheckListView;
 
 import java.io.File;
@@ -29,42 +27,32 @@ import java.time.ZoneId;
  * Created by Крава on 22.12.2015.
  */
 public class SaveToFileController {
+
+    private Emergency emergency;
     @FXML
-    private DatePicker dateField;
-    @FXML
-    private TextField name;
-    @FXML
-    private TextField surname;
-    @FXML
-    private TextField middlename;
-    @FXML
-    private ComboBox<Emergency> emergency;
-    @FXML
-    private CheckListView<DamageType> damagedParts;
+    private TextField path;
+
 
     private Stage dialogStage;
 
-    private ObservableList<Emergency> emergencies = FXCollections.observableArrayList();
-    private ObservableList<DamageType> damageTypes = FXCollections.observableArrayList();
+    private ObservableList<Report> reports = FXCollections.observableArrayList();
     //  private Person person;
     private boolean okClicked = false;
 
     public void initialize() {
+
+    }
+
+    public void start() {
         try (Connection con = DaoFactory.getConnection()) {
-            EmergencyDao emergencyDao = DaoFactory.getEmergencyDao(con);
-            DamageTypeDao damageTypeDao = DaoFactory.getDamageTypeDao(con);
+            ReportDao reportDao = DaoFactory.getReportDao(con);
 
-            emergencies.addAll(emergencyDao.getAll());
-            emergency.setItems(emergencies);
+            reports.addAll(reportDao.getByEmergency(emergency));
 
-
-            damageTypes.addAll(damageTypeDao.getAll());
-            damagedParts.setItems(damageTypes);
         } catch (SQLException e) {
             Message.showErrorMessage(e.getMessage());
         }
     }
-
 
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
@@ -78,12 +66,14 @@ public class SaveToFileController {
     private void choosePath() {
         FileChooser chooser = new FileChooser();
         File file = chooser.showSaveDialog(dialogStage);
+        path.setText(file.getPath());
+
     }
 
 
     @FXML
     private void handleOk() {
-        if (isInputValid()) {
+      /*  if (isInputValid()) {
             Instant instant = dateField.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
             Person person = new Person(name.getText(), surname.getText(), middlename.getText(), new Date(Date.from(instant).getTime()));
             PersonDao dao;
@@ -96,7 +86,7 @@ public class SaveToFileController {
             okClicked = true;
             Message.showInformationMessage("Запис додано");
             dialogStage.close();
-        }
+        }*/
     }
 
     @FXML
@@ -108,25 +98,9 @@ public class SaveToFileController {
     private boolean isInputValid() {
         String errorMessage = "";
 
-        if (dateField.getValue() == null || LocalDate.now().toEpochDay() - dateField.getValue().toEpochDay() < 0) {
-            errorMessage += "Дата\n";
+        if (path.getText() == null || path.getText().length() == 0) {
+            errorMessage += "Путь\n";
         }
-        if (name.getText() == null || name.getText().length() == 0) {
-            errorMessage += "Ім'я\n";
-        }
-        if (surname.getText() == null || surname.getText().length() == 0) {
-            errorMessage += "Прізвище\n";
-        }
-        if (middlename.getText() == null || middlename.getText().length() == 0) {
-            errorMessage += "По-батькові\n";
-        }
-        if (emergency.getValue() == null) {
-            errorMessage += "Надзвичайна ситуація\n";
-        }
-        if (damagedParts.getCheckModel().getCheckedItems().size() == 0) {
-            errorMessage += "Уражені частини\n";
-        }
-
         if (errorMessage.length() == 0) {
             return true;
         } else {
@@ -134,5 +108,9 @@ public class SaveToFileController {
             Message.showErrorMessage("Виправте невірно вказані поля: \n" + errorMessage);
             return false;
         }
+    }
+
+    public void setEmergency(Emergency emergency) {
+        this.emergency = emergency;
     }
 }
