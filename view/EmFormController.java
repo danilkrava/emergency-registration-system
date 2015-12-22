@@ -1,5 +1,6 @@
 package view;
 
+import com.sun.java.util.jar.pack.Package;
 import controller.MainController;
 import dao.*;
 import javafx.beans.property.IntegerProperty;
@@ -17,10 +18,12 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.*;
 import org.controlsfx.control.CheckListView;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
@@ -919,29 +922,22 @@ public class EmFormController {
 
     @FXML
     private void toFile() {
-        try {
-            // Load the fxml file and create a new stage for the popup dialog.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("save_frame.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
+        try (Connection con = DaoFactory.getConnection()) {
+            FileChooser fileChooser = new FileChooser();
+            FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("DOC Files (*.doc)");
+            fileChooser.getExtensionFilters().add(extensionFilter);
+            File file = fileChooser.showSaveDialog(primaryStage);
 
-            // Create the dialog Stage.
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Вивести звіти");
-            // dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(primaryStage);
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
+            ReportDao reportDao = DaoFactory.getReportDao(con);
+            ObservableList<Report> reportsToSave = FXCollections.observableArrayList();
+            reportsToSave.addAll(reportDao.getByEmergency(emergencyTableView.getSelectionModel().getSelectedItem()));
 
-            // Set the person into the controller.
-
-            SaveToFileController controller = loader.getController();
-            controller.setEmergency(emergencyTableView.getSelectionModel().getSelectedItem());
-            controller.start();
-            // Show the dialog and wait until the user closes it
-            dialogStage.showAndWait();
+            DocCreator.createDocFile(file.getPath(), reportsToSave);
+            Message.showConfirmationnMessage("Звіти збережено");
+        } catch (SQLException e) {
+            Message.showErrorMessage(e.getMessage());
         } catch (IOException e) {
-            e.printStackTrace();
+            Message.showErrorMessage(e.getMessage());
         }
     }
 
