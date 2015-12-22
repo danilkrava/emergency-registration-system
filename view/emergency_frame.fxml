@@ -258,8 +258,9 @@
                                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="310.0"
                                                                    prefWidth="415.0">
                                                            <children>
-                                                               <GridPane layoutX="14.0" layoutY="14.0"
-                                                                         prefHeight="310.0" prefWidth="546.0"
+                                                               <GridPane fx:id="emergencyGridPane" layoutX="14.0"
+                                                                         layoutY="14.0" prefHeight="310.0"
+                                                                         prefWidth="546.0"
                                                                          style="-fx-grid-lines-visible: true;"
                                                                          AnchorPane.bottomAnchor="0.0"
                                                                          AnchorPane.leftAnchor="0.0"
@@ -668,7 +669,7 @@
                                        </AnchorPane>
                                    </content>
                                </Tab>
-                               <Tab text="Типи за часу">
+                               <Tab text="Типи за часом">
                                    <content>
                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                            <children>

@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.time.Instant;
 import java.time.ZoneId;
 
@@ -188,6 +189,9 @@ public class EmFormController {
     @FXML
     private ComboBox<Region> filterRegion;
 
+    @FXML
+    private GridPane emergencyGridPane;
+
     private ObservableList<Emergency> emergencies = FXCollections.observableArrayList();
     private ObservableList<Organisation> organisations = FXCollections.observableArrayList();
     private ObservableList<Person> damagedPeople = FXCollections.observableArrayList();
@@ -244,6 +248,8 @@ public class EmFormController {
             filterOrganisation.setItems(organisations);
             filterRegion.setItems(regions);
             filterSeverity.setItems(severities);
+
+            emergencyGridPane.setVisible(false);
         } catch (SQLException e) {
             Message.showErrorMessage(e.getMessage());
         }
@@ -262,6 +268,7 @@ public class EmFormController {
     }
 
     private void showEmergencyDetails(Emergency info) {
+        emergencyGridPane.setVisible(true);
         if (info != null) {
             try (Connection con = DaoFactory.getConnection()) {
                 PersonDao personDao = DaoFactory.getPersonDao(con);
@@ -645,7 +652,7 @@ public class EmFormController {
 
                 emergencyDao.update(emergency);
                 emergencyTableView.refresh();
-            } else {
+            } else if (pane.getSelectionModel().getSelectedItem().getText().equals("Організації")) {
                 OrganisationDao organisationDao = DaoFactory.getOrganisationDao(con);
                 Organisation organisation = organisationTableView.getSelectionModel().getSelectedItem();
                 organisation.setName(organisationNamePane2.getText());
@@ -657,6 +664,50 @@ public class EmFormController {
 
                 organisationDao.update(organisation);
                 organisationTableView.refresh();
+            } else if (pane.getSelectionModel().getSelectedItem().getText().equals("Типи за часом")) {
+                TimeTypeDao timeTypeDao = DaoFactory.getTimeTypeDao(con);
+                TimeType timeType = timeTypeTableView.getSelectionModel().getSelectedItem();
+
+                timeType.setName(timeName.getText());
+                timeType.setTimeElapsed(Integer.parseInt(timeElapsedTime.getText()));
+
+                timeTypeDao.update(timeType);
+                timeTypeTableView.refresh();
+
+            } else if (pane.getSelectionModel().getSelectedItem().getText().equals("Типи за площею")) {
+                AreaTypeDao areaTypeDao = DaoFactory.getAreaTypeDao(con);
+                AreaType areaType = areaTypeTableView.getSelectionModel().getSelectedItem();
+
+                areaType.setName(areasAreaName.getText());
+                areaType.setArea(Double.parseDouble(areaSize.getText()));
+
+                areaTypeDao.update(areaType);
+                areaTypeTableView.refresh();
+
+            } else if (pane.getSelectionModel().getSelectedItem().getText().equals("Типи за важкістю")) {
+                SeverityTypeDao severityTypeDao = DaoFactory.getSeverityTypeDao(con);
+                SeverityType severityType = severityTypeTableView.getSelectionModel().getSelectedItem();
+
+                severityType.setName(severitiesSeverityName.getText());
+
+                severityTypeDao.update(severityType);
+                severityTypeTableView.refresh();
+            } else if (pane.getSelectionModel().getSelectedItem().getText().equals("Рекомендації")) {
+                MeasureDao measureDao = DaoFactory.getMeasureDao(con);
+                Measure measure = measureTableView.getSelectionModel().getSelectedItem();
+
+                measure.setInfo(measureInfo.getText());
+
+                SeverityType severityType = measureSeverityType.getValue();
+                AreaType areaType = measureAreaType.getValue();
+                TimeType timeType = measureTimeType.getValue();
+
+                measure.setSeverityType(severityType);
+                measure.setAreaType(areaType);
+                measure.setTimeType(timeType);
+
+                measureDao.update(measure);
+                severityTypeTableView.refresh();
             }
             Message.showInformationMessage("Запис успішно оновлено");
         } catch (SQLException e) {
