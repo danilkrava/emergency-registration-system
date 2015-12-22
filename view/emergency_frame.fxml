@@ -326,7 +326,7 @@
                                                                            </GridPane.margin>
                                                                        </Button>
                                                                        <Button mnemonicParsing="false"
-                                                                               onAction="#showReports" prefWidth="315.0"
+                                                                               onAction="#showReports" prefWidth="150.0"
                                                                                text="Подробиці..."
                                                                                GridPane.columnIndex="1"
                                                                                GridPane.halignment="RIGHT"
@@ -349,6 +349,16 @@
                                                                                <Insets left="10.0"/>
                                                                            </GridPane.margin>
                                                                        </Label>
+                                                                       <Button mnemonicParsing="false"
+                                                                               onAction="#toFile" prefWidth="150.0"
+                                                                               text="Вивести у файл"
+                                                                               GridPane.columnIndex="1"
+                                                                               GridPane.halignment="CENTER"
+                                                                               GridPane.rowIndex="7">
+                                                                           <GridPane.margin>
+                                                                               <Insets right="123.0"/>
+                                                                           </GridPane.margin>
+                                                                       </Button>
                                                                    </children>
                                                                </GridPane>
                                                            </children>

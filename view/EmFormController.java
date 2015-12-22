@@ -918,6 +918,11 @@ public class EmFormController {
     }
 
     @FXML
+    private void toFile() {
+
+    }
+
+    @FXML
     private void removeFilters() {
         filterDateFrom.setValue(null);
         filterDateTo.setValue(null);
