@@ -36,20 +36,17 @@ public class MeasuresController {
     private TextField name;
 
     @FXML
-    private ComboBox<TimeType> timeTypeComboBox;
+    private TextField timeType;
 
     @FXML
-    private ComboBox<SeverityType> severityTypeComboBox;
+    private TextField severityType;
 
     @FXML
-    private ComboBox<AreaType> areaTypeComboBox;
+    private TextField areaType;
 
     ///////////////////////////////////////////////
 
     ObservableList<Measure> measures = FXCollections.observableArrayList();
-    ObservableList<TimeType> timeTypes = FXCollections.observableArrayList();
-    ObservableList<SeverityType> severityTypes = FXCollections.observableArrayList();
-    ObservableList<AreaType> areaTypes = FXCollections.observableArrayList();
 
     public void initialize() {
 
@@ -59,20 +56,11 @@ public class MeasuresController {
         measureNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getInfo()));
         try (Connection con = DaoFactory.getConnection()) {
             MeasureDao measureDao = DaoFactory.getMeasureDao(con);
-            TimeTypeDao timeTypeDao = DaoFactory.getTimeTypeDao(con);
-            SeverityTypeDao severityTypeDao = DaoFactory.getSeverityTypeDao(con);
-            AreaTypeDao areaTypeDao = DaoFactory.getAreaTypeDao(con);
+
 
             measures.addAll(measureDao.getByEmergency(currentEmergency));
-            timeTypes.addAll(timeTypeDao.getAll());
-            severityTypes.addAll(severityTypeDao.getAll());
-            areaTypes.addAll(areaTypeDao.getAll());
+
             measureTableView.setItems(measures);
-
-            timeTypeComboBox.setItems(timeTypes);
-            severityTypeComboBox.setItems(severityTypes);
-            areaTypeComboBox.setItems(areaTypes);
-
         } catch (SQLException e) {
             Message.showErrorMessage(e.getMessage());
         } catch (NullPointerException e) {
@@ -86,11 +74,12 @@ public class MeasuresController {
         if (info != null) {
             this.measureId.setText(String.valueOf(info.getId()));
             this.name.setText(info.getInfo());
-            this.timeTypeComboBox.setValue(info.getTimeType());
-            this.severityTypeComboBox.setValue(info.getSeverityType());
-            this.areaTypeComboBox.setValue(info.getAreaType());
+            this.timeType.setText(info.getTimeType().getName());
+            this.severityType.setText(info.getSeverityType().getName());
+            this.areaType.setText(info.getAreaType().getName());
         }
     }
+
 
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
