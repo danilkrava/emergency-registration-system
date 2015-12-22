@@ -19,6 +19,7 @@ import javafx.scene.layout.GridPane;
 
 import javafx.stage.Stage;
 import model.*;
+import org.controlsfx.control.CheckListView;
 
 import java.io.IOException;
 import java.sql.Connection;

@@ -10,6 +10,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.*;
+import org.controlsfx.control.CheckComboBox;
+import org.controlsfx.control.CheckListView;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -32,18 +34,27 @@ public class AddPersonController {
     private TextField middlename;
     @FXML
     private ComboBox<Emergency> emergency;
+    @FXML
+    private CheckListView<DamageType> damagedParts;
 
     private Stage dialogStage;
 
     private ObservableList<Emergency> emergencies = FXCollections.observableArrayList();
+    private ObservableList<DamageType> damageTypes = FXCollections.observableArrayList();
     //  private Person person;
     private boolean okClicked = false;
 
     public void initialize() {
         try (Connection con = DaoFactory.getConnection()) {
             EmergencyDao emergencyDao = DaoFactory.getEmergencyDao(con);
+            DamageTypeDao damageTypeDao = DaoFactory.getDamageTypeDao(con);
+
             emergencies.addAll(emergencyDao.getAll());
             emergency.setItems(emergencies);
+
+
+            damageTypes.addAll(damageTypeDao.getAll());
+            damagedParts.setItems(damageTypes);
         } catch (SQLException e) {
             Message.showErrorMessage(e.getMessage());
         }
@@ -67,7 +78,7 @@ public class AddPersonController {
             PersonDao dao;
             try (Connection con = DaoFactory.getConnection()) {
                 dao = DaoFactory.getPersonDao(con);
-                dao.add(person, emergency.getValue());
+                dao.add(person, emergency.getValue(), damagedParts.getSelectionModel().getSelectedItems());
             } catch (SQLException e) {
                 Message.showErrorMessage(e.getMessage());
             }
@@ -99,6 +110,9 @@ public class AddPersonController {
         }
         if (emergency.getValue() == null) {
             errorMessage += "Надзвичайна ситуація\n";
+        }
+        if (damagedParts.getSelectionModel().getSelectedItems().size() == 0) {
+            errorMessage += "Уражені частини\n";
         }
 
         if (errorMessage.length() == 0) {
