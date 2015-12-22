@@ -43,7 +43,7 @@
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#cancelLogInButtonPressed" prefHeight="39.0" prefWidth="160.0" text="Вихід">
+                  <Button mnemonicParsing="false" onAction="#cancelLogInButtonPressed" prefHeight="39.0" prefWidth="160.0" text="Вийти">
                      <font>
                         <Font size="18.0" />
                      </font>
